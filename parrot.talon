@@ -1,3 +1,6 @@
+not mode: sleep
+-
+
 parrot(cluck):
 	print("cluck")
 
