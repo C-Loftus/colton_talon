@@ -8,7 +8,6 @@ import talon
 def check_youtube():
     try:
         t = ui.active_window().title.split(" - ")[-1].split(" — ")[0]
-        print(t)
         return t
     except:
         return ""
