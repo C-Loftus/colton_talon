@@ -1,4 +1,6 @@
 not mode: sleep
+and not mode: dictation
+
 -
 
 parrot(cluck):
@@ -10,6 +12,7 @@ parrot(tut):
 parrot(palate_click):
 	user.mouse_toggle_control_mouse()
 	print("palate_click")
+	print("Test")
 
 parrot(pop):
 	print("pop")
@@ -58,6 +61,8 @@ parrot(oo):
 
 parrot(lll):
 	print("lll")
+	mouse_click(0)   
+
 
 parrot(yee):
 	print("yee")
