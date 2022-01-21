@@ -2,12 +2,15 @@
 # you can find app names by running ui.apps() in the REPL
 app.name: Google-chrome
 mode: sleep
+
 -
-dictate:
+
+# disable dictation
+parrot(lll):
     key(ctrl-shift-s)
 
-wake:
-    speech.enable()
+dictate:
+    key(ctrl-shift-s)
   
 enter:
     key(enter)
@@ -38,5 +41,9 @@ backspace:
 
 delete:
     key(ctrl-backspace)
+
+parrot(palate_click):
+    user.mouse_toggle_control_mouse()
+    print("palate_click")
 
   

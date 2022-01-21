@@ -17,7 +17,7 @@ def pop_handler(active: bool):
     if "dictation" not in scope.get("mode"):
         if ((eye_zoom_mouse.zoom_mouse.enabled == False) and (config.control_mouse == False)):
             ctrl.mouse_click(button=0, hold=16000)
-            # print(list(scope.get("mode"))[4])n
+            # print(list(scope.get("mode"))[4])
 noise.register("pop", pop_handler)
 
 

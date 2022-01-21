@@ -1,5 +1,5 @@
 title: YUME NIKKI
-# app: 1well
+mode: command
 
 -
 left <digits>:

@@ -2,7 +2,7 @@ app: Kitty
 
 -
 
-update system:
+update:
     "sudo apt update; sudo apt upgrade"
 
 search for [{user.letter}]:
@@ -13,3 +13,15 @@ copy that:
 
 paste that:
     key(ctrl-shift-v)
+
+split:
+    key(ctrl-shift-enter)
+
+new tab:
+    key(ctrl-shift-t)
+
+next tab:
+    key(ctrl-shift-right)
+
+copy to clipboard:
+    user.paste("| kitty +kitten clipboard")

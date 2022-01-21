@@ -1,3 +1,5 @@
+### REQUIRES TALON BETA ###
+
 not mode: sleep
 and not mode: dictation
 
@@ -12,7 +14,6 @@ parrot(tut):
 parrot(palate_click):
 	user.mouse_toggle_control_mouse()
 	print("palate_click")
-	print("Test")
 
 parrot(pop):
 	print("pop")
