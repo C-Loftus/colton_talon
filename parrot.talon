@@ -1,4 +1,5 @@
 ### REQUIRES TALON BETA ###
+## paterns.json check
 
 not mode: sleep
 and not mode: dictation
