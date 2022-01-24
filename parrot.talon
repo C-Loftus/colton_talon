@@ -61,10 +61,6 @@ parrot(hmm):
 parrot(oo):
 	print("oo")
 
-parrot(lll):
-	print("lll")
-	mouse_click(0)   
-
 
 parrot(yee):
 	print("yee")

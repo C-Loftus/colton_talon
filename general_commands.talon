@@ -1,7 +1,21 @@
 mode: command
 
 -
-up directory:
+start timer:
+    # work time, break time
+    user.start_timer(20, 5)
+
+custom timer <digits> <digits>:
+    user.start_timer("{digits_1}", "{digits_2}")
+
+stop timer:
+    user.stop_timer()
+
+reset window tiling:
+    key(super-r)
+    sleep(.25)
+    key(super-e)
+    print("reset window tiling")
 
 copy <digits> lines:
     edit.extend_line_end() 

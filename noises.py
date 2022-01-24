@@ -17,7 +17,7 @@ def pop_handler(active: bool):
     if "dictation" not in scope.get("mode"):
         if ((eye_zoom_mouse.zoom_mouse.enabled == False) and (config.control_mouse == False)):
             ctrl.mouse_click(button=0, hold=16000)
-            # print(list(scope.get("mode"))[4])
+            # print(list(scope.get("mode10"))[4])
 noise.register("pop", pop_handler)
 
 
@@ -29,3 +29,8 @@ def on_hiss(active: bool):
                 actions.user.mouse_scroll_down(amount=.8)
                     
 noise.register("hiss", on_hiss)
+
+# patterns.json
+# 	"throttle": {
+# 			"gluck": 0.9
+# 		}	
