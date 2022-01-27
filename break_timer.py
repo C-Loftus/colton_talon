@@ -53,23 +53,24 @@ class TimerActions:
         def idle():
             conn = xcffib.Connection()
             try:
-                print("test")
                 root = conn.get_setup().roots[0].root
                 screen = conn(screensaver.key)
                 reply = screen.QueryInfo(root).reply()
                 time = reply.ms_since_user_input
                 # idle time less than break time after work time means you need a break
                 if time < btms:
-                    screen_print("Take a Break, Idle time for {} seconds".format(time))
+                    screen_print("Take a Break : Talon Timer")
             finally:
                 conn.disconnect()
 
         TimerActions.timer = cron.interval(wtms_string_fmt, idle)
-        print(TimerActions.timer)
-
+        print("Timer started")
     def stop_timer():
         """
         Kill the timer
         """
-        cron.cancel(TimerActions.timer)
+        try:
+            cron.cancel(TimerActions.timer)
+        except:
+            pass
         print("Timer killed")

@@ -1,5 +1,4 @@
 ### REQUIRES TALON BETA ###
-## paterns.json check
 
 not mode: sleep
 and not mode: dictation
@@ -13,7 +12,7 @@ parrot(tut):
 	print("tut")
 
 parrot(palate_click):
-	user.mouse_toggle_control_mouse()
+	# user.mouse_toggle_control_mouse()
 	print("palate_click")
 
 parrot(pop):

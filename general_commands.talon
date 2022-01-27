@@ -5,8 +5,8 @@ start timer:
     # work time, break time
     user.start_timer(20, 5)
 
-custom timer <digits> <digits>:
-    user.start_timer("{digits_1}", "{digits_2}")
+custom timer <number> <number>:
+    user.start_timer(number, number_2)
 
 stop timer:
     user.stop_timer()
