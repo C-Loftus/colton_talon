@@ -1,15 +1,16 @@
 # activate this .talon file if the current app name is "Chrome"
 # you can find app names by running ui.apps() in the REPL
 app.name: Google-chrome
+
 mode: sleep
 
 -
 
-# disable dictation
-parrot(lll):
-    key(ctrl-shift-s)
+# # disable dictation
+# parrot(lll):
+#     key(ctrl-shift-s)
 
-dictate:
+listen:
     key(ctrl-shift-s)
   
 enter:
@@ -42,8 +43,5 @@ backspace:
 delete:
     key(ctrl-backspace)
 
-parrot(palate_click):
-    user.mouse_toggle_control_mouse()
-    print("palate_click")
 
   

@@ -1,6 +1,14 @@
 mode: command
 
 -
+# spell that air bat cap
+# white_check_mark
+# can also try press <key>
+# or just use mixed mode (pinned in 
+# beta) (edit
+
+
+
 start timer:
     # work time, break time
     user.start_timer(20, 5)

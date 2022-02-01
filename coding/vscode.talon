@@ -2,6 +2,8 @@ app: vscode
 mode: command
 
 -
+new window:
+    key(ctrl-shift-n)
 
 focus lines:
     key(ctrl-shift-alt-d)
@@ -29,6 +31,21 @@ restart python:
     sleep(.1)
     key(ctrl-f10)
 
+Run again:
+    key(ctrl-shift-alt-f)
+    sleep(.25)
+    key(up)
+    key(enter)
+
+backup:
+    key(ctrl-shift-alt-f)
+    user.paste("fgc")
+    key(enter)
+
+hooks:
+    user.paste("()") 
+    key(left)
+
 print:
     insert('print()')
     key(left)
@@ -37,3 +54,4 @@ switch project:
     key(ctrl-r)
     sleep(0.25)
     key(enter)
+

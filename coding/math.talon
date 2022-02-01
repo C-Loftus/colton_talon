@@ -1,6 +1,9 @@
 title: /\.tex/
 
 -
+pdf:
+    key(alt-super-e)
+
 equation:
     user.paste("$$ $$")
     key(left:2)

@@ -14,7 +14,7 @@ tag(): browser
 
 switch tab: key(ctrl-tab)
 
-activate dictation:
+listen:
     key(ctrl-shift-s)
     speech.disable()
   
