@@ -1,8 +1,12 @@
 app: Kitty
 
 -
-
 update:
+    "sudo apt update"
+
+remove: 
+    "sudo apt remove"
+shortcut:
     "sudo apt update; sudo apt upgrade"
 
 search for:
@@ -25,3 +29,6 @@ next tab:
 
 copy to clipboard:
     user.paste("| kitty +kitten clipboard")
+
+directory:
+    user.paste("mkdir ")

@@ -12,6 +12,11 @@ mode: sleep
 
 listen:
     key(ctrl-shift-s)
+
+mute:
+    key(ctrl-shift-s)
+    sleep(1)
+    key(ctrl-backspace)
   
 enter:
     key(enter)
@@ -41,6 +46,7 @@ backspace:
     key(backspace)
 
 delete:
+    sleep(.5)
     key(ctrl-backspace)
 
 

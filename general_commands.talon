@@ -6,8 +6,16 @@ mode: command
 # can also try press <key>
 # or just use mixed mode (pinned in 
 # beta) (edit
+Left monitor:
+    key(super-shift-left)
 
+Right monitor:
+    key(super-shift-right)
 
+Shut down computer now:
+    key(super-c)
+    sleep(1)
+    user.paste("shutdown now")
 
 start timer:
     # work time, break time
