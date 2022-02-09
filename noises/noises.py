@@ -10,8 +10,7 @@ mod = Module()
 
 @mod.action_class
 class Locks:
-    
-    # detect how long user has been working on the keyboard
+    # lock scrolling in cases otherwise permitted if manually specificied    
     def lock_scroll():
         """
         Lock the hiss
@@ -33,9 +32,7 @@ class Locks:
 
         hiss_lock=False
     def unlock_pop():
-        """
-        Unlock the pop
-        """
+        """ Unlock the pop """
         global pop_lock
         pop_lock=False
 
@@ -56,6 +53,8 @@ def pop_handler(active: bool):
                 # print(list(scope.get("mode10"))[4])
     elif pop_lock:
         print("pop lock")
+    elif dictation_mode:
+        print("can't pop in dictation mode")
 noise.register("pop", pop_handler)
 
 
