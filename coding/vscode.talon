@@ -42,9 +42,6 @@ backup:
     user.paste("fgc")
     key(enter)
 
-hooks:
-    user.paste("()") 
-    key(left)
 
 print:
     insert('print()')
@@ -55,3 +52,7 @@ switch project:
     sleep(0.25)
     key(enter)
 
+special:
+    "``"
+    key(left:1)
+    

@@ -1,6 +1,9 @@
 app: Kitty
+mode: command
 
 -
+install:
+    "sudo apt install"
 update:
     "sudo apt update"
 

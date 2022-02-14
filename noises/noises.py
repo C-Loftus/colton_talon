@@ -72,7 +72,7 @@ def on_hiss(active: bool):
         not code and \
         not docs \
         and not hiss_lock:
-        actions.user.mouse_scroll_down(amount=1.2)
+        actions.user.mouse_scroll_down(amount=.9)
     elif hiss_lock:
         print("hiss lock")
                     

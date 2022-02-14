@@ -1,10 +1,11 @@
 title: /Google Docs/
+mode: command
 
 
 -
-
 settings():
     key_wait = 10.0
+
 
 equation:
     key(alt-shift-i)
