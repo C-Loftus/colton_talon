@@ -1,17 +1,28 @@
+'''
+this program keeps track of the current mode in talon
+it does not have the normal .py  extension so that
+it will be ignored by talon if the user places this 
+repository in the .talon directory.
 
+however, on unix systems, this program will be
+run fine with python3 interpreter regardless of
+extension.
+
+this program is intended to be run as a background
+process at startup. 
+'''
 APPINDICATOR_ID = 'scriptindicator'
 
 import os
 ROOT_DIR = os.path.realpath(os.path.join(os.path.dirname(__file__), '..'))
 TRAY_DIR = os.path.join(ROOT_DIR, "tray")
 
-from time import sleep
-
 import gi
 gi.require_version('AppIndicator3', '0.1')
 gi.require_version('Notify', '0.7')
 gi.require_version('Gtk', '3.0')
 
+from time import sleep
 from gi.repository import Gtk as gtk
 from gi.repository import AppIndicator3 as appindicator
 from gi.repository import Notify as notify
