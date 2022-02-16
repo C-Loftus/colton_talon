@@ -196,12 +196,11 @@ class ProgramIndicator:
                 self.set_sleep(self)
             elif 'quit_application'in recv:
                 self.quit1(self)
-            elif 'start' in mode:
+            elif 'start timer' in mode:
                 self.script(self)
-            elif 'stop' in mode:
+            elif 'stop timer' in mode:
                 self.kill_script(self)
             else:
-                print("else")
                 pass
 
         finally:
