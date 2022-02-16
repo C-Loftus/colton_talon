@@ -17,7 +17,7 @@ class TimerActions:
     timer = None
 
 
-        # os.system("echo {} | osd_cat --delay={} -A center --pos bottom --color white -u blue -O 2 -f {}".format(message, 0, font))
+    # os.system("echo {} | osd_cat --delay={} -A center --pos bottom --color white -u blue -O 2 -f {}".format(message, 0, font))
 
 
     # detect how long user has been working on the keyboard

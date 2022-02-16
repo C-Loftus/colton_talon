@@ -72,5 +72,7 @@ expectation <user.letter>:
 
 disclaimer:
     user.paste('Please note I have an ods medical exemption for hand written solutions as a result of hand issues.  Any hand written solutions or formatting irregularities are due to this ')
+    sleep(.5)
     key(alt-shift-i)
+    sleep(.5)
     key(r)
