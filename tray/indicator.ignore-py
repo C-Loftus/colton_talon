@@ -13,7 +13,7 @@ process at startup.
 '''
 APPINDICATOR_ID = 'scriptindicator'
 
-import os
+import os, sys
 ROOT_DIR = os.path.realpath(os.path.join(os.path.dirname(__file__), '..'))
 TRAY_DIR = os.path.join(ROOT_DIR, "tray")
 
@@ -82,7 +82,7 @@ def timer_create(min_until_break, delay):
             elif (time) > (seconds_until_break):
                 screen_print('Time to take a break!', delay=delay)
 
-    p = Process(target=work_time)
+    p = Process(target=work_time, daemon=True)
     p.start()
 
     return p
@@ -103,7 +103,6 @@ class ProgramIndicator:
         p.start()
         self.timer = p
 
-    # /https://stackoverflow.com/questions/8826523/gtk-main-and-unix-sockets
         self.s = socket()    
         self.s.bind(('localhost', PORT))    
         self.s.listen()    
@@ -185,7 +184,8 @@ class ProgramIndicator:
         try:
             pid = int(recv.split(":")[0])
             mode = recv.split(":")[1]
-
+            if recv != "":
+                print(mode, pid)
             if 'command' in mode:
                 self.set_command(self)    
             elif 'dictation' in mode:
@@ -196,12 +196,12 @@ class ProgramIndicator:
                 self.set_sleep(self)
             elif 'quit_application'in recv:
                 self.quit1(self)
-
-            elif 'start_timer' in recv:
-                self.script()
-            elif 'stop_timer' in recv:
-                self.kill_script(self, False)
+            elif 'start' in mode:
+                self.script(self)
+            elif 'stop' in mode:
+                self.kill_script(self)
             else:
+                print("else")
                 pass
 
         finally:
@@ -209,7 +209,6 @@ class ProgramIndicator:
     
 if __name__ == '__main__':
     try:
-        ProgramIndicator()
+        p = ProgramIndicator()
     except KeyboardInterrupt:
-        import sys
         sys.exit(0)
