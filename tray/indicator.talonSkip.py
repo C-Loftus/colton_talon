@@ -22,7 +22,7 @@ gi.require_version('AppIndicator3', '0.1')
 gi.require_version('Notify', '0.7')
 gi.require_version('Gtk', '3.0')
 
-from time import sleep
+import time as t
 from gi.repository import Gtk as gtk
 from gi.repository import AppIndicator3 as appindicator
 from gi.repository import Notify as notify
@@ -30,6 +30,8 @@ from gi.repository import GLib
 from socket import socket   
 from threading import Thread
 from multiprocessing import Process
+import subprocess
+
 
 def get_port():
     config_path = os.path.join(ROOT_DIR, "tray/tray.py")
@@ -51,16 +53,15 @@ def screen_print(message,  delay=2, font="-*-*-medium-*-*-*-*-*-*-*-*-120-*-*", 
 
 # detect how long user has been working on the keyboard
 def timer_create(min_until_break, delay):
-    import time as t
     seconds_until_break = min_until_break * 60
 
     screen_print("Timer starting with {} min intervals".format(min_until_break), delay)
 
     def idle_time():
         #xprintidle
-        import subprocess
         p = subprocess.Popen(["xprintidle"], stdout=subprocess.PIPE)
         out = p.stdout.read()
+        p.kill()
         return float(out) / 1000 / 60
 
     def work_time():
@@ -178,8 +179,8 @@ class ProgramIndicator:
         GLib.io_add_watch(GLib.IOChannel(conn.fileno()),0,GLib.IOCondition.IN, self.handler, conn)    
         return True    
 
-    def handler(self, io, cond, sock):    
-        recv = (sock.recv(1000)).decode()
+    def handler(self, io, cond, sock): 
+        recv = (sock.recv(100)).decode()
 
         try:
             pid = int(recv.split(":")[0])

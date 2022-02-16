@@ -3,6 +3,8 @@ from socket import socket
 from talon import Module
 
 mod = Module()
+s = socket()
+PORT = 49250
 
 @mod.action_class
 class ClientSocket:
@@ -17,17 +19,15 @@ class ClientSocket:
         # indicator.ignore-py file and not imported
         # This is since you are using two different
         #  python interpreters
-        PORT = 49250
     
-        s = socket()
         try:
+            global s
             s.connect(('localhost', PORT))
             pid = getpid()
             msg = str(pid) + ":" + message
             s.send(msg.encode())
         except ConnectionRefusedError:
             print("program error, couldn't connect to socket")
-        s.close()
 
 
         
