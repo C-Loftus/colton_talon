@@ -6,7 +6,14 @@ mode: command
 settings():
     key_wait = 10.0
 
+    
+bullet point:
+    key(ctrl-shift-8)
 
+indent right:
+    key(ctrl-])
+indent left:
+    key(ctrl-[)
 equation:
     key(alt-shift-i)
     key(e)
@@ -71,7 +78,7 @@ expectation <user.letter>:
     key(right)
 
 disclaimer:
-    user.paste('Please note I have an ods medical exemption for hand written solutions as a result of hand issues.  Any hand written solutions or formatting irregularities are due to this ')
+    user.paste('Please note I have an ODS medical exemption as a result of hand issues.  Any differences such as hand written solutions or formatting irregularities caused by voice dictation are due to this')
     sleep(.5)
     key(alt-shift-i)
     sleep(.5)

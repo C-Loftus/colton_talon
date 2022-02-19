@@ -19,3 +19,5 @@ launch kitty:
 
 launch firefox:
     user.system_command_nb("firefox")
+launch dot files:
+    user.system_command_nb("code ~/dotfiles")
