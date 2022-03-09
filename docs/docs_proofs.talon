@@ -68,6 +68,19 @@ expectation <user.letter>:
     insert("E[{letter}]")
     key(left)
 
+special <user.letters>:
+    key(space)
+    key(alt-shift-i)
+    key(e)
+    user.insert_formatted(letters, "ALL_CAPS")
+    key(right)
+
+special down <user.letters>:
+    key(alt-shift-i)
+    key(e)
+    insert(letters)
+    key(right)
+
 <user.letter> sub <number>:
     insert("{letter}_")
     insert("{number}")
@@ -78,7 +91,7 @@ expectation <user.letter>:
     key(right)
 
 disclaimer:
-    user.paste('Please note I have an ODS medical exemption as a result of hand issues.  Any differences such as hand written solutions or formatting irregularities caused by voice dictation are due to this')
+    'Please note I have an ODS medical exemption as a result of hand issues.  Any differences such as hand written solutions or formatting irregularities caused by voice dictation are due to this'
     sleep(.5)
     key(alt-shift-i)
     sleep(.5)

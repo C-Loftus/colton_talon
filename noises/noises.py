@@ -4,8 +4,8 @@ from talon_plugins.eye_mouse import config, toggle_camera_overlay, toggle_contro
 import talon
 from talon import Module, actions
 
-pop_lock = False
-hiss_lock=False
+pop_lock = True
+hiss_lock=True
 mod = Module()
 
 @mod.action_class

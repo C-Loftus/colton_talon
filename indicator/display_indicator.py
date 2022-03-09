@@ -1,13 +1,23 @@
 from operator import mod
-from talon import canvas
+from talon import canvas, ui
 from talon.skia import image
 from talon.types import rect
 from talon import Module
+import os
 
+# 100x100 image for thea
 
-can = canvas.Canvas(x=1970, y=100, width=100, height=100)
+y77 = 110
+y0 = 33
+if ui.screens()[0].y == 77:
+    y = y77
+else:
+    y = y0
 
-PATH="/home/colton/.talon/user/myScripts/tray/"
+can = canvas.Canvas(x=1975, y=y, width=30, height=30)
+
+PATH = os.path.realpath(os.path.dirname(__file__)) + "/"
+
 
 img=image.Image.from_file(PATH+"command.jpg")
 

@@ -2,8 +2,10 @@ app: firefox
 
 -
 
-# vimium requirement
-split new window:
+close tab:
+    key(ctrl-w)
+# m requirement
+split window:
     key(shift-w)
 
 restore tab:
