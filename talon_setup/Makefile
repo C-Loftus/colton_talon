@@ -11,4 +11,4 @@ cursorless:
 	git clone https://github.com/cursorless-dev/cursorless-talon ~/.talon/user/cursorless-talon
 
 pull:
-	readlink -f ~/.talon/user/* | xargs -I{} git -C {} pull
+	@ readlink -f ~/.talon/user/* | xargs -I{} git -C {} pull 2> /dev/null

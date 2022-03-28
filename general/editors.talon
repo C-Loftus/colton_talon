@@ -1,5 +1,9 @@
 mode: command
 -
+junk:
+    key(end)
+
+
 go left <digits>:
     key("left:{digits_1}")
 go right <digits>:

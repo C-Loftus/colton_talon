@@ -1,6 +1,15 @@
 mode: command
 
 -
+system monitor:
+    key(super-c)
+    sleep(1.3)
+    insert("htop")
+
+    key(enter)
+
+launch slack talon:
+    user.system_command_nb("google-chrome https://app.slack.com/client/T7FPSMV8F/C7ENXA7C4")
 
 launch code:
     user.system_command_nb("code")

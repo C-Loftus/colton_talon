@@ -19,4 +19,5 @@ listen:
     speech.disable()
   
     
-  
+close tab:
+    key(ctrl-w)

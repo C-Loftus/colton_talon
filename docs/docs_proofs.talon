@@ -1,12 +1,15 @@
 title: /Google Docs/
 mode: command
 
-
 -
 settings():
     key_wait = 10.0
 
-    
+Greater  equal:
+    ">="
+Less equal:
+    "<="
+
 bullet point:
     key(ctrl-shift-8)
 

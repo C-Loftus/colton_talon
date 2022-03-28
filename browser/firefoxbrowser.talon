@@ -1,13 +1,21 @@
+#My additional  commands for firefox beyond those in knausj
+
 app: firefox
 
 -
+web search <user.text>:
+    key(ctrl-l)
+    sleep(.05)
+    insert(text)
+    key(enter)
 
 close tab:
     key(ctrl-w)
-# m requirement
+# vimium requirement
 split window:
     key(shift-w)
-
+yo: 
+    key(f)
 restore tab:
     key(X)
 

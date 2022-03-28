@@ -1,4 +1,4 @@
-not mode: dictation
+mode: command
 -
 lock scroll:
     user.lock_scroll()
