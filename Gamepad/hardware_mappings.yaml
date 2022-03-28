@@ -1,0 +1,30 @@
+# MANUFACTURER:
+# OS BUTTON NAME : DANCEPAD BUTTON
+
+OSTENT:
+  - BTN_BASE   : X
+  - BTN_BASE2  : O
+  - BTN_PINKIE : TRIANGLE
+  - BTN_TOP2   : SQUARE
+  - BTN_THUMB2 : UP
+  - BTN_TRIGGER: LEFT
+  - BTN_TOP    : RIGHT
+  - BTN_THUMB  : DOWN
+  - BTN_ABS_Y  : MID
+  - BTN_BASE3  : SELECT
+  - BTN_BASE4  : START
+
+# This is the default name for dance pads in Linux
+# TODO :  figure out how to get the real manufacturer name
+USB Gamepad:
+  - BTN_BASE   : X
+  - BTN_BASE2  : O
+  - BTN_PINKIE : TRIANGLE
+  - BTN_TOP2   : SQUARE
+  - BTN_THUMB2 : UP
+  - BTN_TRIGGER: LEFT
+  - BTN_TOP    : RIGHT
+  - BTN_THUMB  : DOWN
+  - BTN_ABS_Y  : MID
+  - BTN_BASE3  : SELECT
+  - BTN_BASE4  : START

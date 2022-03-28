@@ -1,0 +1,3 @@
+PyAutoGUI==0.9.53
+inputs==0.5
+watchdog==2.1.6
