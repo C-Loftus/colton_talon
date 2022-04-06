@@ -5,71 +5,23 @@ mode: command
 settings():
     key_wait = 10.0
 
-Greater  equal:
-    ">="
-Less equal:
-    "<="
+integral <user.alnum> <user.alnum>:
+    insert("\\int {alnum_1}\n{alnum_2}\n")
 
-bullet point:
-    key(ctrl-shift-8)
+sigma <user.alnum> <user.alnum>:
+    insert("\\sum {alnum_1}\n{alnum_2}\n")
 
-indent right:
-    key(ctrl-])
-indent left:
-    key(ctrl-[)
-equation:
-    key(alt-shift-i)
-    key(e)
-
-sigma <number> <user.letter>:
+sigma (<number>|<user.letter>) infinity:
     insert("\\sum ")
-    insert(number)
+    insert(number or letter)
     key(enter)
-    insert(letter)
-    key(enter)
-
-infinite:
-    user.paste("∞")
-    key(right)
-
-sigma <number> infinity:
-    insert("\\sum ")
-    insert(number)
-    key(enter)
-    user.paste("∞")
+    insert("∞")
     key(enter)
 
-section:
-    key(alt-shift-i)
-    key(r)
-divide:
-    insert("\\frac ")
 
-<number> divide <number>:
-    insert("\\frac ")
-    insert(number)
-    key(right)
-    insert(number_2)
-    key(right)
-
-new proof <number>:
-    key(enter)
-    key(alt-shift-i)
-    key(r)
-    key(ctrl-alt-3)
-    insert("Problem {number}")
-    key(enter)
-new part <user.letter>:
-    key(enter)
-    key(alt-shift-i)
-    key(r)
-    key(ctrl-alt-3)
-    insert("Part {letter}")
-    key(enter)
+<user.alnum> divide  <user.alnum>:
+    insert("\\frac {alnum_1}\n{alnum_2}\n")
     
-expectation <user.letter>:
-    insert("E[{letter}]")
-    key(left)
 
 special <user.letters>:
     key(space)
@@ -77,6 +29,25 @@ special <user.letters>:
     key(e)
     user.insert_formatted(letters, "ALL_CAPS")
     key(right)
+
+special <user.letters> sub <number>:
+    key(space)
+    key(alt-shift-i)
+    key(e)
+    user.insert_formatted(letters, "ALL_CAPS")
+    insert("_{number}")
+    key(right)
+    key(right)
+
+special down <user.letters> sub <number>:
+    key(space)
+    key(alt-shift-i)
+    key(e)
+    insert(letters)
+    insert("_{number}")
+    key(right)
+    key(right)
+
 
 special down <user.letters>:
     key(alt-shift-i)
@@ -93,9 +64,3 @@ special down <user.letters>:
     insert("{letter_2}")
     key(right)
 
-disclaimer:
-    'Please note I have an ODS medical exemption as a result of hand issues.  Any differences such as hand written solutions or formatting irregularities caused by voice dictation are due to this'
-    sleep(.5)
-    key(alt-shift-i)
-    sleep(.5)
-    key(r)

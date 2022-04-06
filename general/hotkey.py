@@ -20,9 +20,9 @@ class HotKey:
 
         if "sleep" in scope.get("mode"):
             actions.speech.enable()
-            app.notify("Now Woken Up")
+            # app.notify("Now Woken Up")
         else:
-            app.notify("Now Sleeping")
+            # app.notify("Now Sleeping")
             actions.speech.disable()
 
     def mute_zoom_start_talon():

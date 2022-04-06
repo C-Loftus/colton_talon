@@ -23,5 +23,9 @@ smile:
     user.paste("(* ^ ω ^)")
 
 hooks:
-    user.paste("()") 
+    insert("()")
+    key(left)
+
+fishes:
+    user.paste("<>")
     key(left)
