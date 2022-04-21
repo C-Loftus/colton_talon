@@ -56,3 +56,4 @@ special:
     "``"
     key(left:1)
     
+collapse folders: user.vscode("workbench.files.action.collapseExplorerFolders")

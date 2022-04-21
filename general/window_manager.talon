@@ -19,8 +19,3 @@ reset window tiling:
     key(super-e)
     print("reset window tiling")
 
-# 3=vscode shift-alt-at=Switch to desktop two 
-start code:
-    key(super-3)
-    sleep(1)
-    key(shift-alt-@)

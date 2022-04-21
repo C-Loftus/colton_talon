@@ -6,7 +6,7 @@ not mode: sleep
     mode.enable("dictation")
     user.code_clear_language_mode()
     mode.disable("user.gdb")
-    user.draw_mode("command")
+    user.draw_mode("dictation")
 
 ^command mode$:
     mode.disable("sleep")

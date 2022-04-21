@@ -5,11 +5,20 @@ mode: command
 settings():
     key_wait = 10.0
 
+sigma:
+    insert('\\sum \n')
+    key(right)
+alpha:
+    insert('\\alpha ')
+
 integral <user.alnum> <user.alnum>:
     insert("\\int {alnum_1}\n{alnum_2}\n")
 
 sigma <user.alnum> <user.alnum>:
     insert("\\sum {alnum_1}\n{alnum_2}\n")
+
+<user.alnum> choose <user.alnum>:
+    insert("\\choose {alnum_1}\n{alnum_2}\n")
 
 sigma (<number>|<user.letter>) infinity:
     insert("\\sum ")
