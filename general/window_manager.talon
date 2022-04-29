@@ -1,6 +1,12 @@
 mode: command
 
 -
+jump firefox:
+    key(alt-1)
+    user.switcher_focus("firefox")
+Jump code:
+    key(alt-2)
+    user.switcher_focus("code")
 
 Left monitor:
     key(super-shift-left)

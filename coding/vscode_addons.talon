@@ -16,10 +16,11 @@ run python:
     sleep(.1)
     key(ctrl-f10)
 
-kill python:
-    key(ctrl-shift-alt-f)
+kill program:
+    user.vscode("workbench.action.terminal.focus")
     sleep(.25)
     key(ctrl-c)
+
 
 restart python:
     key(ctrl-shift-alt-f)
@@ -57,3 +58,8 @@ special:
     key(left:1)
     
 collapse folders: user.vscode("workbench.files.action.collapseExplorerFolders")
+
+run rust:
+    user.vscode("workbench.action.terminal.focus")
+    user.paste("cargo run")
+    key(enter)

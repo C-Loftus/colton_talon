@@ -3,14 +3,14 @@ mode: command
 
 -
 install:
-    "sudo apt install"
+    " sudo apt install"
 update:
-    "sudo apt update"
+    " sudo apt update"
 
 remove: 
-    "sudo apt remove"
+    " sudo apt remove"
 shortcut:
-    "sudo apt update; sudo apt upgrade"
+    " sudo apt update; sudo apt upgrade"
 
 search for:
     insert('grep -ri "" *')
@@ -32,7 +32,7 @@ next tab:
     key(ctrl-shift-right)
 
 copy to clipboard:
-    user.paste("| kitty +kitten clipboard")
+    user.paste(" | kitty +kitten clipboard")
 
 directory:
-    user.paste("mkdir ")
+    user.paste(" mkdir ")

@@ -4,6 +4,7 @@ app: firefox
 
 -
 web search <user.text>:
+    key(ctrl-t)
     key(ctrl-l)
     sleep(.05)
     insert(text)
