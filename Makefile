@@ -5,7 +5,7 @@ setup: cursorless
 	mv talon/ ~/talon
 	mkdir -p ~/.talon/user   
 
-git:
+clone:
 	git clone https://github.com/david-tejada/rango-talon  ~/.talon/user/rango-talon
 	git clone https://github.com/cursorless-dev/cursorless-talon.git ~/.talon/user/cursorless-talon
 	git clone https://github.com/C-Loftus/knausj_talon ~/.talon/user/knausj_talon
