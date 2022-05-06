@@ -1,7 +1,8 @@
 mode: command
 -
-^Add Note <phrase>$:
+erase note:
+     user.erase_note()
+^scratch note <phrase>$:
      user.add_note(phrase)
-
-Toggle Notes:
+toggle Notes:
      user.toggle_notes()
