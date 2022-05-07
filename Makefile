@@ -1,4 +1,4 @@
-setup: cursorless
+setup: 
 	curl "https://talonvoice.com/dl/latest/talon-linux.tar.xz" --output talon.tar.xz
 	tar -vxf talon.tar.xz
 	rm -f talon.tar.xz
@@ -13,4 +13,6 @@ clone:
 	git clone https://github.com/tararoys/dense-mouse-grid ~/.talon/user/dense-mouse-grid
 
 pull:
-	find ~/.talon/user -name .git -print -execdir git pull \;
+	find ~/.talon/user -name .git -print -execdir git pull --ff-only \;
+
+	
