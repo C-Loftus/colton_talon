@@ -11,5 +11,3 @@ export notes:
      user.export_notes()
 trash notes:
      user.trash_note()
-recompute:
-     user.recompute_primary_key()

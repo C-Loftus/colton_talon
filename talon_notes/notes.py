@@ -37,23 +37,26 @@ class Actions:
 
         # add string to database
         conn = sqlite3.connect(db)
-        c = conn.cursor()
-        c.execute("""CREATE TABLE IF NOT EXISTS notes (
-            id INTEGER PRIMARY KEY,
-            note TEXT
-        )""")
-        c.execute("INSERT INTO notes (note) VALUES (?)", (text,))
-        conn.commit()
-        conn.close()
+        try:
+            c = conn.cursor()
+            c.execute("""CREATE TABLE IF NOT EXISTS notes (
+                id INTEGER PRIMARY KEY,
+                note TEXT
+            )""")
+            c.execute("INSERT INTO notes (note) VALUES (?)", (text,))
+            conn.commit()
+        finally:
+            conn.close()
 
+        # hide then show to prevent visual bugs
         gui.hide()
         gui.show()
 
 
     def erase_note(primary_key: str):
         """Removes a note from the GUI"""
+        conn = sqlite3.connect(db)
         try:
-            conn = sqlite3.connect(db)
             c = conn.cursor()
             c.execute("DELETE FROM notes WHERE id = ?", (primary_key,))
             conn.commit()
@@ -66,9 +69,11 @@ class Actions:
             for index, row in enumerate(rows):
                 c.execute("UPDATE = ? WHERE id = ?", (index, row[0]))
             conn.commit()
-            conn.close()        
         except Exception as e:
             print(e)
+        finally:
+            conn.close()
+
         if gui.showing:
             # Hiding then showing prevents visual bugs
             gui.hide()
@@ -94,12 +99,14 @@ class Actions:
     def export_notes():
         """Exports all notes to a text file"""
         conn = sqlite3.connect(db)
-        c = conn.cursor()
-        c.execute("SELECT * FROM notes")
-        rows = c.fetchall()
-        with open(os.path.expanduser(text_path), "w") as f:
-            print("Exporting notes...") 
-            for row in rows:
-                f.write(f'{row[0]}: {row[1]}\n')
-                print(f'{row[0]}: {row[1]}')
-        conn.close()
+        try:
+            c = conn.cursor()
+            c.execute("SELECT * FROM notes")
+            rows = c.fetchall()
+            with open(os.path.expanduser(text_path), "w") as f:
+                print("Exporting notes...") 
+                for row in rows:
+                    f.write(f'{row[0]}: {row[1]}\n')
+                    print(f'{row[0]}: {row[1]}')
+        finally:
+            conn.close()
