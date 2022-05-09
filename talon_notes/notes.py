@@ -1,7 +1,7 @@
 
+from sys import stdout
 from talon import Module, actions, imgui
-import os
-import sqlite3
+import sqlite3, os
 
 mod = Module()
 db = os.path.dirname(os.path.realpath(__file__)) + "/notes.db"
@@ -23,12 +23,30 @@ def gui(gui: imgui.GUI):
     # print all rows in table
     c.execute("SELECT * FROM notes")
     rows = c.fetchall()
+
+
+    # ROW_WIDTH = 80
+
+    # for row in rows:
+    #     total_chars = len(row[1])
+
+    #     for index in range(0, total_chars, ROW_WIDTH):
+    #         offset = total_chars if index + ROW_WIDTH >= total_chars else ROW_WIDTH
+
+    #         primary_key = str(row[0]) + ": "
+    #         no_overflow = index == 0
+    #         start = primary_key if no_overflow else "   "
+
+    #         gui.text(f'{start}{row[1][index:index+offset]}')
+
+
     for row in rows:
         gui.text(f'{row[0]}: {row[1]}')
 
     gui.spacer()
     if gui.button("Close"):
         gui.hide()
+
 
 @mod.action_class
 class Actions:
@@ -70,7 +88,7 @@ class Actions:
                 c.execute("UPDATE = ? WHERE id = ?", (index, row[0]))
             conn.commit()
         except Exception as e:
-            print(e)
+            print(f'NOTES ERROR: {e}')
         finally:
             conn.close()
 
@@ -84,7 +102,10 @@ class Actions:
         try:
             os.remove(db)
         except FileNotFoundError:
-            print("No notes to erase")
+            print("NOTES: No notes to erase")
+
+        if gui.showing:
+            gui.show()
 
     def toggle_notes():
         """Toggles Available notes"""
@@ -110,3 +131,5 @@ class Actions:
                     print(f'{row[0]}: {row[1]}')
         finally:
             conn.close()
+
+
