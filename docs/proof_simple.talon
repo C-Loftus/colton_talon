@@ -1,10 +1,17 @@
-title: /Google Docs/
+
 mode: command
 
 -
+
 settings():
     key_wait = 10.0
 
+for all:
+    insert('\\forall')
+    key(space)
+Special in:
+    insert('\\in')
+    key(space)
 infinite:
     user.paste("∞")
     key(right)

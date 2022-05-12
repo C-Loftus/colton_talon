@@ -1,17 +1,16 @@
 
 from sys import stdout
 from talon import Module, actions, imgui
-import sqlite3, os
+import sqlite3, os, time
 
 mod = Module()
 db = os.path.dirname(os.path.realpath(__file__)) + "/notes.db"
 text_path = os.path.dirname(os.path.realpath(__file__)) + "/notes.txt"
 
+current_page = "General Notes"
+
 @imgui.open()
 def gui(gui: imgui.GUI):
-
-    gui.text("Notes")
-    gui.line()
 
     # if database doesn't exist, create it
     conn = sqlite3.connect(db)
@@ -19,13 +18,17 @@ def gui(gui: imgui.GUI):
     c.execute("""CREATE TABLE IF NOT EXISTS notes (
         id INTEGER PRIMARY KEY,
         note TEXT
+        page TEXT
     )""")
-    # print all rows in table
+
+    gui.text("Notes")
+    gui.line()
     c.execute("SELECT * FROM notes")
+
     rows = c.fetchall()
 
 
-    # ROW_WIDTH = 80
+    ROW_WIDTH = 80
 
     # for row in rows:
     #     total_chars = len(row[1])
@@ -39,9 +42,8 @@ def gui(gui: imgui.GUI):
 
     #         gui.text(f'{start}{row[1][index:index+offset]}')
 
-
     for row in rows:
-        gui.text(f'{row[0]}: {row[1]}')
+        gui.text(f'{row[0]}: {row[1]}. {row[2]}')
 
     gui.spacer()
     if gui.button("Close"):
@@ -50,18 +52,24 @@ def gui(gui: imgui.GUI):
 
 @mod.action_class
 class Actions:
-    def add_note(text: str):
+    def add_note(text: str, page: str = "General"):
         """Adds a note to the GUI"""
 
         # add string to database
         conn = sqlite3.connect(db)
         try:
             c = conn.cursor()
+            # create database with columns id, note, page if it doesn't exist
             c.execute("""CREATE TABLE IF NOT EXISTS notes (
                 id INTEGER PRIMARY KEY,
-                note TEXT
+                note TEXT,
+                page TEXT
             )""")
-            c.execute("INSERT INTO notes (note) VALUES (?)", (text,))
+            # add note to database
+            
+            # insert text and page into database
+            c.execute("INSERT INTO notes (note, page) VALUES (?, ?)", (text, page))
+
             conn.commit()
         finally:
             conn.close()
@@ -119,12 +127,15 @@ class Actions:
 
     def export_notes():
         """Exports all notes to a text file"""
+        # get current time
+        now = time.strftime("%Y-%m-%d_%H-%M-%S")
+
         conn = sqlite3.connect(db)
         try:
             c = conn.cursor()
             c.execute("SELECT * FROM notes")
             rows = c.fetchall()
-            with open(os.path.expanduser(text_path), "w") as f:
+            with open(os.path.expanduser(text_path + now ), "w") as f:
                 print("Exporting notes...") 
                 for row in rows:
                     f.write(f'{row[0]}: {row[1]}\n')
