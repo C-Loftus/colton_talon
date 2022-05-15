@@ -6,7 +6,7 @@ new window:
     key(ctrl-shift-n)
 
 focus lines:
-    key(ctrl-shift-alt-d)
+    key(ctrl-1)
 
 
 run python:
@@ -33,7 +33,7 @@ restart python:
     key(ctrl-f10)
 
 Run again:
-    key(ctrl-shift-alt-f)
+    user.vscode("workbench.action.terminal.focus")
     sleep(.25)
     key(up)
     key(enter)
@@ -58,8 +58,28 @@ special:
     key(left:1)
     
 collapse folders: user.vscode("workbench.files.action.collapseExplorerFolders")
+format code: user.vscode("editor.action.formatDocument")
+
 
 run rust:
     user.vscode("workbench.action.terminal.focus")
+    sleep(.3)
     user.paste("cargo run")
     key(enter)
+run typescript:
+    user.vscode("workbench.action.terminal.focus")
+    sleep(.3)
+    user.paste("npx ts-node src/")
+
+Compile typescript:
+    user.vscode("workbench.action.terminal.focus")
+    sleep(.3)
+    user.paste("npx tsc; node dist/src/index.js")
+    key(enter)
+Compile typescript tests:
+    user.vscode("workbench.action.terminal.focus")
+    sleep(.3)
+    user.paste("npx tsc; node dist/src/tests.js")
+    key(enter)
+dance:
+    "// "

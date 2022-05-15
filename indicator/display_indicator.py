@@ -1,4 +1,3 @@
-from operator import mod
 from talon import canvas, ui
 from talon.skia import image
 from talon.types import rect
@@ -7,18 +6,25 @@ import os
 
 # 100x100 image for thea
 
-y77 = 110
-y0 = 33
-if ui.screens()[0].y == 77:
-    y = y77
-else:
-    y = y0
+default_ubuntu = (1979, 33)
+top_bar = (1928, 45)
+left_dash_to_panel = (1975, 8)
 
-can = canvas.Canvas(x=1975, y=y, width=30, height=30)
+config = default_ubuntu
+
+
+if ui.screens()[0].y == 77:
+    y = config[1] + 77
+else:
+    y = config[1]
+
+x = config[0]
+
+
+
+can = canvas.Canvas(x=x, y=y, width=30, height=30)
 
 PATH = os.path.realpath(os.path.dirname(__file__)) + "/"
-
-
 img=image.Image.from_file(PATH+"command.jpg")
 
 

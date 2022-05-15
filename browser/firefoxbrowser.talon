@@ -10,22 +10,23 @@ web search <user.text>:
     insert(text)
     key(enter)
 
+page hunt <user.text>:
+    key(ctrl-f)
+    sleep(.2)
+    insert(text)
+
 close tab:
     key(ctrl-w)
 # vimium requirement
 split window:
     key(shift-w)
-yo: 
-    key(f)
+# yo: 
+#     key(f)
 restore tab:
     key(X)
 
 bookmark <user.word>:
     key(ctrl-b)
-    sleep(.2)
-    insert(user.word)
-search <user.word>:
-    key(ctrl-f)
     sleep(.2)
     insert(user.word)
 

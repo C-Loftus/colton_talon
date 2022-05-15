@@ -7,10 +7,8 @@ system monitor:
     insert("htop")
 
     key(enter)
-
-launch slack talon:
-    user.system_command_nb("google-chrome https://app.slack.com/client/T7FPSMV8F/C7ENXA7C4")
-
+launch code dotfiles:
+    user.system_command_nb("code ~/dotfiles")
 launch code:
     user.system_command_nb("code")
 
