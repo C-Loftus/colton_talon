@@ -1,12 +1,12 @@
 mode: command
 
 -
-jump firefox:
-    key(alt-1)
-    user.switcher_focus("firefox")
-Jump code:
-    key(alt-2)
-    user.switcher_focus("code")
+Toggle stacking:
+    key(super-s)
+# stack left:     
+#     key(super-left)
+# Switch stack right:     
+    # key(super-right)
 
 Left monitor:
     key(super-shift-left)

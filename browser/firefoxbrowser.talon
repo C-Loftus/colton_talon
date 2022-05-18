@@ -3,6 +3,17 @@
 app: firefox
 
 -
+# requires extension to switch to last tab with ctrl-9
+last [<number_small>] :
+
+    key(ctrl-9)
+    times = number_small or 1
+    times = times - 1
+    key("ctrl-pageup:{times}")
+
+tab <number_small> :
+    key("ctrl-{number_small}")
+
 web search <user.text>:
     key(ctrl-t)
     key(ctrl-l)

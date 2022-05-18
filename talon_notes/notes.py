@@ -169,9 +169,8 @@ class Actions:
         finally:
             conn.close()
 
-        if gui.showing:
-            gui.hide()
-            gui.show()
+        gui.hide()
+        gui.show()
 
 
 
