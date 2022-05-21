@@ -7,7 +7,7 @@ erase note <digits>:
      user.pencil_note(phrase)
 toggle notes:
      user.toggle_notes()
-export notes:
+export my notes:
      user.export_notes()
 trash notes:
      user.trash_notes()

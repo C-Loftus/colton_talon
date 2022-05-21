@@ -1,5 +1,8 @@
- #  this file defines the function that is called within my change to the knausj focus command
+ #  this file defines the function that is called within 
+ # my change to the knausj focus command
+
 from talon import Module, actions, ui, app
+import time
 
 mod = Module()
 
@@ -13,6 +16,8 @@ class focus:
         for app in app_list:
             if app.name==my_application:
                 workspace = app.active_window.workspace
+                ui.switch_workspace(workspace)
+                 # if switch happens too fast you will ignore the focus
+                time.sleep(0.1)
                 app.focus()
-
-        ui.switch_workspace(workspace)
+                break

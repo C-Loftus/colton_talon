@@ -1,1 +1,0 @@
-All programs in this directory are ran using the external system python interpreter instead of the one built in from Talon

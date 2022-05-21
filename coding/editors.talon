@@ -29,3 +29,8 @@ hooks:
 fishes:
     user.paste("<>")
     key(left)
+type array:
+    "[]"
+
+colgap:
+    ": "

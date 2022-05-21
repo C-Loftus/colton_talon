@@ -1,3 +1,4 @@
 Assets/
 *.txt
 *.db
+__pycache__
