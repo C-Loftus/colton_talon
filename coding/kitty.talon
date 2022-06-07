@@ -2,6 +2,10 @@ app: Kitty
 mode: command
 
 -
+
+fill:
+    key(ctrl-f)
+    key(enter)
 install:
     " sudo apt install"
 update:

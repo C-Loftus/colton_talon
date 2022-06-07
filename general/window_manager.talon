@@ -1,12 +1,23 @@
 mode: command
-
+os: linux
 -
+
+focus <user.running_applications>: 
+    user.jump_workspace_and_switch_focus(running_applications)
 Toggle stacking:
     key(super-s)
 # stack left:     
 #     key(super-left)
 # Switch stack right:     
     # key(super-right)
+
+move <number_small> :
+    key("alt-shift-{number_small}")
+
+bounce <number_small> :
+    key("alt-{number_small}")
+
+
 
 Left monitor:
     key(super-shift-left)

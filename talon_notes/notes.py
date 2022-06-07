@@ -1,7 +1,7 @@
 
 from sys import stdout
 from talon import Module, actions, imgui
-import sqlite3, os, time
+import sqlite3, os, time, shutil
 
 mod = Module()
 db = os.path.dirname(os.path.realpath(__file__)) + "/notes.db"
@@ -115,7 +115,7 @@ class Actions:
                 c.execute("UPDATE = ? WHERE id = ?", (index, row[0]))
             conn.commit()
         except Exception as e:
-            print(f'NOTES ERROR: {e}')
+            print(f'NOTES ERROR In erase_note: \'{e}\'')
         finally:
             conn.close()
 
@@ -129,7 +129,7 @@ class Actions:
         try:
             os.remove(db)
         except FileNotFoundError:
-            print("NOTES: No notes to erase")
+            print("NOTES ERROR WHEN TRASHING ALL NOTES: No notes to erase")
 
         if gui.showing:
             gui.hide()
@@ -191,7 +191,7 @@ class Actions:
 
         print(f'NOTES: Switched to {page} with{current_page=}{page_list=}')
 
-    def trash_page(Page: str):
+    def erase_page(Page: str):
         """Removes a page from the database"""
         if Page == "general":
             print("NOTES: The general page itself cannot be deleted because it is the default page. However,  the associated notes will still be deleted")
@@ -211,7 +211,7 @@ class Actions:
                 c.execute("UPDATE = ? WHERE id = ?", (index, row[0]))
             conn.commit()
         except Exception as e:
-            print(f'NOTES ERROR: {e}')
+            print(f'NOTES ERROR IN erase_page: \'{e}\'')
         finally:
             conn.close()
         global current_page
@@ -220,31 +220,42 @@ class Actions:
             gui.hide()
             gui.show()
 
-    def export_notes():
+    def backup_notes():
         """Exports all notes to a text file"""
-        # get current time
+
         now = time.strftime("%Y-%m-%d")
-        path = os.path.dirname(os.path.realpath(__file__)) + now
+
+        backups = os.path.join(os.path.dirname(__file__), "backups")
+        if not os.path.exists(backups):
+            os.mkdir(backups)
 
         # copy database to text file
-
-        import shutil
-        shutil.copy(db, path + "_backup.db")
+        db_backup = os.path.join(backups, f"notes_{now}.db")
+        shutil.copy(db, db_backup)
 
         conn = sqlite3.connect(db)
         try:
             c = conn.cursor()
             c.execute("SELECT * FROM notes")
             rows = c.fetchall()
-            with open(os.path.expanduser( path + "_backup.txt"), "w") as f:
-                print("Exporting notes...") 
+
+            path = os.path.join(backups, f"notes_{now}.txt")
+            with open(os.path.expanduser(path), "w") as f:
                 for row in rows:
-                    for item in row:
-                        if item != None:
-                            f.write(f'{item}:')
-                            print(f'NOTES: {item}')
-                    f.write("\n")
+                    f.write(f'{row}\n')
         finally:
             conn.close()
 
+    def log_notes():
+        """Logs all notes In the talon log"""
+        conn = sqlite3.connect(db)
+        try:
+            c = conn.cursor()
+            c.execute("SELECT * FROM notes")
+            rows = c.fetchall()
+            print("Exporting notes...") 
+            for row in rows:
+                print(f'NOTES: {row}')
+        finally:
+            conn.close()
 

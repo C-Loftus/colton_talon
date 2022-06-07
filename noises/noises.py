@@ -55,7 +55,7 @@ def pop_handler(active: bool):
         print("pop lock")
     elif dictation_mode:
         print("can't pop in dictation mode")
-noise.register("pop", pop_handler)
+# noise.register("pop", pop_handler)
 
 
 def on_hiss(active: bool):
@@ -76,7 +76,7 @@ def on_hiss(active: bool):
     elif hiss_lock:
         print("hiss lock")
                     
-noise.register("hiss", on_hiss)
+# noise.register("hiss", on_hiss)
 
 
 

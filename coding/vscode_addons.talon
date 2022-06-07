@@ -32,7 +32,7 @@ restart python:
     sleep(.1)
     key(ctrl-f10)
 
-Run again:
+previous command:
     user.vscode("workbench.action.terminal.focus")
     sleep(.25)
     key(up)
@@ -42,11 +42,6 @@ backup:
     key(ctrl-shift-alt-f)
     user.paste("fgc")
     key(enter)
-
-
-print:
-    insert('print()')
-    key(left)
 
 switch project:
     key(ctrl-r)
@@ -58,13 +53,14 @@ special:
     key(left:1)
     
 collapse folders: user.vscode("workbench.files.action.collapseExplorerFolders")
-format code: user.vscode("editor.action.formatDocument")
+format: user.vscode("editor.action.formatDocument")
 
 
 run rust:
     user.vscode("workbench.action.terminal.focus")
-    sleep(.3)
-    user.paste("cargo run")
+    sleep(.1)
+    "cargo run"
+    sleep(.1)
     key(enter)
 run typescript:
     user.vscode("workbench.action.terminal.focus")

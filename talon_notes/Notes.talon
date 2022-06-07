@@ -1,23 +1,23 @@
 mode: command
 -
 
-erase note <digits>:
+^erase note <digits>$:
      user.erase_note("{digits_1}")
-^pencil note <phrase>$:
-     user.pencil_note(phrase)
+^pencil note <user.text>$:
+     user.pencil_note(text)
 toggle notes:
      user.toggle_notes()
-export my notes:
-     user.export_notes()
-trash notes:
+^backup notes$:
+     user.backup_notes()
+^log notes$:
+     user.log_notes()
+^trash notes$:
+     user.backup_notes()
      user.trash_notes()
-
-trash page <user.text>:
-     user.trash_page(text)
-
-new page <user.text>:
+^erase page <user.text>$:
+     user.erase_page(text)
+^new page <user.text>$:
      user.new_page(text)
-
-switch page <user.text>$:
+switch page <user.text>:
      user.switch_page(text)
 
