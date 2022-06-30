@@ -1,10 +1,11 @@
 
 mode: command
+title: /Google Docs/
 
 -
 
-settings():
-    key_wait = 10.0
+# settings():
+#     key_wait = 10.0
 
 for all:
     insert('\\forall')

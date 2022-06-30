@@ -4,8 +4,8 @@ app.name: Google-chrome
 -
 # key_wait increases the delay when pressing keys (milliseconds)
 # this is useful if an app seems to jumble or drop keys
-settings():
-    key_wait = 4.0
+# settings():
+#     key_wait = 4.0
 
 # activate the global tag "browser"
 tag(): browser

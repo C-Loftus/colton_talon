@@ -5,8 +5,8 @@ title: /Google Docs/
 # and mode: user.auto_lang
 # and code.language: markdown
 -
-settings():
-    key_wait = 10.0
+# settings():
+#     key_wait = 10.0
     
 caps:
     mouse_click()
