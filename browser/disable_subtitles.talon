@@ -1,4 +1,6 @@
 title: /Slack/
+title: /Element/
+
 -
 settings():
     # Note unstable API; might change

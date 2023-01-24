@@ -2,8 +2,11 @@ title: /Google Docs/
 mode: command
 
 -
-settings():
-    key_wait = 10.0
+# settings():
+#     key_wait = 10.0
+
+
+
 
 sigma:
     insert('\\sum \n')

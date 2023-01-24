@@ -19,10 +19,10 @@ bounce <number_small> :
 
 
 
-Left monitor:
+move left:
     key(super-shift-left)
 
-Right monitor:
+move right:
     key(super-shift-right)
 
 Shut down computer now:

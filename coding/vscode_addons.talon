@@ -2,6 +2,12 @@ app: vscode
 mode: command
 
 -
+hats permanently off: 
+    user.change_setting("cursorless.showOnStart", 'false')
+
+hats permanently on: 
+    user.change_setting("cursorless.showOnStart", 'true')
+    
 new window:
     key(ctrl-shift-n)
 
@@ -21,6 +27,9 @@ kill program:
     sleep(.25)
     key(ctrl-c)
 
+hat toggle:
+    user.vscode("cursorless.toggleDecorations")
+
 
 restart python:
     key(ctrl-shift-alt-f)
@@ -32,10 +41,11 @@ restart python:
     sleep(.1)
     key(ctrl-f10)
 
-previous command:
+run previous:
     user.vscode("workbench.action.terminal.focus")
     sleep(.25)
     key(up)
+    sleep(.25)
     key(enter)
 
 backup:
@@ -79,3 +89,5 @@ Compile typescript tests:
     key(enter)
 dance:
     "// "
+run that:
+    key(ctrl-shift-enter)

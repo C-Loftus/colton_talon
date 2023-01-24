@@ -6,3 +6,6 @@ mode: command
 
 fly:
     key(end)
+
+bullet:
+    "* "

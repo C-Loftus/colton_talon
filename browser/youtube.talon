@@ -1,8 +1,9 @@
 title: /YouTube/
+title: /Invidious/
 
 -
-settings():
-    key_wait = 10.0
+# settings():
+#     key_wait = 10.0
 
 jump left: 
     key(ctrl-left)

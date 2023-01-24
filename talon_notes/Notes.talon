@@ -5,7 +5,7 @@ mode: command
      user.erase_note("{digits_1}")
 ^pencil note <user.text>$:
      user.pencil_note(text)
-toggle notes:
+toggle notes:  
      user.toggle_notes()
 ^backup notes$:
      user.backup_notes()

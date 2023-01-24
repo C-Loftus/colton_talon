@@ -11,6 +11,11 @@ launch code dotfiles:
     user.system_command_nb("code ~/dotfiles")
 launch code:
     user.system_command_nb("code")
+launch code thesis:
+    user.system_command_nb("code ~/School/2022/data")
+
+launch code data:
+    user.system_command_nb("code ~/SCh")
 
 launch chrome:
     user.system_command_nb("google-chrome")

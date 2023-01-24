@@ -18,7 +18,7 @@ menu:
 debug:
     key(ctrl-p)
 
-settings():
-    key_wait = 100.0
+# settings():
+#     key_wait = 
 
     

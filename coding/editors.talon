@@ -25,12 +25,19 @@ smile:
 hooks:
     insert("()")
     key(left)
+scope: 
+    user.paste("{\n\n}") 
+    key(up)
+
+
+
+polygon:
+    user.paste("[]")
+    key(left)
 
 fishes:
     user.paste("<>")
     key(left)
-type array:
-    "[]"
 
 colgap:
     ": "
