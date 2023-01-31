@@ -9,3 +9,18 @@ fly:
 
 bullet:
     "* "
+
+voyage: 
+    key(volup:3)
+
+vacate: 
+    key(voldown:3)
+
+smile:
+    key(volup)
+
+frown:
+    key(voldown)
+
+^thumbs up$:
+    user.paste("👍")

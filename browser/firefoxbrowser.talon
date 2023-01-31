@@ -22,7 +22,6 @@ web search <user.text>:
     key(ctrl-l)
     sleep(.05)
     insert(text)
-    key(enter)
 
 page hunt <user.text>:
     key(ctrl-f)
@@ -34,8 +33,7 @@ close tab:
 # vimium requirement
 split window:
     key(shift-w)
-# yo: 
-#     key(f)
+
 restore tab:
     key(X)
 
@@ -46,3 +44,7 @@ bookmark <user.word>:
 
 bookmarks:
     key(ctrl-b)
+
+pick <number_small>: 
+    key("down:{number_small}") 
+    key(enter)

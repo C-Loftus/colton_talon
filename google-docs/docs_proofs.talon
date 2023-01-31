@@ -28,6 +28,10 @@ epsilon:
     insert('\\epsilon ')
     key(space)
 
+raise <user.alnum>:
+    print('test')
+    insert("^{alnum_1}\n")
+
 integral <user.alnum> <user.alnum>:
     insert("\\int {alnum_1}\n{alnum_2}\n")
 

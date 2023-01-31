@@ -63,7 +63,7 @@ special:
     key(left:1)
     
 collapse folders: user.vscode("workbench.files.action.collapseExplorerFolders")
-format: user.vscode("editor.action.formatDocument")
+format document: user.vscode("editor.action.formatDocument")
 
 
 run rust:
