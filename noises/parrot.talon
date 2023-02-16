@@ -1,88 +1,88 @@
-### REQUIRES TALON BETA ###
+# ### REQUIRES TALON BETA ###
 
-not mode: sleep
-and not mode: dictation
+# not mode: sleep
+# and not mode: dictation
 
--
+# -
 
-parrot(cluck):
-	print("cluck")
+# parrot(cluck):
+# 	print("cluck")
 
-parrot(tut):
-	print("tut")
+# parrot(tut):
+# 	print("tut")
 
-parrot(palate_click):
-	# user.mouse_toggle_control_mouse()
-	print("palate_click")
+# parrot(palate_click):
+# 	# user.mouse_toggle_control_mouse()
+# 	print("palate_click")
 
-parrot(pop):
-	print("pop")
+# parrot(pop):
+# 	print("pop")
 
-parrot(gluck):
-	print("gluck")
+# parrot(gluck):
+# 	print("gluck")
 
-parrot(finger_snap):
-	print("finger_snap")
+# parrot(finger_snap):
+# 	print("finger_snap")
 
-parrot(ch):
-	print("ch")
+# parrot(ch):
+# 	print("ch")
 
-parrot(ah):
-	print("ah")
+# parrot(ah):
+# 	print("ah")
 
-parrot(oh):
-	print("oh")
+# parrot(oh):
+# 	print("oh")
 
-parrot(ee):
-	print("ee")
+# parrot(ee):
+# 	print("ee")
 
-parrot(ue):
-	print("ue")
+# parrot(ue):
+# 	print("ue")
 
-parrot(ae):
-	print("ae")
+# parrot(ae):
+# 	print("ae")
 
-parrot(horse):
-	print("horse")
+# parrot(horse):
+# 	print("horse")
 
-parrot(whistle):
-	print("whistle")
+# parrot(whistle):
+# 	print("whistle")
 
-parrot(chopper):
-	print("chopper")
+# parrot(chopper):
+# 	print("chopper")
 
-parrot(hurr):
-	print("hurr")
+# parrot(hurr):
+# 	print("hurr")
 
-parrot(hmm):
-	print("hmm")
+# parrot(hmm):
+# 	print("hmm")
 
-parrot(oo):
-	print("oo")
+# parrot(oo):
+# 	print("oo")
 
 
-parrot(yee):
-	print("yee")
+# parrot(yee):
+# 	print("yee")
 
-parrot(uh):
-	print("uh")
+# parrot(uh):
+# 	print("uh")
 
-parrot(fff):
-	print("fff")
+# parrot(fff):
+# 	print("fff")
 
-parrot(buzz):
-	print("buzz")
+# parrot(buzz):
+# 	print("buzz")
 
-parrot(generator):
-	print("generator")
+# parrot(generator):
+# 	print("generator")
 
-parrot(hiss):
-	# key(pagedown)
-	print("hiss")
+# parrot(hiss):
+# 	# key(pagedown)
+# 	print("hiss")
 
-# parrot(shush):
-# 	print("shush")
-# 	# key(pageup)
+# # parrot(shush):
+# # 	print("shush")
+# # 	# key(pageup)
 
-parrot(x):
-	print("x")
+# parrot(x):
+# 	print("x")

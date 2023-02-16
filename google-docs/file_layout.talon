@@ -1,4 +1,4 @@
-title: /Google Docs/
+title: /Docs/
 mode: command
 
 -

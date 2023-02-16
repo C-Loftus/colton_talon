@@ -1,4 +1,4 @@
-app: vscode
+gb1app: vscode
 mode: command
 
 -
@@ -16,11 +16,7 @@ focus lines:
 
 
 run python:
-    key(ctrl-s)
-    sleep(.1)
-    key(ctrl-shift-alt-d)
-    sleep(.1)
-    key(ctrl-f10)
+    user.vscode("python.execInTerminal-icon")
 
 kill program:
     user.vscode("workbench.action.terminal.focus")

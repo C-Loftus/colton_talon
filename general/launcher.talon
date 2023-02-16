@@ -12,7 +12,9 @@ launch code dotfiles:
 launch code:
     user.system_command_nb("code")
 launch code thesis:
-    user.system_command_nb("code ~/School/2022/data")
+    user.system_command_nb("code ~/Projects/thesis")
+Launch code voice: 
+    user.system_command_nb("code ~/numen")
 
 launch code data:
     user.system_command_nb("code ~/SCh")

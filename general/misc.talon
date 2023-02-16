@@ -24,3 +24,29 @@ frown:
 
 ^thumbs up$:
     user.paste("👍")
+
+
+hooks:
+    insert("()")
+    key(left)
+scope: 
+    user.paste("{\n\n}") 
+    key(up)
+
+^box$:
+    user.paste("[]")
+    key(left)
+^skis$: 
+    user.paste("``")
+    key(left)
+
+# fishes:
+#     user.paste("<>")
+#     key(left)
+
+colgap:
+    ": "
+
+^diamond$:
+    user.paste("<>")
+    key(left)

@@ -13,7 +13,7 @@ clone:
 	git clone https://github.com/tararoys/dense-mouse-grid ~/.talon/user/dense-mouse-grid
 
 fetch: pull
-	cd ~/.talon/user/knausj_talon; git fetch https://github.com/knausj85/knausj_talon
+	cd ~/.talon/user/knausj_talon; git fetch upstream main
 pull:
 	find ~/.talon/user -name .git -print -execdir git pull --ff-only \;
 

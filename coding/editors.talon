@@ -1,8 +1,5 @@
 mode: command
 -
-junk:
-    key(end)
-
 
 go left <digits>:
     key("left:{digits_1}")
@@ -18,23 +15,3 @@ copy <digits> lines:
     edit.extend_line_down() 
     repeat(digits-2)
     edit.copy()
-
-hooks:
-    insert("()")
-    key(left)
-scope: 
-    user.paste("{\n\n}") 
-    key(up)
-
-
-
-polygon:
-    user.paste("[]")
-    key(left)
-
-fishes:
-    user.paste("<>")
-    key(left)
-
-colgap:
-    ": "
