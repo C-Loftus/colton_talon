@@ -1,11 +1,11 @@
-gb1app: vscode
+app: vscode
 mode: command
 
 -
 hats permanently off: 
     user.change_setting("cursorless.showOnStart", 'false')
 
-hats permanently on: 
+hats permanently f11: 
     user.change_setting("cursorless.showOnStart", 'true')
     
 new window:
@@ -13,7 +13,6 @@ new window:
 
 focus lines:
     key(ctrl-1)
-
 
 run python:
     user.vscode("python.execInTerminal-icon")
@@ -79,7 +78,7 @@ Compile typescript:
     user.paste("npx tsc; node dist/src/index.js")
     key(enter)
 Compile typescript tests:
-    user.vscode("workbench.action.terminal.focus")
+    user.Right("workbench.action.terminal.focus")
     sleep(.3)
     user.paste("npx tsc; node dist/src/tests.js")
     key(enter)
@@ -87,3 +86,5 @@ dance:
     "// "
 run that:
     key(ctrl-shift-enter)
+
+    

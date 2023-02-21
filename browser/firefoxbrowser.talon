@@ -10,7 +10,7 @@ last [<number_small>] :
     key(ctrl-9)
     times = number_small or 1
     times = times - 1
-    print(times)
+    # print(times)
     sleep(.05)
     key("ctrl-pageup:{times}")
 

@@ -1,5 +1,6 @@
 title: /Slack/
 title: /Element/
+title: /Discord/
 
 -
 settings():
