@@ -21,8 +21,7 @@ kill program:
     user.vscode("workbench.action.terminal.focus")
     sleep(.25)
     key(ctrl-c)
-
-hat toggle:
+hints toggle:
     user.vscode("cursorless.toggleDecorations")
 
 

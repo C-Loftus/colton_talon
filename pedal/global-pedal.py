@@ -26,4 +26,4 @@ class Actions:
     def center_pedal_up():
         """Center pedal up"""
         # actions.user.mouse_scroll_stop()
-        pass
+        actions.key("end")

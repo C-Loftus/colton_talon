@@ -1,7 +1,20 @@
 from talon import Context, actions
 
 ctx = Context()
-ctx.matches = "app: vscode"
+ctx.matches = """app: vscode
+"""
+
+def run_cell():
+    actions.user.vscode("jupyter.runcurrentcell"); actions.user.vscode("notebook.cell.execute")
+
+def go_up():
+    actions.user.vscode("jupyter.gotoPrevCellInFile")
+    actions.user.vscode("notebook.focusPreviousEditor")
+
+def go_down():
+    actions.user.vscode("jupyter.gotoNextCellInFile")
+    actions.user.vscode("notebook.focusNextEditor")
+
 
 @ctx.action_class("user")
 class CodeActions:
@@ -14,13 +27,13 @@ class CodeActions:
         pass
 
     def left_pedal_up():
-        actions.user.vscode("jupyter.gotoPrevCellInFile")
+        go_up()
+
     def right_pedal_up():
-        actions.user.vscode("jupyter.gotoNextCellInFile")
+        run_cell()
+        go_down()
     def center_pedal_up():
-        actions.user.vscode("jupyter.runcurrentcell")
-
-
+        run_cell()
 
 
     

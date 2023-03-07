@@ -15,3 +15,7 @@ key(keypad_plus:down):
     user.center_pedal()
 key(keypad_minus:up):       
     user.center_pedal_up()
+
+
+key(keypad_divide-keypad_multiply):    
+    print("Both pedals pressed")

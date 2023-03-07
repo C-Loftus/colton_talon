@@ -1,6 +1,6 @@
 
 mode: command
-title: /Google Docs/
+title: /docs.google/
 
 -
 
