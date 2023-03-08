@@ -3,42 +3,45 @@ import time
 
 mod = Module()
 
-
 map = {
     "left": False,
     "right": False,
     "center": False
 }
 
-discrete = mod.setting(
-    "discrete",
+force_synchronous = mod.setting(
+    "force_synchronous",
     type=bool,
     default=False,
-    desc="discrete",
+    desc="force_synchronous",
 )
 
 
 def on_interval():
-    """Interval"""
-    if discrete.get() == True:
+    
+    if force_synchronous.get() == True:
+        if map["left"] and map["right"]:
+            actions.user.left_right_down()
+            reset_map()
         return
 
     if map["left"] and map["right"]:
-        actions.user.left_right_down( )
+        actions.user.left_right_down()
         reset_map()
     elif map["left"]:
-        actions.user.left_down( )
+        actions.user.left_down()
     elif map["right"]:
-        actions.user.right_down( )
+        actions.user.right_down()
     elif map["center"]:
-        actions.user.center_down( )
+        actions.user.center_down()
+
 
 reset_map = lambda: map.update({k: False for k in map.keys()})
 
 hold_timeout = 0.2
 scroll_amount = 0.2
 
-cron.interval("", on_interval)
+cron.interval("16ms", on_interval)
 
 
 @mod.action_class
@@ -54,7 +57,7 @@ class Actions:
         """Pedal up"""
         map[key]=False
 
-        if discrete.get() == True:
+        if force_synchronous.get() == True:
             if key == "left":
                 actions.user.left_up( )
             elif key == "right":

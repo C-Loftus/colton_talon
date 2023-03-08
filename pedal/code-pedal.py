@@ -5,19 +5,7 @@ ctx = Context()
 ctx.matches = """app: vscode
 """
 
-def run_cell():
-    actions.user.vscode("jupyter.runcurrentcell"); 
-    actions.user.vscode("notebook.cell.execute")
-
-def go_up():
-    actions.user.vscode("jupyter.gotoPrevCellInFile")
-    actions.user.vscode("notebook.focusPreviousEditor")
-
-def go_down():
-    actions.user.vscode("jupyter.gotoNextCellInFile")
-    actions.user.vscode("notebook.focusNextEditor")
-
-ctx.settings["user.discrete"] = True
+ctx.settings["user.force_synchronous"] = True
 
 @ctx.action_class("user")
 class Actions:
