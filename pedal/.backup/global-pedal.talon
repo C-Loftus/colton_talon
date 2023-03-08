@@ -11,11 +11,8 @@ key(keypad_multiply:up):
     user.right_pedal_up() 
 
 # Center button (kpplus)
-key(keypad_plus:down):    
+key(keypad_minus:down):    
     user.center_pedal()
 key(keypad_minus:up):       
     user.center_pedal_up()
 
-
-key(keypad_divide-keypad_multiply):    
-    print("Both pedals pressed")

@@ -5,7 +5,8 @@ ctx.matches = """app: vscode
 """
 
 def run_cell():
-    actions.user.vscode("jupyter.runcurrentcell"); actions.user.vscode("notebook.cell.execute")
+    actions.user.vscode("jupyter.runcurrentcell"); 
+    actions.user.vscode("notebook.cell.execute")
 
 def go_up():
     actions.user.vscode("jupyter.gotoPrevCellInFile")
