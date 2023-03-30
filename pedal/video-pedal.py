@@ -4,6 +4,7 @@ import time, random, math, os
 ctx = Context()
 ctx.matches = """title: /watch/
 title: /soundcloud/
+title: /Internet Archive/
 """
 
 speed_mode = False

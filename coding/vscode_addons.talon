@@ -35,7 +35,7 @@ restart python:
     sleep(.1)
     key(ctrl-f10)
 
-run previous:
+run again:
     user.vscode("workbench.action.terminal.focus")
     sleep(.25)
     key(up)
@@ -56,7 +56,10 @@ special:
     "``"
     key(left:1)
     
-collapse folders: user.vscode("workbench.files.action.collapseExplorerFolders")
+close folders: user.vscode("workbench.files.action.collapseExplorerFolders")
+# bar collapse: user.vscode("workbench.files.action.collapseExplorerFolders")
+
+
 format document: user.vscode("editor.action.formatDocument")
 
 
