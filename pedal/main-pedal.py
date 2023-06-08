@@ -1,7 +1,7 @@
-from talon import Module, actions, cron, scope, Context
+from talon import Module, actions, cron, scope, Context, settings
 import time
 
-
+CRON_INTERVAL="16ms"
 mod = Module()
 
 map = {
@@ -19,7 +19,7 @@ force_synchronous = mod.setting(
 pedal_scroll_amount=mod.setting(
     "pedal_scroll_amount",
     type=float,
-    default=0.2,
+    default=0.1,
     desc="pedal_scroll_amount",
 )
 
@@ -41,7 +41,10 @@ def on_interval():
         reset_map()
         return  
 
-    if force_synchronous.get() == True:
+    # with synchronous code we only call functions on the pedal up
+    # pedal down functions  can be asynchronous and held down to repeat,
+    #  which is impossible if we have to force synchronous
+    if settings.get("user.force_synchronous") == True:
         return
 
     elif map["left"]:
@@ -55,7 +58,7 @@ def on_interval():
 reset_map = lambda: map.update({k: False for k in map.keys()})
 two_keypress = lambda: sum(map.values()) >= 2
 
-cron.interval("16ms", on_interval)
+cron.interval(CRON_INTERVAL, on_interval)
 
 
 
@@ -63,14 +66,13 @@ cron.interval("16ms", on_interval)
 class Actions:
 
     def pedal_down(key: str):
-        """Pedal down"""
+        """Map the key name to down"""
         map[key]=True
 
 
     def pedal_up(key: str):
         """Pedal up"""
         # If you have a synchronous double keypress that has already reset the map, then we don't want to do anything. this prevents single actions mistakenly firing after the double action
-        # print(map, key, force_synchronous.get())
 
         if map[key] == False:
             return
@@ -105,13 +107,13 @@ class Actions:
 
     def left_right_down():
         """Left and Right pedal"""
-        ctx.settings['user.pedal_scroll_amount'] = pedal_scroll_amount.get()
+        ctx.settings['user.pedal_scroll_amount'] = settings.get("user.pedal_scroll_amount")
         ctx.settings['user.pedal_scroll_amount']+=0.2
         print(ctx.settings['user.pedal_scroll_amount'])
 
     def left_center_down():
         """Left and Center pedal"""
-        print('testing some random stuff here')
+        actions.user.piemenu_launch(1)
 
 
     def left_down():
@@ -126,6 +128,7 @@ class Actions:
         ctx.settings['user.pedal_scroll_amount'] = 0.2
 
 
+    # default implementations to override contextually
     def left_up():
         """Left pedal up"""
     def right_up():

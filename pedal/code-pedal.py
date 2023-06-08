@@ -6,8 +6,7 @@ ctx.matches = """app: vscode
 """
 
 ctx.settings["user.force_synchronous"] = False
-pedal_scroll_amount = settings.get("user.pedal_scroll_amount")
-
+pedal_scroll_amount = settings.get("user.pedal_scroll_amount") if settings.get("user.pedal_scroll_amount") else 0.2
 
 jump = False
 

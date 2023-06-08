@@ -48,3 +48,10 @@ bookmarks:
 pick <number_small>: 
     key("down:{number_small}") 
     key(enter)
+
+
+notion save:
+    key(ctrl-shift-k)
+    sleep(1.5)
+    key(enter)
+    key(escape)

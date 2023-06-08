@@ -29,6 +29,7 @@ indent left:
     key(ctrl-[)
 equation:
     key(alt-shift-i)
+    sleep(.3)
     key(e)
 divide:
     insert("\\frac ")
@@ -39,4 +40,8 @@ probability:
 
 expectation <user.letter>:
     insert("E[{letter}]")
+    key(left)
+
+expectation:
+    insert("E[]")
     key(left)

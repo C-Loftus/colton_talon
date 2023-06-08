@@ -25,6 +25,12 @@ move left:
 move right:
     key(super-shift-right)
 
+focus left: 
+    key(super-left)
+
+focus right: 
+    key(super-right)
+
 Shut down computer now:
     key(super-c)
     sleep(1)
