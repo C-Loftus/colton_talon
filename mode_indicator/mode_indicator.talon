@@ -4,7 +4,7 @@ settings():
     # 30pixels diameter
     user.mode_indicator_size = 30
     # Center horizontally
-    user.mode_indicator_x = 0.5
+    user.mode_indicator_x = 0
     # Align top
     user.mode_indicator_y = 0
     # Slightly transparent
