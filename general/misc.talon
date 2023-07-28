@@ -37,7 +37,7 @@ scope:
     user.paste("{\n\n}") 
     key(up)
 
-box:
+square:
     user.paste("[]")
     key(left)
 ^skis$: 

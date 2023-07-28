@@ -1,9 +1,10 @@
 #My additional  commands for firefox beyond those in knausj
 
-app: firefox
+app: browser
+app: chrome
 
 -
-# requires extension to switch to last tab with ctrl-9
+# for fire fox it requires my extension to switch to last tab with ctrl-9
 
 last [<number_small>] :
 

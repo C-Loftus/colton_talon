@@ -1,11 +1,12 @@
-from talon import app
+from talon import app, Context
 import subprocess, os
+
 
 def app_ready():
     current_dir = os.path.dirname(os.path.abspath(__file__) )
 
     def create_path(path):
-        return os.path.join(current_dir, "..", path)
+        return os.path.join(current_dir, os.path(".."), path)
 
     repos = ["rango-talon", "cursorless-talon", "knausj_talon"]
 
@@ -29,9 +30,10 @@ def app_ready():
 
         except subprocess.CalledProcessError as e:
             # Error occurred while executing git command
-            print(f"Error: {e.output.decode('utf-8')}")
+            print(f"e")
 
     if no_updates:
         print("Your Talon User Directory is up to date!")
 
-app.register("ready", app_ready)
+if os.name != 'nt':
+    app.register("ready", app_ready)

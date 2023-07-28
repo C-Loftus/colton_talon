@@ -96,6 +96,8 @@ class Actions:
             actions.speech.enable()
         else:
             actions.speech.disable()
+        actions.user.on_update_contexts()
+        
 
     def center_right_down():
         """Center and Right pedal"""
@@ -125,7 +127,13 @@ class Actions:
         actions.user.mouse_scroll_up(pedal_scroll_amount.get())
     def center_down():
         """Center pedal"""
-        ctx.settings['user.pedal_scroll_amount'] = 0.2
+        modes = scope.get("mode")
+        if "sleep" in modes:
+            # mode = "sleep"
+            actions.speech.enable()
+            actions.user.on_update_contexts()
+        else:    
+            ctx.settings['user.pedal_scroll_amount'] = 0.2
 
 
     # default implementations to override contextually

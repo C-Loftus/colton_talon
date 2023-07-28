@@ -183,14 +183,6 @@ def update_indicator():
     elif canvas:
         hide_indicator()
 
-
-@ctx.action_class("user")
-class Actions:
-    def sound_microphone_enable_event():
-        update_indicator()
-        actions.next()
-
-
 def on_update_contexts():
     global current_mode
     modes = scope.get("mode")
