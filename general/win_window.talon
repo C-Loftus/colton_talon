@@ -20,4 +20,11 @@ snap left:
 maximize:
     key(super-up)
 
-target {user.website}: user.open_or_focus_tab(website)
+# target {user.website}: user.open_or_focus_tab(website)
+
+key(delete):
+    key(voldown)
+
+# key():
+#     key(volup)
+
