@@ -28,3 +28,7 @@ key(delete):
 # key():
 #     key(volup)
 
+Shut down computer now:
+    key(ctrl-alt-t)
+    sleep(1.5)
+    user.paste("Stop-Computer -Force")

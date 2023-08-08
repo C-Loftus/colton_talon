@@ -1,5 +1,6 @@
 app: Kitty
 mode: command
+os: linux
 
 -
 

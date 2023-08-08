@@ -1,7 +1,6 @@
 from talon import Module, actions, cron, scope, Context, settings
 import time
 
-CRON_INTERVAL="16ms"
 mod = Module()
 
 map = {
@@ -10,12 +9,23 @@ map = {
     "center": False
 }
 
+#  By default  this is false which signifies a continuously called function 
+# (Holding down scroll etc)
 force_synchronous = mod.setting(
     "force_synchronous",
     type=bool,
-    default=False,
+    default=False, 
     desc="force_synchronous",
 )
+
+#  turns just the center pedal into a synchronous option
+force_synchronous_center = mod.setting(
+    "force_synchronous_center",
+    type=bool,
+    default=True,
+    desc="force_synchronous_center",
+)
+
 pedal_scroll_amount=mod.setting(
     "pedal_scroll_amount",
     type=float,
@@ -44,22 +54,20 @@ def on_interval():
     # with synchronous code we only call functions on the pedal up
     # pedal down functions  can be asynchronous and held down to repeat,
     #  which is impossible if we have to force synchronous
-    if settings.get("user.force_synchronous") == True:
+    if settings.get("user.force_synchronous"):
         return
 
+    if map["center"] and not settings.get("user.force_synchronous_center"):
+        actions.user.center_down()
     elif map["left"]:
         actions.user.left_down()
     elif map["right"]:
         actions.user.right_down()
-    elif map["center"]:
-        actions.user.center_down()
-
 
 reset_map = lambda: map.update({k: False for k in map.keys()})
 two_keypress = lambda: sum(map.values()) >= 2
 
-cron.interval(CRON_INTERVAL, on_interval)
-
+cron.interval("16ms", on_interval)
 
 
 @mod.action_class
@@ -79,43 +87,36 @@ class Actions:
         else:
             map[key]=False
 
-        #  if we have a  discrete action that needs to wait and can't be asynchronous, then we can't use the cron job and as a result we have to do it synchronously on the pedal raise.
-        if force_synchronous.get() == True:
+        #  if we have a  discrete action that needs to wait and can't be asynchronous, 
+        # then we can't use the cron job and as a result we have to do it synchronously on the pedal raise.
+        if settings.get("user.force_synchronous") == True:
             if key == "left":
-                print("left up")
                 actions.user.left_up( )
             elif key == "right":
                 actions.user.right_up( )
             elif key == "center":
-                actions.user.center_up( )
+                actions.user.center_up()
+
+        elif settings.get("user.force_synchronous_center") == True:
+            actions.user.center_up()
 
     def left_center_right_down():
         """Left, Center and Right pedal"""
-        print("Switching mode")
-        if "sleep" in scope.get("mode"):
-            actions.speech.enable()
-        else:
-            actions.speech.disable()
-        actions.user.on_update_contexts()
-        
 
     def center_right_down():
         """Center and Right pedal"""
-        print("Switching mode")
-        if "sleep" in scope.get("mode"):
-            actions.speech.enable()
-        else:
-            actions.speech.disable()
+        ctx.settings['user.pedal_scroll_amount'] = 0.2
+        print("Speed reset to 0.2")
+
 
     def left_right_down():
         """Left and Right pedal"""
         ctx.settings['user.pedal_scroll_amount'] = settings.get("user.pedal_scroll_amount")
         ctx.settings['user.pedal_scroll_amount']+=0.2
-        print(ctx.settings['user.pedal_scroll_amount'])
+        print(f'Speed set to: {ctx.settings["user.pedal_scroll_amount"]}')
 
     def left_center_down():
         """Left and Center pedal"""
-        actions.user.piemenu_launch(1)
 
 
     def left_down():
@@ -127,13 +128,6 @@ class Actions:
         actions.user.mouse_scroll_up(pedal_scroll_amount.get())
     def center_down():
         """Center pedal"""
-        modes = scope.get("mode")
-        if "sleep" in modes:
-            # mode = "sleep"
-            actions.speech.enable()
-            actions.user.on_update_contexts()
-        else:    
-            ctx.settings['user.pedal_scroll_amount'] = 0.2
 
 
     # default implementations to override contextually
@@ -143,3 +137,9 @@ class Actions:
         """Right pedal up"""
     def center_up():
         """Center pedal up"""
+        modes = scope.get("mode")
+        if "sleep" in modes:
+            # mode = "sleep"
+            actions.speech.enable()
+        else:    
+            actions.speech.disable()

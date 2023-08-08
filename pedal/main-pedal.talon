@@ -1,8 +1,19 @@
 # Left button
-key(keypad_divide:down):    
-   user.pedal_down('left')
-key(keypad_divide:up):     
+key(numlock:down):    
+    print("left")
+    user.pedal_down('left') 
+key(numlock:up):       
     user.pedal_up('left') 
+    print("left")
+
+# Center button (kpplus)
+key(keypad_divide:down):    
+    # print("center")
+   user.pedal_down('center')
+key(keypad_divide:up):     
+    # print("center")
+    user.pedal_up('center')
+
 
 # Right button (kpmult)
 key(keypad_multiply:down):
@@ -10,8 +21,6 @@ key(keypad_multiply:down):
 key(keypad_multiply:up):  
     user.pedal_up('right') 
 
-# Center button (kpplus)
-key(keypad_minus:down):    
-    user.pedal_down('center')
-key(keypad_minus:up):       
-    user.pedal_up('center')
+# KEY_NUM_LOCK 0xDB 219
+# KEY_KP_SLASH: 0xDC 220
+# KEY_KP_ASTERISK: 0xDD 221
