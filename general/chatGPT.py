@@ -1,7 +1,7 @@
 import requests
 import json, os
 from typing import Optional
-from talon import Module, actions
+from talon import Module, actions, clip
 
 # TODO: Make it only available to run one request at a time
 
@@ -47,8 +47,9 @@ def gtp_task(prompt: str, content: str, task_name: str) -> str:
     if not resp:
         actions.app.notify('GPT: Something went wrong...')
         return None
-
-    actions.app.notify('GPT: Task ({task_name}) finished')
+    
+    clip.set_text(resp)
+    actions.app.notify(f'GPT: Task ({task_name}) finished')
     return resp
 
 
@@ -61,7 +62,27 @@ class Actions:
         """
         content = actions.edit.selected_text()
 
-        resp = gtp_task(prompt, content, "Grammar Check")
+        return gtp_task(prompt, content, "Grammar Check")
 
-        if resp:
-            actions.user.paste(resp)
+
+    
+    def summarize_this():
+        """summarize data"""
+        prompt = """
+        Summarize this text into a format suitable for business notes. Use a professional business tone.
+        """
+        content = actions.edit.selected_text()
+
+        return gtp_task(prompt, content, "Summarization")
+
+ 
+    def add_context():
+        """ add additional context"""
+        prompt = """
+        Add additional text to the sentence that would be appropriate to the situation and useful in consulting project.  Use a professional business tone
+        """
+
+        content = actions.edit.selected_text()
+
+        return gtp_task(prompt, content, "Summarization")
+    

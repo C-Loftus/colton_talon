@@ -97,7 +97,7 @@ class Actions:
             elif key == "center":
                 actions.user.center_up()
 
-        elif settings.get("user.force_synchronous_center") == True:
+        elif settings.get("user.force_synchronous_center") == True and key == "center":
             actions.user.center_up()
 
     def left_center_right_down():
@@ -137,6 +137,7 @@ class Actions:
         """Right pedal up"""
     def center_up():
         """Center pedal up"""
+        print("center")
         modes = scope.get("mode")
         if "sleep" in modes:
             # mode = "sleep"

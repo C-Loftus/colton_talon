@@ -18,9 +18,13 @@ class Actions:
     def left_up():
         """left pedal"""
 
+    def left_down():
+        """left pedal down"""
+
     def right_up():
         """right pedal"""
-
+    def right_down():
+        """right pedal down"""
 
     def center_up():
         """center pedal"""

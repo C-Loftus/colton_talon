@@ -3,6 +3,7 @@ import time
 
 ctx = Context()
 ctx.matches = """title: /pptx/
+title: /PowerPoint/
 """
 
 ctx.settings["user.force_synchronous"] = False
