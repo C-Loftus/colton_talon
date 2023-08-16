@@ -34,25 +34,13 @@ class UserActions:
         try:
             for func in functions:
                 with open(temp_file.name, 'a') as sys.stdout:
-                    actions.find(func)
+                    actions.find(func, inactive=False)
 
             temp_file_name = temp_file.name
         finally:
-            temp_file.close()
+            temp_file.close() 
 
-        time.sleep(1)
         actions.key("ctrl-alt-t")
         time.sleep(5)
         actions.insert(f'bat {temp_file_name}\n')
 
-
-
-# def pedal_held_down(key, map, seconds):
-
-#     held_down=True
-
-#     def check_down():
-#         if not map[key]:
-#             held_down=False
-
-#     cron.interval(fd, on_interval)

@@ -6,16 +6,19 @@ from talon import Module, actions, clip
 # TODO: Make it only available to run one request at a time
 
 mod = Module()
-mod.setting(
-    "open_ai_fixup_prompt",
-    type=str,
-    default="Fix any grammar, ponctuation, and typos.",
-    desc="Prompt to use when using GPT to fix misrecognitions.",
-)
+# mod.setting(
+#     "open_ai_fixup_prompt",
+#     type=str,
+#     default="Fix any grammar, ponctuation, and typos.",
+#     desc="Prompt to use when using GPT to fix misrecognitions.",
+# )
 
-TOKEN = os.environ["OPENAI_API_KEY"]
 
 def gpt_query(prompt: str, content: str) -> Optional[str]:
+    try:
+        TOKEN = os.environ["OPENAI_API_KEY"]
+    except:
+        print("OPENAI API Key not loaded")
     headers = {
         'Content-Type': 'application/json',
         'Authorization': f'Bearer {TOKEN}'
@@ -54,7 +57,7 @@ def gtp_task(prompt: str, content: str, task_name: str) -> str:
 
 
 @mod.action_class
-class Actions:
+class UserActions:
     def fix_grammar():
         """Grammar Check"""
         prompt = """

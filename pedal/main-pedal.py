@@ -1,7 +1,14 @@
 from talon import Module, actions, cron, scope, Context, settings
 import time
 
+"""
+This script works by setting a dictionary based on the pedal state.  If the pedal is pushed down, the dictionary updated with a 'True' Boolean value. The dictionary is then read using a cron job. The corresponding function is then called based on the dictionary state.  Certain functions can be called in repetition.  These functions are called asynchronous. We don't have to wait for them to return to call them again. (i.e. scrolling down, or pressing a key)
+
+Other functions are called synchronous, these functions cannot be called in repetition and must wait for the others to finish.  Such an example could include waiting on an API call. As a result, the user has to manually set whether or not to force a synchronous or an asynchronous call.  Synchronous calls can only be called on the pedal up and not the pedal down since the pedal down is called both full times as long as it is held down.
+"""
+
 mod = Module()
+wasHeld = False
 
 map = {
     "left": False,
@@ -69,7 +76,6 @@ two_keypress = lambda: sum(map.values()) >= 2
 
 cron.interval("16ms", on_interval)
 
-
 @mod.action_class
 class Actions:
 
@@ -80,22 +86,27 @@ class Actions:
 
     def pedal_up(key: str):
         """Pedal up"""
-        # If you have a synchronous double keypress that has already reset the map, then we don't want to do anything. this prevents single actions mistakenly firing after the double action
-
-        if map[key] == False:
+        # If you have a synchronous double keypress that has already reset the map, then we don't want to do anything.
+        # this prevents single actions mistakenly firing after the double action
+        global wasHeld
+        if map[key] == False or wasHeld:
+            wasHeld = False
             return
-        else:
+        else: 
             map[key]=False
 
-        #  if we have a  discrete action that needs to wait and can't be asynchronous, 
-        # then we can't use the cron job and as a result we have to do it synchronously on the pedal raise.
+
+        # if we have a  discrete action that needs to block (wait for return) and can't be asynchronous, 
+        # then we can't use the cron job for quick calls in succession and as a result we have to do 
+        # it synchronously on the pedal raise to only call it once
         if settings.get("user.force_synchronous") == True:
-            if key == "left":
-                actions.user.left_up( )
-            elif key == "right":
-                actions.user.right_up( )
-            elif key == "center":
-                actions.user.center_up()
+            match key:
+                case "left":
+                    actions.user.left_up( )
+                case "right":
+                    actions.user.right_up( )
+                case "center":
+                    actions.user.center_up()
 
         elif settings.get("user.force_synchronous_center") == True and key == "center":
             actions.user.center_up()
@@ -128,7 +139,13 @@ class Actions:
         actions.user.mouse_scroll_up(pedal_scroll_amount.get())
     def center_down():
         """Center pedal"""
-
+        # modes = scope.get("mode")
+        # if "sleep" in modes:
+        #     # mode = "sleep"
+        #     actions.speech.enable()
+        # else:    
+        #     actions.speech.disable()
+        # time.sleep(2)
 
     # default implementations to override contextually
     def left_up():
@@ -137,10 +154,82 @@ class Actions:
         """Right pedal up"""
     def center_up():
         """Center pedal up"""
-        print("center")
         modes = scope.get("mode")
         if "sleep" in modes:
             # mode = "sleep"
             actions.speech.enable()
         else:    
             actions.speech.disable()
+
+    def held_left():
+        """ called when the left pedal is held down"""
+    def held_right():
+        """ called when the right pedal is held down"""
+    def held_center():
+        """ called when the right pedal is held down"""
+        print("Held center")
+        global teamNotOutlook
+        teamNotOutlook = not teamNotOutlook
+        chrome = actions.user.get_running_app("Chrome")
+        actions.user.switcher_focus_app(chrome)
+        if teamNotOutlook:
+            actions.key("ctrl-shift-6")
+        else:
+            actions.key("ctrl-shift-7")
+
+# Trigger a hold if a key has been held for SEC_TO_TRIGGER seconds
+# check if this threshold is met every SEC_TO_CHECK seconds
+SEC_TO_CHECK = .5
+SEC_TO_TRIGGER = 2
+teamNotOutlook=False
+
+held_seconds= {
+    'left': 0,
+    'right': 0,
+    'center': 0
+} 
+reset_hold = lambda: held_seconds.update({k: 0 for k in held_seconds.keys()})
+
+def pedal_held_down():
+
+    for pedalDirection in map:
+        isHeldDown = map[pedalDirection]
+        match isHeldDown:
+            case True:
+                print(f'{pedalDirection} is down')
+                held_seconds[pedalDirection] += SEC_TO_CHECK
+            case False:
+                held_seconds[pedalDirection] = 0
+    
+        if held_seconds[pedalDirection] == SEC_TO_TRIGGER:
+            # We reset the hold time so we can potentially trigger the action again after the trigger time passes once more.
+            reset_hold()
+
+            # we only want to trigger on synchronous actions since if it was asynchronous We might trigger it by mistake, 
+            # for instance if you were scrolling down a lot and end up holding the pedal for 5 seconds
+
+            if settings.get("user.force_synchronous_center") and pedalDirection == "center":
+                actions.user.held_center()
+                
+            elif settings.get("user.force_synchronous"):
+                
+                match pedalDirection:
+                    case "right":
+                        actions.user.held_right()
+                    case "center":
+                        actions.user.held_center()
+                    case "left":
+                        actions.user.held_left()
+            else: 
+                return
+            
+            # we need to reset the map so we don't call the up function
+            # as well on release of the pedal
+            reset_map()
+            global wasHeld
+            wasHeld = True
+            
+
+
+check_freq_cron_format = str(int(SEC_TO_CHECK * 1000))
+cron.interval(f'{check_freq_cron_format}ms', pedal_held_down)

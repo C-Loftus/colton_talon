@@ -1,10 +1,24 @@
 mode: command
-
+title: /Excel/
 -
 
-jump <user.letter> <number>:
+settings():
+    key_hold = 50
+
+take <user.letter> <number>:
     key(ctrl-g)
     insert("{letter}{number}\n")
+
+take  <user.letter> <number> past <user.letter> <number>:
+    key(ctrl-g)
+    insert("{letter}{number}:{letter_2}{number_2}")
+    key(enter)
+
+take until <user.letter> <number>:
+    key(ctrl-g)
+    insert("A1:{letter}{number}")
+    key(enter)
+
 
 select column:
     key(ctrl-shift-down)
@@ -23,6 +37,16 @@ next sheet:
 
 previous sheet:
     key(ctrl-pageup)
+
+fit column:
+    key(alt-h)
+    key(o)
+    key(i)
+
+fit row:
+    key(alt-h)
+    key(o)
+    key(a)
 
 format currency: key(ctrl-shift-$)
 format percent: key(ctrl-shift-%)

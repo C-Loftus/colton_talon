@@ -1,4 +1,4 @@
-# Left button
+# Left button (numlk)
 key(numlock:down):    
     user.pedal_down('left') 
 key(numlock:up):       
@@ -10,6 +10,7 @@ key(keypad_divide:down):
    user.pedal_down('center')
 key(keypad_divide:up):     
     # print("center")
+    print("upping")
     user.pedal_up('center')
 
 
@@ -23,5 +24,5 @@ key(keypad_multiply:up):
 # KEY_KP_SLASH: 0xDC 220
 # KEY_KP_ASTERISK: 0xDD 221
 
-key(ctrl-shift-4):
+(pedal | pettle | paddle) help:
     user.pedal_help()
