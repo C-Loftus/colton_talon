@@ -6,11 +6,21 @@ from os.path import expanduser
 from pathlib import Path
 
 from talon import Context, Module, actions, app, clip
+from typing import Any
 
 mod = Module()
 
 @mod.action_class
 class Actions:
+
+    def remove_spaces(string: str): 
+        """"Removes Spaces from String"""
+        if string.endswith("\n"):
+            print("YES")
+
+        return string.replace(" ", "")
+    
+
 
     def change_setting(setting_name: str, setting_value: Union[str, int, bool]):
         """

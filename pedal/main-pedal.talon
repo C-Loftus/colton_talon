@@ -10,7 +10,6 @@ key(keypad_divide:down):
    user.pedal_down('center')
 key(keypad_divide:up):     
     # print("center")
-    print("upping")
     user.pedal_up('center')
 
 

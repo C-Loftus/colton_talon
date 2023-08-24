@@ -10,8 +10,6 @@ ctx = Context()
 mod = Module()
 
 
-
-
 functions = [
     # actions.user.left_center_right_down.__call__,
     "user.center_right_down",

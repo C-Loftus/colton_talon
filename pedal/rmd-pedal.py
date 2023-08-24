@@ -3,7 +3,7 @@ import time, multiprocessing
 
 ctx = Context()
 ctx.matches = """app: vscode
-and title: /rmd/
+and title: /.rmd/
 """
 
 ctx.settings["user.force_synchronous"] = True

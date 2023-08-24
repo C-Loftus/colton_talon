@@ -1,7 +1,7 @@
 #My additional  commands for firefox beyond those in knausj
 
-app: browser
-app: chrome
+tag: browser
+# app: chrome
 
 -
 # for fire fox it requires my extension to switch to last tab with ctrl-9
@@ -56,3 +56,6 @@ notion save:
     sleep(1.5)
     key(enter)
     key(escape)
+
+
+hence (toggle | switch): user.rango_command_without_target("toggleHints")

@@ -1,8 +1,9 @@
-from talon import Context, Module, actions, settings
+from talon import Context, Module, actions, settings, scope
 import time, multiprocessing
 
 ctx = Context()
 ctx.matches = """app: vscode
+not title: /html/
 """
 
 ctx.settings["user.force_synchronous"] = False
@@ -63,6 +64,13 @@ class Actions:
         if display:
             actions.app.tab_next()
             return
+        else:
+            modes = scope.get("mode")
+            if "sleep" in modes:
+                # mode = "sleep"
+                actions.speech.enable()
+            else:    
+                actions.speech.disable()
         
 
 

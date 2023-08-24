@@ -196,13 +196,13 @@ def pedal_held_down():
         isHeldDown = map[pedalDirection]
         match isHeldDown:
             case True:
-                print(f'{pedalDirection} is down')
                 held_seconds[pedalDirection] += SEC_TO_CHECK
             case False:
                 held_seconds[pedalDirection] = 0
     
         if held_seconds[pedalDirection] == SEC_TO_TRIGGER:
             # We reset the hold time so we can potentially trigger the action again after the trigger time passes once more.
+            
             reset_hold()
 
             # we only want to trigger on synchronous actions since if it was asynchronous We might trigger it by mistake, 
@@ -212,7 +212,8 @@ def pedal_held_down():
                 actions.user.held_center()
                 
             elif settings.get("user.force_synchronous"):
-                
+                print(f'{pedalDirection} hold triggered')
+
                 match pedalDirection:
                     case "right":
                         actions.user.held_right()
