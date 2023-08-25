@@ -1,5 +1,7 @@
 from talon import Module, actions, cron, scope, Context, settings
 import time
+from typing import TypedDict
+
 
 """
 This script works by setting a dictionary based on the pedal state.  If the pedal is pushed down, the dictionary updated with a 'True' Boolean value. The dictionary is then read using a cron job. The corresponding function is then called based on the dictionary state.  Certain functions can be called in repetition.  These functions are called asynchronous. We don't have to wait for them to return to call them again. (i.e. scrolling down, or pressing a key)
@@ -8,13 +10,22 @@ Other functions are called synchronous, these functions cannot be called in repe
 """
 
 mod = Module()
+# We use this state variable to make sure we aren't 
+# calling the pedal up command after holding it down
 wasHeld = False
 
-map = {
+class KeyMap(TypedDict):
+    left: bool
+    right: bool
+    center: bool
+
+map: KeyMap = {
     "left": False,
     "right": False,
     "center": False
 }
+
+
 
 #  By default  this is false which signifies a continuously called function 
 # (Holding down scroll etc)
@@ -42,7 +53,7 @@ pedal_scroll_amount=mod.setting(
 
 ctx = Context()
 
-def on_interval():
+def on_interval() -> None:
 
     # if map contains at least 2 true values, then we have a double keypress
     if two_keypress():
@@ -179,26 +190,30 @@ class Actions:
 
 # Trigger a hold if a key has been held for SEC_TO_TRIGGER seconds
 # check if this threshold is met every SEC_TO_CHECK seconds
-SEC_TO_CHECK = .5
+CHECK_INTERVAL = .5
 SEC_TO_TRIGGER = 2
 teamNotOutlook=False
 
-held_seconds= {
+class KeyHold(TypedDict): 
+    left: float
+    right: float
+    center: float
+
+held_seconds:  KeyHold = {
     'left': 0,
     'right': 0,
     'center': 0
 } 
 reset_hold = lambda: held_seconds.update({k: 0 for k in held_seconds.keys()})
 
-def pedal_held_down():
+def pedal_held_down() -> None:
 
     for pedalDirection in map:
         isHeldDown = map[pedalDirection]
-        match isHeldDown:
-            case True:
-                held_seconds[pedalDirection] += SEC_TO_CHECK
-            case False:
-                held_seconds[pedalDirection] = 0
+        if isHeldDown == True:
+            held_seconds[pedalDirection] += CHECK_INTERVAL
+        else:
+            held_seconds[pedalDirection] = 0
     
         if held_seconds[pedalDirection] == SEC_TO_TRIGGER:
             # We reset the hold time so we can potentially trigger the action again after the trigger time passes once more.
@@ -232,5 +247,5 @@ def pedal_held_down():
             
 
 
-check_freq_cron_format = str(int(SEC_TO_CHECK * 1000))
+check_freq_cron_format = str(int(CHECK_INTERVAL * 1000))
 cron.interval(f'{check_freq_cron_format}ms', pedal_held_down)
