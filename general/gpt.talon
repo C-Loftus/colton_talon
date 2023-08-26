@@ -1,4 +1,4 @@
-mode : command
+mode: command
 
 -
 
