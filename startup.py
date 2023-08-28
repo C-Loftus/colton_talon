@@ -6,9 +6,9 @@ def app_ready():
     current_dir = os.path.dirname(os.path.abspath(__file__) )
 
     def create_path(path):
-        return os.path.join(current_dir, os.path(".."), path)
+        return os.path.join(current_dir, "..", path)
 
-    repos = ["rango-talon", "cursorless-talon", "knausj_talon"]
+    repos = ["rango-talon", "cursorless-talon", "knausj_talon", "my_talon_scripts"]
 
     paths = map(create_path, repos)
 
@@ -30,10 +30,22 @@ def app_ready():
 
         except subprocess.CalledProcessError as e:
             # Error occurred while executing git command
-            print(f"e")
+            print(e)
 
     if no_updates:
         print("Your Talon User Directory is up to date!")
 
 if os.name != 'nt':
     app.register("ready", app_ready)
+
+
+game_controller_config = (
+    "03000000c01600008704000011010000,"
+    "Serial/Keyboard/Mouse/Joystick,"
+    "platform:Linux,"
+    "a:b1,b:b0,x:b2,y:b3,dpup:b4,"
+)
+
+# 03000000c01600008704000000000000,Serial/Keyboard/Mouse/Joystick,platform:Windows,a:b4,b:b3,x:b2,y:b1,dpup:b0,
+
+# os.environ["SDL_GAMECONTROLLERCONFIG"] = game_controller_config

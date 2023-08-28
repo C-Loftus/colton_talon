@@ -1,39 +1,50 @@
 from typing import assert_never
-from talon import Module, Context, app, registry, scope, skia, ui, actions, cron
-from talon.canvas import Canvas
+from talon import Module, Context, app, registry, scope, skia, ui, actions, cron, settings
 from talon.screen import Screen
-from talon.skia.canvas import Canvas as SkiaCanvas
-from talon.skia.imagefilter import ImageFilter
-from talon.types import Rect
 from enum import Enum
-from dataclasses import dataclass
 
-# +------------+
-# |\          /|
-# | \        / |
-# |  \  up  /  |
-# |   \    /   |
-# |left+--right|
-# |   /   \    |
-# |  /     \   |
-# | / down  \  |
-# |/         \ |
-# +------------+
+# # +------------+
+# # |\          /|
+# # | \        / |
+# # |  \  up  /  |
+# # |   \    /   |
+# # |left+--right|
+# # |   /   \    |
+# # |  /     \   |
+# # | / down  \  |
+# # |/         \ |
+# # +------------+
+
+tracker_job = None
+app_names = ["ynoproject.net"]
 
 mod = Module()
 ctx = Context()
-ctx.matches = r"""
-title: /ynoproject.net/
+ctx.matches = f"""
+title: /{app_names[0]}/
 """
-horizontal_position = mod.setting(
-    "my_user_file_set_horizontal_position",
-    type=int,
-    default=0,
-    desc="Set the horizontal display position of some UI element",
+
+
+def on_app_switch(application):
+    global tracker_job
+    if application.name in app_names:
+        print(f'Starting cron interval at {CRON_INTERVAL}')
+        tracker_job = cron.interval(CRON_INTERVAL, onFocus)
+    else:
+        cron.cancel(tracker_job)
+
+ui.register("app_activate", on_app_switch)
+
+
+mod.setting(
+    "TRIGGER_THRESHOLD",
+    type=str,
+    default="2000ms",
+    desc="How long the cursor needs to be in one quadrant before the action is switched",
 )
 
 CRON_INTERVAL = "100ms"
-TRIGGER_THRESHOLD = "2000ms"
+TRIGGER_THRESHOLD = settings.get("TRIGGER_THRESHOLD")
 ScreenQuadrant = Enum('screenQuadrant', ['UP', 'DOWN', 'LEFT', 'RIGHT'])
 screen: Screen = ui.main_screen()
 rect = screen.rect
@@ -103,27 +114,21 @@ def onFocus():
             case ScreenQuadrant.LEFT: 
                 actions.user.on_quadrant_left_focus()
 
-nop = lambda *a, **k: print("Test")
-
-@ctx.action_class
+@mod.action_class
 class Actions:
 
     def on_quadrant_left_focus():
         """Runs when the left quadrant is focused """
-        nop()
+        actions.key("left")
     def on_quadrant_right_focus():
         """Runs when the right quadrant is focused """
-        nop()
+        actions.key("right")
     def on_quadrant_up_focus():
         """Runs when the up quadrant is focused """
-        nop()
+        actions.key("up")
     def on_quadrant_down_focus():
         """Runs when the down quadrant is focused """
-        nop()
-
-print(f'Starting cron interval at {CRON_INTERVAL}')
-cron.interval(CRON_INTERVAL, onFocus)
-
+        actions.down("down")
 
 stare_map = {
     ScreenQuadrant.UP : 0,
