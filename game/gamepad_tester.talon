@@ -1,1 +1,5 @@
-gamepad tester:             user.gamepad_tester_toggle()
+mode: command
+
+-
+
+input tester:             user.gamepad_tester_toggle()

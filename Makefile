@@ -17,3 +17,8 @@ pull:
 	find ~/.talon/user -name .git -print -execdir git pull --ff-only \;
 
 	
+windows:
+	# mimic xbox controller to get rid of direct input and get xinput for talon. Talon uses gilrs and needs xinput
+	echo "https://github.com/csutorasa/XOutput"
+
+	

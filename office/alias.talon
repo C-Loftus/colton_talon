@@ -12,6 +12,4 @@ entrance <user.rango_target>:
 
 entrance:
     "Hello,\nThank you very much for your email.\n"
-    user.draft_hide()
-    user.draft_show()
-    
+        
