@@ -1,3 +1,6 @@
+tag: user.exclude_pedal_map
+
+-
 
 gamepad(north):             
     print("north/Y")
