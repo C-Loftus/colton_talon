@@ -1,22 +1,16 @@
-from talon import Module, clip, actions, ui, skia
+from talon import clip, actions, ui, skia
 import subprocess, os
 import urllib.request
-from typing import Optional
 from pathlib import Path
-from pathlib import Path
-import time, io
+import time
+from talon import Module, actions
+
+
+
 
 mod = Module()
 @mod.action_class
 class Actions:
-
-    def test_clip():
-        """test clipboard"""
-        path = 'C:\\Users\\cloftus\\tmp\\trimmed.png'
-        with open(path, "rb") as image:
-            f = image.read()
-            b = bytearray(f)
-            clip.set_image(b)
 
     # Must have ghost script and image magick installed
     def extract_PDF_page(url: str, page_number: int, file_description: str):
@@ -33,6 +27,7 @@ class Actions:
 
         output_filename =  os.path.join(Path.home(), "tmp", f'page-{page_number}_{file_description}.png')
 
+        # Convert PDF to image and remove any sort of transparency
         command = [
             'C:\\Users\\cloftus\\scoop\\apps\\imagemagick\\7.1.1-15\\magick.exe', 
                 "convert",
@@ -49,15 +44,12 @@ class Actions:
                 output_filename
             ]
 
-        # assert command == ['magick.exe', 'convert', '-density', '300', 'C:\\Users\\cloftus\\tmp\\download2.pdf[1]', '-quality', '100', 'C:\\Users\\cloftus\\tmp\\trimmed.png']
 
-        p = subprocess.run(command)
-        # time.sleep(2)
 
-        # # Convert image to bytes
-        # image_bytes = io.BytesIO()
+        subprocess.run(command)
+
+
         clip.set_image(skia.Image.from_file(output_filename))
-
 
 
 def on_app_switch(application):

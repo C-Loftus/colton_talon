@@ -7,7 +7,6 @@ tag: browser
 # for fire fox it requires my extension to switch to last tab with ctrl-9
 
 last [<number_small>] :
-
     key(ctrl-9)
     times = number_small or 1
     times = times - 1

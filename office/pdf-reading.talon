@@ -15,6 +15,3 @@ save <number> as <user.text>:
     url = clip.text()
     user.extract_PDF_page(url, number, text)
 
-
-key(ctrl-shift-5):
-    user.test_clip()
