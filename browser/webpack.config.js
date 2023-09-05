@@ -3,7 +3,7 @@ const glob = require("glob");
 
 module.exports = {
     target: "web",
-    entry: glob.sync("./src/**/*.{ts,tsx}").reduce((acc, file) => {
+    entry: glob.sync("./src/**/*.{js, ts,tsx}").reduce((acc, file) => {
         const relativePath = path.relative(__dirname, file); // Convert to relative path
         const parsedName = path.parse(relativePath).name; // get name and get rid of .ts extension
         acc[parsedName.replace(/^src[\/\\]/, "")] = file;
