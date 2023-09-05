@@ -1,5 +1,3 @@
-## TEMPLATE used for creating new pedal scopes
-
 from talon import Context, Module, actions
 import time
 
@@ -41,7 +39,11 @@ class Actions:
     # def center_down():
 
     def center_up():
-        """center up pedal"""
+        """
+        Switch between chrome and vscode with a
+        pedal press if you are doing web dev
+        """
+        
         if "Chrome" not in actions.win.title():
             chrome = actions.user.get_running_app("Chrome")
             actions.user.switcher_focus_app(chrome)

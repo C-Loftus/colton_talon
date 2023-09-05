@@ -1,5 +1,3 @@
-## TEMPLATE used for creating new pedal scopes
-
 from talon import Context, Module, actions
 
 ctx = Context()

@@ -3,12 +3,6 @@ import time
 from typing import TypedDict
 
 
-"""
-This script works by setting a dictionary based on the pedal state.  If the pedal is pushed down, the dictionary updated with a 'True' Boolean value. The dictionary is then read using a cron job. The corresponding function is then called based on the dictionary state.  Certain functions can be called in repetition.  These functions are called asynchronous. We don't have to wait for them to return to call them again. (i.e. scrolling down, or pressing a key)
-
-Other functions are called synchronous, these functions cannot be called in repetition and must wait for the others to finish.  Such an example could include waiting on an API call. As a result, the user has to manually set whether or not to force a synchronous or an asynchronous call.  Synchronous calls can only be called on the pedal up and not the pedal down since the pedal down is called both full times as long as it is held down.
-"""
-
 mod = Module()
 # We use this state variable to make sure we aren't 
 # calling the pedal up command after holding it down
@@ -24,7 +18,6 @@ map: KeyMap = {
     "right": False,
     "center": False
 }
-
 
 
 #  By default  this is false which signifies a continuously called function 
