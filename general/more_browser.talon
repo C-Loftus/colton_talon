@@ -4,7 +4,7 @@ tag: browser
 # app: chrome
 
 -
-# for fire fox it requires my extension to switch to last tab with ctrl-9
+# for firefox it requires my extension to switch to last tab with ctrl-9
 
 last [<number_small>] :
     key(ctrl-9)

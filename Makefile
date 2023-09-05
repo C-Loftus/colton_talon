@@ -21,4 +21,6 @@ windows:
 	# mimic xbox controller to get rid of direct input and get xinput for talon. Talon uses gilrs and needs xinput
 	echo "https://github.com/csutorasa/XOutput"
 
+build: 
+	cd 
 	
