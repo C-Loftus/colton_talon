@@ -1,1 +1,0 @@
-console.log("test"),new VirtualPoint(13,56),TextDecoderStream;

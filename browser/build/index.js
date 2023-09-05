@@ -1,1 +1,0 @@
-console.log("test"),new function(e,t){this.x=13,this.y=56}(13,56),TextDecoderStream;
