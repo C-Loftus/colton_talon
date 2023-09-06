@@ -5,7 +5,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack --watch --mode development",
-    "build": "rm ./build/*.js; webpack --mode production"
+    "build": "webpack --mode production",
+    "clean": "rm ./build/*.js"
   },
   "keywords": [],
   "author": "",

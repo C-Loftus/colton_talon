@@ -23,6 +23,8 @@ ctx = Context()
 ctx.matches = f"""
 title: /{app_names[0]}/
 """
+# {[f'title:/{app}/' for app in app_names]}
+ 
 
 
 def on_app_switch(application):

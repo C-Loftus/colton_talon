@@ -17,7 +17,7 @@ gamepad(west):
 gamepad(east):              
     print("east/B")
 gamepad(south):             
-    print("south/A")
+    key(ctrl-alt-;)
 gamepad(north):             
     print("north/Y")
 

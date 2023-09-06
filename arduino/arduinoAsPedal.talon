@@ -17,10 +17,12 @@ gamepad(east:down):
 gamepad(east:up):
     user.pedal_up('center')
 
-gamepad(west:down):
-    user.pedal_down('right')
+# gamepad(west:down):
+    # user.pedal_down('right')
+    
 gamepad(west:up):
-    user.pedal_up('right')
+    # user.pedal_up('right')
+    key(alt-;)
 
 toggle pedal:
     user.toggleAsPedal()
