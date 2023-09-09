@@ -1,5 +1,7 @@
 from talon import Context, Module, actions, app, ui
 
+# SOURCE: https://github.com/nriley/talon_community/blob/nriley/apps/fluent_search/fluent_search.py 
+
 mod = Module()
 ctx = Context()
 

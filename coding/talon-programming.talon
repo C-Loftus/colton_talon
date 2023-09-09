@@ -2,13 +2,12 @@ mode: command
 tag: user.python
 -
 
-python boilerplate:
+talon boilerplate:
     
-    user.paste("""from talon import Module, actions\n\nmod = Module()\n\n@mod.action_class\nclass Actions:\n\tdef ():""")
-    # user.paste("""\n''' '''\n """)
-    user.paste("\n\t''''''\n")
+    user.paste("""from talon import Module, actions\n\nmod = Module()\n\n@mod.action_class\nclass Actions:\n    def ():""")
+    user.paste("\n     ''''''\n")
     key(up:2)
-    key(right:5)
+    key(right:8)
 
     
    

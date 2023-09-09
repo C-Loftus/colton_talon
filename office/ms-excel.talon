@@ -1,5 +1,6 @@
 mode: command
 title: /Excel/
+title: /.xlsx/
 -
 
 settings():
@@ -20,11 +21,27 @@ take until <user.letter> <number>:
     key(enter)
 
 
-select column:
+take column:
     key(ctrl-shift-down)
 
-select row:
+copy column:
+    key(ctrl-shift-down)
+    key(ctrl-c)
+
+carve column:
+    key(ctrl-shift-down)
+    key(ctrl-x)
+
+take row:
     key(shift-space)
+
+copy row:
+    key(shift-space)
+    key(ctrl-c)
+
+carve row:
+    key(shift-space)
+    key(ctrl-x)
 
 edit cell:
     key(f2)
@@ -56,4 +73,30 @@ format scientific: key(ctrl-shift-^)
 format number: key(ctrl-shift-!)
 format strike: key(ctrl-5)
 hints toggle: key(alt)
+
+new column:
+    key(right)
+    key(ctrl-shift-+)
+    key(down:3)
+    key(enter)
+
+(new row | neuro):
+    key(ctrl-shift-+)
+    key(down:2)
+    key(enter)
+
+model fix this:
+    key(ctrl-c)
+    clipped = clip.text()
+    delimRes = user.gpt_fix_delimited(clipped, "_")
+    key(right)
+    key(ctrl-shift-+)
+    key(down:3)
+    key(enter)
+    user.paste_delimited(delimRes, "_", "column")
+
+
+chuck this:
+    key(ctrl--)
+    key(enter)
 

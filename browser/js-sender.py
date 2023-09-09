@@ -48,7 +48,7 @@ ctx.lists["user.talon_JS_Functions"] = javascript_file_names
 
 @mod.capture(rule="{user.talon_JS_Functions}")
 def talon_JS_Functions(functionName: str) -> str:
-    "send a js file to the browser"
+    "Convert spoken text to the proper filename"
     return functionName.talon_JS_Functions
 
 
@@ -74,6 +74,5 @@ class Actions:
             actions.key("ctrl-shift-i")
 
     def build_js():
-        """te"""
-        print("running")
+        """build typescript to raw js for browser execution"""
         subprocess.run(f'cd {script_directory}; npm run build', shell=True)

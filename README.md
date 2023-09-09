@@ -20,9 +20,10 @@ git clone https://github.com/C-Loftus/my_talon_scripts ~/.talon/user/myscripts
 
 Talon is not like a traditional Python environment. Stylization and code choices in this repo reflect that
 
-- All Python files in the Talon user directory are all ran at startup
-  - We do not need a central `main()` function from which to enter our scripts, thus we can more tighly scope behavior
-- global variables are actually a _good_ practice for keeping state since Python files that define voice commands shouldn't be imported as modules
-
-  - Talon provides modules, tags, and scopes for setting state that needs to be shard across voice commands.
-  - The `global` keyword is a good indicator of state that is unique to one set of voice commands. So in other words, state relevant only to the commands defined in one particular Python file
+- When Talon is loaded, all Python files in the Talon user directory are all ran at startup.
+- We do have an exposed central `main()` function from which to enter our scripts
+- Python scripts which define voice commands are _not_ intended to be exported to other Python functions through `import`.
+  - Any shared Python code is defined in specific helper modules and separated from voice command definitions.
+- `global` variables are actually a _good_ practice for keeping state in Talon becuase of the fact each file defines voice commands that are only called from `.talon` scripts which don't have access to these `global` variables.
+  - `global` is a simple way of sharing state across all related functions in one particular file, since we don't want to have to manually pass in state arguments through voice each time. It is easier to simply set it for an entire group of related commands.
+  - For more complicated state that can be shared across many voice commands, Talon provides modules, tags, and scopes, all of which expose state to `.talon` scripts.

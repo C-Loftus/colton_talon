@@ -39,47 +39,71 @@ def gpt_query(prompt: str, content: str) -> Optional[str]:
 
     if response.status_code == 200:
         return response.json()['choices'][0]['message']['content'].strip()
+    else:
+        print(response.json())
+        return None
 
-    return None
-
-def gtp_task(prompt: str, content: str, task_name: str) -> str:
+def gpt_task(prompt: str, content: str) -> str:
     """Run a GPT task"""
-    actions.app.notify(f"GPT: Task ({task_name}) started")
+    actions.app.notify(f"GPT: Task started")
     resp = gpt_query(prompt, content)
 
     if not resp:
         actions.app.notify('GPT: Something went wrong...')
+        print("GPT failed")
         return None
     
     clip.set_text(resp)
-    actions.app.notify(f'GPT: Task ({task_name}) finished')
+    actions.app.notify(f'GPT: Task finished')
     return resp
 
 
 @mod.action_class
 class UserActions:
-    def fix_grammar():
+
+    def gpt_fix_delimited(contentToFix: str, delimiter: str ="_"):
+        """ 
+        Take a list of words/phrases return them  with the proper formatting and any typos fixed in a delimited string
+        """
+
+        prompt = f"""I will give you a list of words or phrases that are survey responses. Fix these responses so they have the proper formatting and expand any abbreviations to the phrase that would make sense contextually. Return them all as a list with a '{delimiter}' separating each item. If similar words show up multiple times, they should be formatted the same way as other occurrences. So for instance, "face book" and "FB" should both be returned as "Facebook" or if the list is a list of pharmaceutical companies, "astra" should become "AstraZeneca".
+ 
+        """
+
+        result = gpt_task(prompt, contentToFix)
+        print(f'{type(result)=}{result=}')
+        assert type(result) != None
+        return result
+
+    def gpt_fix_grammar():
         """Grammar Check"""
         prompt = """
-        Fix any mistakes or irregularities in grammar, spelling, or formatting. Use a professional business tone.
+        This is a Fix any mistakes or irregularities in grammar, spelling, or formatting. Use a professional business tone. 
         """
         content = actions.edit.selected_text()
 
-        return gtp_task(prompt, content, "Grammar Check")
+        return gpt_task(prompt, content)
 
 
-    
-    def summarize_this():
+    def gpt_arbitrary_prompt(inputText: str):
+        """answer question"""
+        prompt = """
+        Using a professional tone, generate text that satisfies the question or request given in the prompt. 
+        """
+
+        return gpt_task(prompt, inputText)
+
+    def gpt_summarize_this():
         """summarize data"""
         prompt = """
         Summarize this text into a format suitable for business notes. Use a professional business tone.
         """
         content = actions.edit.selected_text()
 
-        return gtp_task(prompt, content, "Summarization")
+        return gpt_task(prompt, content)
 
  
-    def add_context():
+    def gpt_add_context():
         """ add additional context"""
         prompt = """
         Add additional text to the sentence that would be appropriate to the situation and useful in consulting project.  Use a professional business tone
@@ -87,5 +111,7 @@ class UserActions:
 
         content = actions.edit.selected_text()
 
-        return gtp_task(prompt, content, "Summarization")
-    
+        return gpt_task(prompt, content, )
+
+
+
