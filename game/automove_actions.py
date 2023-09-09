@@ -28,6 +28,18 @@ class Actions:
         """Runs when the down quadrant is focused """
         actions.down("down")
 
+    def hotspot_1_focus():
+        """Runs when the first hotspot is focused """
+
+    def hotspot_2_focus():
+        """Runs when the second hotspot is focused """
+
+    def hotspot_3_focus():
+        """Runs when the third hotspot is focused """
+
+    def hotspot_4_focus():
+        """Runs when the fourth hotspot is focused """
+
 mod.setting(
     "automove_trigger_threshold",
     type=str,

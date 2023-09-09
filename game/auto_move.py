@@ -1,4 +1,4 @@
-from ..game.hotspot import Hotspot
+from ..game.hotspot import Hotspot, getHotSpots
 from ..game.automove_actions import APP_NAMES
 from typing import assert_never
 from talon import Module, Context, app, registry, scope, skia, ui, actions, cron, settings
@@ -79,7 +79,9 @@ def handleCursor():
         print(f'{focusedQuadrant=}')
 
     #  don't call an action unless it has been hovered for a  significant threshold
-    if sufficient_threshold(focusedQuadrant):
+    hotspots: list[Hotspot] = getHotSpots()
+
+    if sufficient_threshold(focusedQuadrant) and not cursorInHotspot(hotspots):
         match focusedQuadrant:
             case ScreenQuadrant.UP: 
                 actions.user.on_quadrant_up_focus()
@@ -122,7 +124,9 @@ def cursorInHotspot(hotspots: list[Hotspot]) -> bool:
 
     # check if the cursor is in any of the hotspots. each hotspot has a x and y coordinate as well as a radius. they are all circles
     for hotspot in hotspots:
-        if hotspot.x - hotspot.radius <= cursor_x <= hotspot.x + hotspot.radius and hotspot.y - hotspot.radius <= cursor_y <= hotspot.y + hotspot.radius:
+        INSIDE_X = hotspot.x - hotspot.radius <= cursor_x <= hotspot.x + hotspot.radius
+        INSIDE_Y = hotspot.y - hotspot.radius <= cursor_y <= hotspot.y + hotspot.radius
+        if INSIDE_X and INSIDE_Y:
             return True
     return False
 

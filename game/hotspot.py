@@ -13,6 +13,9 @@ class Hotspot:
     y: float
     radius: float
 
+def getHotSpots() -> list[Hotspot]:
+    raise NotImplementedError("getHotSpots() not implemented")
+
 
 canvas: Canvas = None
 current_mode = ""
