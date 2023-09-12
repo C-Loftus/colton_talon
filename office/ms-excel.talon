@@ -1,23 +1,30 @@
 mode: command
 title: /Excel/i
-title: /.xlsx/
+not app: vscode
+title: /.xlsx/i
+not app: vscode
 -
 
 settings():
     key_hold = 50
 
-take <user.letter> <number>:
+take <user.excel_cell>:
     key(ctrl-g)
-    insert("{letter}{number}\n")
+    insert("{excel_cell}\n")
 
-take  <user.letter> <number> past <user.letter> <number>:
+change <user.excel_cell>:
     key(ctrl-g)
-    insert("{letter}{number}:{letter_2}{number_2}")
+    key(enter)
+    key(backspace)
+
+take  <user.excel_cell> past <user.excel_cell>: 
+    key(ctrl-g)
+    insert("{user.excel_cell}:{user.excel_cell_2}")
     key(enter)
 
-take until <user.letter> <number>:
+take until <user.excel_cell>: 
     key(ctrl-g)
-    insert("A1:{letter}{number}")
+    insert("A1:{user.excel_cell}")
     key(enter)
 
 

@@ -4,6 +4,11 @@ mod = Module()
 
 
 
+@mod.capture(rule="<user.letter> <number>")
+def excel_cell(m) -> str:
+    return f'{m.letter}{m.number}'
+
+
 @mod.action_class
 class Actions:
     def paste_delimited(text: str, delimiter: str="_", orientation: str = "column"):

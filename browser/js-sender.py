@@ -75,7 +75,6 @@ class Actions:
 
     def build_js():
         """build typescript to raw js for browser execution"""
-        # path of this file
         print("Compiling JS...")
-        this_file_path = os.path.dirname(os.path.abspath(__file__))
-        subprocess.run(f'npm run build --prefix {this_file_path}', shell=True)
+        npm_path = os.path.dirname(os.path.abspath(__file__))
+        subprocess.run(f'npm run build --prefix {npm_path}', shell=True)

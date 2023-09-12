@@ -13,6 +13,8 @@ os: windows
 # Search using Screen hotkey (displays labels; screen 1 only)
 ^ax screen$: key(ctrl-alt-;)
 
+^fluent search$: key(ctrl-alt-;)
+
 # -- LaunchBar
 # Search hotkey (in fluent_search.py)
 launch <user.text>: user.fluent_search("apps\t{text}")
