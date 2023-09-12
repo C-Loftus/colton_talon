@@ -1,2 +1,4 @@
 Spoken form, VSCode command
-run, r.runSelection
+run are, r.runSelection
+join, editor.action.joinLines
+run cell, notebook.cell.executeAndFocusContainer

@@ -21,7 +21,7 @@ git clone https://github.com/C-Loftus/my_talon_scripts ~/.talon/user/myscripts
 Talon is not like a traditional Python environment. Stylization and code choices in this repo reflect that
 
 - When Talon is loaded, all Python files in the Talon user directory are all ran at startup.
-- We do have an exposed central `main()` function from which to enter our scripts
+- We do not have an exposed central `main()` function from which to enter our scripts
 - Python scripts which define voice commands are _not_ intended to be exported to other Python functions through `import`.
   - Any shared Python code is defined in specific helper modules and separated from voice command definitions.
 - `global` variables are actually a _good_ practice for keeping state in Talon becuase of the fact each file defines voice commands that are only called from `.talon` scripts which don't have access to these `global` variables.

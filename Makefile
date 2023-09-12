@@ -21,3 +21,4 @@ windows:
 	echo "https://github.com/csutorasa/XOutput"
 
 build: 
+	npm run build --prefix ./browser

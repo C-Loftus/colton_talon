@@ -13,8 +13,8 @@ route switch <user.text>:
     key(enter)
 
 jump chrome:
-    chrome = actions.user.get_running_app("Chrome")
-    actions.user.switcher_focus_app(chrome)
+    chrome = user.get_running_app("Chrome")
+    user.switcher_focus_app(chrome)
     key(ctrl-shift-r)
 
     

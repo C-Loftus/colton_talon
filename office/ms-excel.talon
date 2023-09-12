@@ -1,5 +1,5 @@
 mode: command
-title: /Excel/
+title: /Excel/i
 title: /.xlsx/
 -
 
@@ -27,6 +27,8 @@ take column:
 copy column:
     key(ctrl-shift-down)
     key(ctrl-c)
+
+
 
 carve column:
     key(ctrl-shift-down)
@@ -100,3 +102,9 @@ chuck this:
     key(ctrl--)
     key(enter)
 
+
+copy append:
+    mouse_click(0)
+    text = clip.text()
+    key(ctrl-c)
+    clip.set_text("{text}\n{clip.text()}")

@@ -7,5 +7,5 @@ app: browser
 browser send <user.talon_JS_Functions>:
     user.send_js(talon_JS_Functions)
     
-key(ctrl-alt-5):
+compile talon javascript:
     user.build_js()    

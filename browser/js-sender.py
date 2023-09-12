@@ -29,14 +29,14 @@ def build_capture_list():
         for file_name in file_names:
             try:
                 if not file_name.endswith(".js"):
-                    raise ValueError
+                    continue
                 else:
                     pretty_name = file_name.replace(".js", "")
                 pretty_name = pretty_name.replace("_", " ") if "_" in pretty_name else pretty_name
                 javascript_file_names[pretty_name] = file_name
             except :
                 #  should never trigger given the fact that the file name is auto generated from webpack
-                print(f'{file_name} is not a valid JS file according to its filename')
+                print(f'{file_name} triggered an exception when parsing')
     else:
         print("The 'build/' directory does not exist.")
 
@@ -75,4 +75,7 @@ class Actions:
 
     def build_js():
         """build typescript to raw js for browser execution"""
-        subprocess.run(f'cd {script_directory}; npm run build', shell=True)
+        # path of this file
+        print("Compiling JS...")
+        this_file_path = os.path.dirname(os.path.abspath(__file__))
+        subprocess.run(f'npm run build --prefix {this_file_path}', shell=True)

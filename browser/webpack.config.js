@@ -6,6 +6,7 @@ module.exports = {
   entry: glob
     .sync("./src/**/*.{ts,js}", { ignore: "./src/**/*.test.js" })
     .reduce((acc, file) => {
+      // slices off './src/' and '.ts'
       acc[file.slice(3, -3)] = file;
       return acc;
     }, {}),
