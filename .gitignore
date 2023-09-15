@@ -5,4 +5,4 @@ __pycache__
 
 node_modules/
 
-browser/build/*.js
+browser/js-sender/build/*.js

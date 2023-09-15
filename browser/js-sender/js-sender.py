@@ -75,6 +75,19 @@ class Actions:
 
     def build_js():
         """build typescript to raw js for browser execution"""
-        print("Compiling JS...")
+        print("Compiling TS...")
+
+        # remove all js files from the build directory
+        build_directory = os.path.join(script_directory, 'build')
+        if os.path.exists(build_directory) and os.path.isdir(build_directory):
+            file_names = os.listdir(build_directory)
+            for file_name in file_names:
+                if file_name.endswith(".js"):
+                    os.remove(os.path.join(build_directory, file_name))
+
         npm_path = os.path.dirname(os.path.abspath(__file__))
         subprocess.run(f'npm run build --prefix {npm_path}', shell=True)
+        # block until the build folder contains the js files
+        while len(os.listdir(build_directory)) < len(javascript_file_names):
+            time.sleep(0.5)
+        

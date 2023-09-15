@@ -1,8 +1,33 @@
-from talon import app, Context
+from talon import app, Context, actions
 import subprocess, os
+import win32gui
+import os
+
+def get_windows_running_apps():
+    
+    #Remove these apps from the list since they aren't necessary and can't be called with keyboard shortcuts anyways
+    FILTER_THESE = ['Microsoft Text Input Application', 'Windows Shell Experience Host', 'Search', 'Cortana', "Start"]
+    taskbar_apps = []
+
+    def callback(hwnd, lParam):
+        if win32gui.IsWindowVisible(hwnd):
+            title = win32gui.GetWindowText(hwnd)
+            if title:
+                taskbar_apps.append(title)
+
+    # Enumerate all top-level windows
+    win32gui.EnumWindows(callback, 0)
+
+    # Filter out empty titles and duplicates
+    taskbar_apps = list(filter(None, taskbar_apps))
+    taskbar_apps = [x for x in taskbar_apps if x not in FILTER_THESE]
+
+    taskbar_apps = list(set(taskbar_apps))
+
+    return taskbar_apps
 
 
-def app_ready():
+def check_git():
     current_dir = os.path.dirname(os.path.abspath(__file__) )
 
     def create_path(path):
@@ -35,8 +60,18 @@ def app_ready():
     if no_updates:
         print("Your Talon User Directory is up to date!")
 
+
 if os.name != 'nt':
-    app.register("ready", app_ready)
+    def app_ready_unix():
+        check_git()
+    app.register("ready", app_ready_unix)
+
+if os.name == 'nt':
+    def app_ready_windows():
+        # for some reason this application doesn't auto start natively 
+        # through windows so we have to just press the key
+        actions.key(STRETCHLY := "super-9")
+    app.register("ready", app_ready_windows)
 
 
 game_controller_config = (

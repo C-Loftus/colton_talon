@@ -9,5 +9,7 @@ talon boilerplate:
     key(up:2)
     key(right:8)
 
-    
+new format string:
+    user.paste("f'{ }'")
+    key(left:3)    
    

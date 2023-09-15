@@ -40,21 +40,19 @@ def gpt_query(prompt: str, content: str) -> Optional[str]:
     if response.status_code == 200:
         return response.json()['choices'][0]['message']['content'].strip()
     else:
+        actions.user.notify("GPT Failure")
         print(response.json())
         return None
 
 def gpt_task(prompt: str, content: str) -> str:
     """Run a GPT task"""
-    actions.app.notify(f"GPT: Task started")
+    actions.user.notify("GPT Task Started")
+
     resp = gpt_query(prompt, content)
 
-    if not resp:
-        actions.app.notify('GPT: Something went wrong...')
-        print("GPT failed")
-        return None
-    
-    clip.set_text(resp)
-    actions.app.notify(f'GPT: Task finished')
+    if resp:
+        clip.set_text(resp)
+
     return resp
 
 

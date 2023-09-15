@@ -3,8 +3,9 @@ from talon import Module, actions
 mod = Module()
 
 
-
-@mod.capture(rule="<user.letter> <number>")
+# TODO:  allow columns and rowsprocesses   
+# + allows for multiple letters
+@mod.capture(rule="<user.letter>+ <number>")
 def excel_cell(m) -> str:
     return f'{m.letter}{m.number}'
 

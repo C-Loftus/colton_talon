@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "outDir": "./build",
+    "noImplicitAny": true,
+    "module": "es6",
+    "target": "es5",
+    "allowJs": true,
+    "incremental": true,
+    "moduleResolution": "node"
+  },
+  "skipLibCheck": true,
+}

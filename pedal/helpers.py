@@ -38,7 +38,7 @@ class UserActions:
         finally:
             temp_file.close() 
 
-        actions.key("ctrl-alt-t")
+        actions.key(OPEN_TERMINAL := "ctrl-alt-t")
         time.sleep(5)
         actions.insert(f'bat {temp_file_name}\n')
 

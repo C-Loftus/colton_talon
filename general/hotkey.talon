@@ -9,3 +9,6 @@
 
 # key(alt-g):
 #     user.switch_app_and_mic()
+
+# key(alt-g):
+#     user.notify("Switching app and mic")
