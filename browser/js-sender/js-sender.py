@@ -46,6 +46,7 @@ build_capture_list()
 mod.list("talon_JS_Functions", desc="All the local javascript functions that can be sent to the browser")
 ctx.lists["user.talon_JS_Functions"] = javascript_file_names
 
+
 @mod.capture(rule="{user.talon_JS_Functions}")
 def talon_JS_Functions(functionName: str) -> str:
     "Convert spoken text to the proper filename"
@@ -63,15 +64,15 @@ def fn_contents(js_build_file: str) -> str:
 class Actions:
     def send_js(funct: str):
         '''copy JS to clipboard and send to browser'''
-        with clip.revert():
-            raw_text=fn_contents(funct) 
-            clip.set_text(raw_text)
-            actions.key("ctrl-shift-i")
-            time.sleep(0.5)
-            actions.user.paste(clip.text())
-            actions.key("enter")
-            time.sleep(1)
-            actions.key("ctrl-shift-i")
+        actions.key("ctrl-shift-i")
+        raw_text=fn_contents(funct) 
+        clip.set_text(raw_text)
+        print("pasting", clip.text())
+        actions.user.paste(clip.text())
+        actions.key("enter")
+        print("test")
+        time.sleep(1)
+        actions.key("ctrl-shift-i")
 
     def build_js():
         """build typescript to raw js for browser execution"""
@@ -88,6 +89,12 @@ class Actions:
         npm_path = os.path.dirname(os.path.abspath(__file__))
         subprocess.run(f'npm run build --prefix {npm_path}', shell=True)
         # block until the build folder contains the js files
+
+        total_time = 0
         while len(os.listdir(build_directory)) < len(javascript_file_names):
             time.sleep(0.5)
+            total_time += 0.5
+            if total_time > 30:
+                actions.user.notify("Build timed out")
+                return
         

@@ -109,7 +109,7 @@ class UserActions:
 
         content = actions.edit.selected_text()
 
-        return gpt_task(prompt, content, )
+        return gpt_task(prompt, content)
 
 
 

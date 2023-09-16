@@ -1,5 +1,5 @@
-from talon import app, Context, actions
-import subprocess, os
+from talon import app, Context, actions, ui
+import subprocess, os, time
 import win32gui
 import os
 
@@ -73,6 +73,16 @@ if os.name == 'nt':
         actions.key(STRETCHLY := "super-9")
     app.register("ready", app_ready_windows)
 
+# auto dismiss popups on work computer
+def on_app_switch(application):
+    if "XamlAction" in application.name:
+        actions.insert("This is a bug in Delinea caused by a misrecognition of Talon. This is auto dismissed")
+        time.sleep(.5)
+        actions.key("tab")
+        actions.key("enter")
+        actions.key("enter")
+
+ui.register("app_activate", on_app_switch)
 
 game_controller_config = (
     "03000000c01600008704000011010000,"

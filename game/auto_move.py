@@ -1,4 +1,4 @@
-from ..game.hotspot import Hotspot, getHotSpots
+from ..game.hotspotGenerator.hotspot import getHotSpots, Hotspot
 from ..game.automove_actions import APP_NAMES
 from typing import assert_never
 from talon import Module, Context, app, registry, scope, skia, ui, actions, cron, settings

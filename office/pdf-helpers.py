@@ -47,13 +47,3 @@ class Actions:
 
         clip.set_image(skia.Image.from_file(output_filename))
 
-
-def on_app_switch(application):
-    if "XamlAction" in application.name:
-        actions.insert("This is a bug in Delinea caused by a misrecognition of Talon. This is auto dismissed")
-        time.sleep(.5)
-        actions.key("tab")
-        actions.key("enter")
-        actions.key("enter")
-
-ui.register("app_activate", on_app_switch)

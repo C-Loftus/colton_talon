@@ -20,6 +20,9 @@ windows:
 	# mimic xbox controller to get rid of direct input and get xinput for talon. Talon uses gilrs and needs xinput
 	echo "https://github.com/csutorasa/XOutput"
 
+install:
+	npm run install --prefix ./browser/js-sender
+	npm run build --prefix ./browser/js-sender
 
 build: 
 	npm run build --prefix ./browser/js-sender
