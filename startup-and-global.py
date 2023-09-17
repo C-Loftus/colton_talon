@@ -1,6 +1,8 @@
 from talon import app, Context, actions, ui
 import subprocess, os, time
-import win32gui
+
+if os.name == 'nt':
+    import win32gui
 import os
 
 def get_windows_running_apps():

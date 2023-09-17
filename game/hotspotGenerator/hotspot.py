@@ -15,7 +15,7 @@ hotspot1 = mod.setting(
     "hotspot1",
     str,
     desc="Hotspot 1 settings",
-    default='"x": 1, "y": 0, "radius": 20, "color": "099990", "alpha": 0.9,"gradient": 0.9'
+    default='"x": 1, "y": 0, "radius": 10, "color": "099990", "alpha": 0.9,"gradient": 0.9'
 )
 
 
@@ -26,6 +26,33 @@ hotspot_show = mod.setting(
     default=True,
 )
 
+
+# create a class that override the canvas class
+class HotspotCanvas(Canvas):
+    def __init__(self):
+        super().__init__()
+
+    def on_draw(canvas: Canvas):
+
+        c: SkiaCanvas = canvas
+
+        # TODO fix
+        global hotspot_list
+        hotspot = hotspot_list[0]
+
+        color_mode, color_gradient = hotspot.get_colors()
+        x, y = c.rect.center.x, c.rect.center.y
+        radius = c.rect.height / 2 - 2
+
+        c.paint.shader = skia.Shader.radial_gradient(
+            (x, y), radius, [color_mode, color_gradient]
+        )
+
+        c.paint.imagefilter = ImageFilter.drop_shadow(1, 1, 1, 1, color_gradient)
+
+        c.paint.style = c.paint.Style.FILL
+        c.paint.color = color_mode
+        c.draw_circle(x, y, radius)
 
 class Hotspot:
     x: float
@@ -78,11 +105,11 @@ class Hotspot:
         
     def show_indicator(self):
         self.canvas = Canvas.from_rect(Rect(0, 0, 0, 0))
-        self.canvas.register("draw", on_draw)
+        self.canvas.register("draw", on_draw_wrapper(self.canvas, self))
 
 
     def hide_indicator(self):
-        self.canvas.unregister("draw", on_draw)
+        self.canvas.unregister("draw", on_draw_wrapper(self.canvas, self))
         self.canvas.close()
         self.canvas = None
 
@@ -110,10 +137,13 @@ def getHotSpots() -> list[Hotspot]:
     return hotspot_list
 
 def makeHotspotList() -> list[Hotspot]:
-    return [Hotspot("x 1 y 0 radius 20 color 808080 alpha 0.9 gradient 0.9")]
+    return [Hotspot("x 1 y 0 radius 40 color 808080 alpha 0.9 gradient 0.9"),
+            Hotspot("x 0 y 1 radius 50 color 899880 alpha 0.9 gradient 0.9"),
+            Hotspot("x 190 y 100 radius 200 color 899880 alpha 0.4 gradient 0.9")
+            
+            ]
 
 hotspot_list = makeHotspotList()
-print(hotspot_list)
 
 setting_paths = {
     s.path
@@ -124,28 +154,22 @@ setting_paths = {
 }
 
 
+def on_draw_wrapper(c: SkiaCanvas, current_hotspot: Hotspot):
 
-def on_draw(canvas: Canvas):
+    def on_draw(c: SkiaCanvas):
 
-    c: SkiaCanvas = canvas
+        color_mode, color_gradient = current_hotspot.get_colors()
+        x, y = c.rect.center.x, c.rect.center.y
+        radius = c.rect.height / 2 - 2
+        c.paint.shader = skia.Shader.radial_gradient(
+            (x, y), radius, [color_mode, color_gradient]
+        )
+        c.paint.imagefilter = ImageFilter.drop_shadow(1, 1, 1, 1, color_gradient)
+        c.paint.style = c.paint.Style.FILL
+        c.paint.color = color_mode
+        c.draw_circle(x, y, radius)
 
-    # TODO fix
-    global hotspot_list
-    hotspot = hotspot_list[0]
-
-    color_mode, color_gradient = hotspot.get_colors()
-    x, y = c.rect.center.x, c.rect.center.y
-    radius = c.rect.height / 2 - 2
-
-    c.paint.shader = skia.Shader.radial_gradient(
-        (x, y), radius, [color_mode, color_gradient]
-    )
-
-    c.paint.imagefilter = ImageFilter.drop_shadow(1, 1, 1, 1, color_gradient)
-
-    c.paint.style = c.paint.Style.FILL
-    c.paint.color = color_mode
-    c.draw_circle(x, y, radius)
+    return on_draw
 
 
 
@@ -155,23 +179,22 @@ def update_hotspots():
     for hotspot in hotspot_list:
         canvas = hotspot.canvas
 
-        print(type(canvas))
         if hotspot_show.get():
             if not canvas or canvas is None:
-                print("running with", type(canvas))
                 hotspot.show_indicator()
-            move_indicator(hotspot)
-            
-            canvas.freeze()
+                assert hotspot.canvas is not None and type(hotspot.canvas) is not NoneType
+
+            hotspot.move_indicator()           
+            hotspot.canvas.freeze()
         elif canvas:
-            hide_indicator(hotspot)
+            hotspot.hide_indicator()
+            print("hide indicator")
 
 
 
 def on_update_settings(updated_settings: set[str]):
     if setting_paths & updated_settings:
-        global hotspot_list
-        update_hotspots(hotspot_list)
+        update_hotspots()
 
 def on_ready():
     update_hotspots()   
