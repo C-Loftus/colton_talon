@@ -89,4 +89,5 @@ dance:
 run that:
     key(ctrl-shift-enter)
 
-    
+^question work$:
+    "?"

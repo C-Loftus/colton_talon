@@ -43,6 +43,7 @@ class Actions:
 
     def left_right_down():
         global current_direction
+        print("Excel direction switched")
         
         match current_direction:
             case SCROLL_DIRECTION.vertical:

@@ -27,6 +27,6 @@ class Actions:
     def right_up():
         actions.key("volup")
 
-    def center_up():
+    def left_right_down():
         actions.key("ctrl-shift-m")
         

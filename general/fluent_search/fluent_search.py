@@ -9,6 +9,11 @@ ctx.matches = """
 os: windows
 """
 
+mod.tag("fluentSearchHintsOpen", "Current input method can use pedal press commands")
+
+isSearching = False
+
+ctx.tags = ["user.fluentSearchHintsOpen"]
 def wait_for_fluent_search_window():
     for _ in range(10):
         if ui.active_app().name == "FluentSearch":
@@ -26,8 +31,22 @@ class Action:
     def fluent_search_in_app(text: str, submit: bool):
         """Searches using Fluent Search’s In-app Search"""
 
+    def toggleFluentSearchTags():
+        """Toggle fluentsearch label Tag"""
+
 @ctx.action_class("user")
 class UserActions:
+    def toggleFluentSearchTags():
+            """Toggle asPedal Tag"""
+            global isSearching
+            if isSearching:
+                ctx.tags = ["user.fluentSearchHintsOpen"]
+            else:
+                ctx.tags = []
+            
+            isSearching = not isSearching
+
+
     def fluent_search(text: str):
         # XXX can't use app.focus() and unaware of any other way to
         # automate the way we do with LaunchBar

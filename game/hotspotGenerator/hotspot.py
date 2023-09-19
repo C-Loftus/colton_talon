@@ -137,9 +137,9 @@ def getHotSpots() -> list[Hotspot]:
     return hotspot_list
 
 def makeHotspotList() -> list[Hotspot]:
-    return [Hotspot("x 1 y 0 radius 40 color 808080 alpha 0.9 gradient 0.9"),
-            Hotspot("x 0 y 1 radius 50 color 899880 alpha 0.9 gradient 0.9"),
-            Hotspot("x 190 y 100 radius 200 color 899880 alpha 0.4 gradient 0.9")
+    return [Hotspot("x 1 y 0 radius 20 color 808280 alpha 0.9 gradient 0.9"),
+            Hotspot("x 0 y 01 radius 50 color 899841 alpha 0.9 gradient 0.9"),
+            Hotspot("x 05 y 190 radius 40 color 893880 alpha 0.4 gradient 0.9")
             
             ]
 
@@ -188,7 +188,7 @@ def update_hotspots():
             hotspot.canvas.freeze()
         elif canvas:
             hotspot.hide_indicator()
-            print("hide indicator")
+            print("Indicator")
 
 
 
