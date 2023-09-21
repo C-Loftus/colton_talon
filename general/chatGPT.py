@@ -33,11 +33,14 @@ def gpt_query(prompt: str, content: str) -> Optional[str]:
         'model': 'gpt-3.5-turbo'
     }
 
+    actions.user.notify("GPT Task Started")
+
     response = requests.post(
         'https://api.openai.com/v1/chat/completions',
         headers=headers, data=json.dumps(data))
 
     if response.status_code == 200:
+        actions.user.notify("GPT Task Done")
         return response.json()['choices'][0]['message']['content'].strip()
     else:
         actions.user.notify("GPT Failure")
@@ -46,7 +49,6 @@ def gpt_query(prompt: str, content: str) -> Optional[str]:
 
 def gpt_task(prompt: str, content: str) -> str:
     """Run a GPT task"""
-    actions.user.notify("GPT Task Started")
 
     resp = gpt_query(prompt, content)
 
