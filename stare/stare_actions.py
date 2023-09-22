@@ -3,14 +3,10 @@
 # of the logic for determining which quadrant the cursor is in. That is
 # handled in ../game/auto_move.py
 
-from talon import Module, Context, app, registry, scope, skia, ui, actions, cron, settings
+from talon import Module, actions
 APP_NAMES = ["ynoproject.net"]
 
 mod = Module()
-# ctx = Context()
-# ctx.matches = f"""
-# title: /{APP_NAMES[0]}/
-# """
 
 @mod.action_class
 class Actions:
@@ -30,6 +26,7 @@ class Actions:
 
     def hotspot_1_focus():
         """Runs when the first hotspot is focused """
+        actions.user.notify("test")
 
     def hotspot_2_focus():
         """Runs when the second hotspot is focused """
@@ -41,23 +38,23 @@ class Actions:
         """Runs when the fourth hotspot is focused """
 
 mod.setting(
-    "automove_trigger_threshold",
+    "thresholdToTriggerStare",
     type=str,
     default="2000ms",
     desc="How long the cursor needs to be in one quadrant before the action is called",
 )
 
-mod.setting(
-    "automove_enabled",
-    type=bool,
-    default=False,
-    desc="should an action be triggered if you stay any quadrant for a certain amount of time",
-)
 
 mod.setting(
-    "automove_debug",
+    "stare_debug",
     type=bool,
     default=False,
     desc="Whether to print debug statements",
 )
 
+mod.setting(
+    "stare_by_quadrant_enabled",
+    type=bool,
+    default=False,
+    desc="Whether to print debug statements",
+)

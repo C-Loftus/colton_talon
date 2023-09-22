@@ -7,6 +7,7 @@ from talon.skia.canvas import Canvas as SkiaCanvas
 from talon.skia.imagefilter import ImageFilter
 from talon.types import Rect
 import json
+from typing import assert_never
 
 mod = Module()
 ctx = Context()
@@ -54,7 +55,7 @@ class Hotspot:
         self.x = float(conf["x"])
         self.y = float(conf["y"])
         self.radius = float(conf["radius"])
-        self.color = conf["color"]
+        self.color = str(conf["color"])
         self.alpha = float(conf["alpha"])
         self.gradient = float(conf["gradient"])
 
@@ -135,6 +136,12 @@ class Hotspot:
         return False
     def get_unique_id(self) -> int:
         return self._uniqueID
+    
+    def run_associated_action(self):
+        functionName = f"user.hotspot_{self.get_unique_id()}_focus"
+        #   run a function based on a string
+        getattr(actions, functionName)()
+
 
 
 def getHotSpots() -> list[Hotspot]:
@@ -160,7 +167,7 @@ setting_paths = {
 
 def on_draw_wrapper(c: SkiaCanvas, current_hotspot: Hotspot):
 
-    def on_draw(c: SkiaCanvas):
+    def on_draw():
 
         color_mode, color_gradient = current_hotspot.get_colors()
         x, y = c.rect.center.x, c.rect.center.y
@@ -176,6 +183,14 @@ def on_draw_wrapper(c: SkiaCanvas, current_hotspot: Hotspot):
     return on_draw
 
 
+def getHotspotIfFocused():
+    hotSpots = getHotSpots()
+    
+    for hotSpot in hotSpots: 
+        if hotSpot.cursorInside() and settings.get("user.hotspot_show"):
+            return hotSpot
+    return None
+                    
 
 def update_hotspots():
     global hotspot_list
@@ -192,8 +207,6 @@ def update_hotspots():
             hotspot.canvas.freeze()
         elif canvas:
             hotspot.hide_indicator()
-            print("Indicator")
-
 
 
 def on_update_settings(updated_settings: set[str]):
