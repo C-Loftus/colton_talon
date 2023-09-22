@@ -1,6 +1,5 @@
-from enum import Enum
 from types import NoneType
-from talon import Module, Context, app, registry, scope, skia, ui, actions, settings
+from talon import Module, Context, app, registry, skia, ui, actions, settings
 from talon.canvas import Canvas
 from talon.screen import Screen
 from talon.skia.canvas import Canvas as SkiaCanvas
@@ -90,6 +89,7 @@ class Hotspot:
         self.canvas.close()
         self.canvas = None
 
+
     def move_indicator(self):
         screen: Screen = ui.main_screen()
         rect = screen.rect
@@ -126,6 +126,8 @@ class Hotspot:
             max(self.y * rect.height - self.radius, 0),
             rect.height - self.radius,
         )
+
+        # check should be one radius lower TODO check why
 
         # check if the cursor is in any of the hotspots. each hotspot has a x and y coordinate as well as a radius. they are all circles
         INSIDE_X = x_coord_from_percentage - self.radius <= cursor_x <= x_coord_from_percentage + self.radius
@@ -167,7 +169,7 @@ setting_paths = {
 
 def on_draw_wrapper(c: SkiaCanvas, current_hotspot: Hotspot):
 
-    def on_draw():
+    def on_draw(c: SkiaCanvas):
 
         color_mode, color_gradient = current_hotspot.get_colors()
         x, y = c.rect.center.x, c.rect.center.y

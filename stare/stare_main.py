@@ -1,9 +1,7 @@
 from .stare_by_quadrant import ScreenQuadrant, getQuadrant, runQuadrantAction
-from .hotspot import Hotspot, getHotSpots, getHotspotIfFocused
+from .hotspot import getHotSpots, getHotspotIfFocused
 from .stare_actions import APP_NAMES
-from typing import assert_never
 from talon import ui, actions, cron, settings
-from talon.screen import Screen
 import time
 
 
@@ -49,7 +47,7 @@ def handleCursorLocation():
         runQuadrantAction(focusedQuadrant)
 
 
-ids = [hotspot.id for hotspot in getHotSpots()]
+ids = [hotspot.get_unique_id() for hotspot in getHotSpots()]
 stare_map = {}
 stare_map.update({id:0 for id in ids})
 stare_map.update({quadrant:0 for quadrant in ScreenQuadrant})
