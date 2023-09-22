@@ -13,7 +13,6 @@ mod.tag("fluentSearchHintsOpen", "Current input method can use pedal press comma
 
 isSearching = False
 
-ctx.tags = ["user.fluentSearchHintsOpen"]
 def wait_for_fluent_search_window():
     for _ in range(10):
         if ui.active_app().name == "FluentSearch":
