@@ -75,9 +75,9 @@ class Hotspot:
         
         conf = d
 
-        self.x = int(conf["x"])
-        self.y = int(conf["y"])
-        self.radius = int(conf["radius"])
+        self.x = float(conf["x"])
+        self.y = float(conf["y"])
+        self.radius = float(conf["radius"])
         self.color = conf["color"]
         self.alpha = float(conf["alpha"])
         self.gradient = float(conf["gradient"])
