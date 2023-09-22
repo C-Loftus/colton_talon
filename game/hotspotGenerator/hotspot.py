@@ -27,32 +27,6 @@ hotspot_show = mod.setting(
 )
 
 
-# create a class that override the canvas class
-class HotspotCanvas(Canvas):
-    def __init__(self):
-        super().__init__()
-
-    def on_draw(canvas: Canvas):
-
-        c: SkiaCanvas = canvas
-
-        # TODO fix
-        global hotspot_list
-        hotspot = hotspot_list[0]
-
-        color_mode, color_gradient = hotspot.get_colors()
-        x, y = c.rect.center.x, c.rect.center.y
-        radius = c.rect.height / 2 - 2
-
-        c.paint.shader = skia.Shader.radial_gradient(
-            (x, y), radius, [color_mode, color_gradient]
-        )
-
-        c.paint.imagefilter = ImageFilter.drop_shadow(1, 1, 1, 1, color_gradient)
-
-        c.paint.style = c.paint.Style.FILL
-        c.paint.color = color_mode
-        c.draw_circle(x, y, radius)
 
 class Hotspot:
     x: float
@@ -61,19 +35,21 @@ class Hotspot:
     color: str
     alpha: float
     gradient: float
+    _uniqueID: int=1
 
     def __init__(self, rawConfigStr: str):
+        self._uniqueID = Hotspot._uniqueID
+        Hotspot._uniqueID += 1
 
 
         assert rawConfigStr is not None
 
-        d = {}
+        conf = {}
         split = rawConfigStr.split(" ")
         # convert groups of 2 to key value pairs
         for i in range(0, len(split), 2):
-            d[split[i]] = split[i + 1]
+            conf[split[i]] = split[i + 1]
         
-        conf = d
 
         self.x = float(conf["x"])
         self.y = float(conf["y"])
@@ -132,6 +108,34 @@ class Hotspot:
         self.canvas.move(x, y)
         self.canvas.resize(side, side)
 
+    def cursorInside(self) -> bool:
+        cursor_y = actions.mouse_y()
+        cursor_x = actions.mouse_x()
+
+        screen: Screen = ui.main_screen()
+        rect = screen.rect
+        
+        x_coord_from_percentage = rect.left + min(
+            max(self.x * rect.width - self.radius, 0),
+            rect.width - 2 * self.radius,
+        )
+
+        # y coordinate is wrong somehow
+        y_coord_from_percentage = rect.top + min(
+            max(self.y * rect.height - self.radius, 0),
+            rect.height - self.radius,
+        )
+
+        # check if the cursor is in any of the hotspots. each hotspot has a x and y coordinate as well as a radius. they are all circles
+        INSIDE_X = x_coord_from_percentage - self.radius <= cursor_x <= x_coord_from_percentage + self.radius
+        INSIDE_Y = y_coord_from_percentage - self.radius <= cursor_y <= y_coord_from_percentage + self.radius
+
+        if INSIDE_X and INSIDE_Y:
+            return True
+        return False
+    def get_unique_id(self) -> int:
+        return self._uniqueID
+
 
 def getHotSpots() -> list[Hotspot]:
     return hotspot_list
@@ -139,7 +143,7 @@ def getHotSpots() -> list[Hotspot]:
 def makeHotspotList() -> list[Hotspot]:
     return [Hotspot("x 1 y 0 radius 20 color 808280 alpha 0.9 gradient 0.9"),
             Hotspot("x 0 y 01 radius 50 color 899841 alpha 0.9 gradient 0.9"),
-            Hotspot("x 05 y 190 radius 40 color 893880 alpha 0.4 gradient 0.9")
+            Hotspot("x 0.5 y 0.5 radius 50 color 893880 alpha 0.4 gradient 0.9")
             
             ]
 

@@ -7,10 +7,10 @@ from talon import Module, Context, app, registry, scope, skia, ui, actions, cron
 APP_NAMES = ["ynoproject.net"]
 
 mod = Module()
-ctx = Context()
-ctx.matches = f"""
-title: /{APP_NAMES[0]}/
-"""
+# ctx = Context()
+# ctx.matches = f"""
+# title: /{APP_NAMES[0]}/
+# """
 
 @mod.action_class
 class Actions:
@@ -26,7 +26,7 @@ class Actions:
         actions.key("up")
     def on_quadrant_down_focus():
         """Runs when the down quadrant is focused """
-        actions.down("down")
+        actions.key("down")
 
     def hotspot_1_focus():
         """Runs when the first hotspot is focused """
@@ -45,6 +45,13 @@ mod.setting(
     type=str,
     default="2000ms",
     desc="How long the cursor needs to be in one quadrant before the action is called",
+)
+
+mod.setting(
+    "automove_enabled",
+    type=bool,
+    default=False,
+    desc="should an action be triggered if you stay any quadrant for a certain amount of time",
 )
 
 mod.setting(

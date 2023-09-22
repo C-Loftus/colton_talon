@@ -1,7 +1,7 @@
 from ..game.hotspotGenerator.hotspot import getHotSpots, Hotspot
 from ..game.automove_actions import APP_NAMES
 from typing import assert_never
-from talon import Module, Context, app, registry, scope, skia, ui, actions, cron, settings
+from talon import ui, actions, cron, settings
 from talon.screen import Screen
 from enum import Enum
 import time
@@ -20,7 +20,7 @@ import time
 # # +------------+
 
 tracker_job = None
-CRON_INTERVAL = "100ms"
+CRON_INTERVAL = "500ms"
 ScreenQuadrant = Enum('screenQuadrant', ['UP', 'DOWN', 'LEFT', 'RIGHT'])
 screen: Screen = ui.main_screen()
 rect = screen.rect
@@ -28,6 +28,10 @@ focusedQuadrant: type[ScreenQuadrant]
 
 def on_app_switch(application):
     global tracker_job
+    if application.name == "Visual Studio Code":
+        cron.cancel(tracker_job)
+        return
+
     if application.name in APP_NAMES or settings.get("user.automove_debug"):
         print(f'Starting cron interval at {CRON_INTERVAL}')
         tracker_job = cron.interval(CRON_INTERVAL, handleCursor)
@@ -59,6 +63,23 @@ def isAbovePositiveSlope() -> bool:
 
 
 def handleCursor():
+
+    hotSpots = getHotSpots()
+
+    for hotSpot in hotSpots: 
+        if hotSpot.cursorInside() and settings.get("user.hotspot_show"):
+            match hotSpot.get_unique_id():
+                case 1:
+                    actions.user.hotspot_1_focus()  
+                case 2:
+                    actions.user.hotspot_2_focus()
+                case 3:
+                    actions.user.hotspot_3_focus()
+                case 4:
+                    actions.user.hotspot_4_focus()
+                case _:
+                    assert_never()
+    
     
     global focusedQuadrant
 
@@ -79,9 +100,11 @@ def handleCursor():
         print(f'{focusedQuadrant=}')
 
     #  don't call an action unless it has been hovered for a  significant threshold
-    hotspots: list[Hotspot] = getHotSpots()
 
-    if sufficient_threshold(focusedQuadrant) and not cursorInHotspot(hotspots):
+    hotspots: list[Hotspot] = getHotSpots()
+    cursorInHotspot = any([hotspot.cursorInside() for hotspot in hotspots])
+    #  don't call an action unless it has been hovered for a  signif andicant threshold
+    if sufficient_threshold(focusedQuadrant) and not cursorInHotspot and settings.get("user.automove_enabled"): 
         match focusedQuadrant:
             case ScreenQuadrant.UP: 
                 actions.user.on_quadrant_up_focus()
@@ -99,13 +122,11 @@ stare_map = {
     ScreenQuadrant.LEFT:0
 }
 
-# remove the "ms" unit from the cron interval
-to_int = lambda cron_fmt: int(cron_fmt[:-2])
-
 def sufficient_threshold(focusedQuadrant) -> bool:
-    if settings.get("user.automove_debug"):
-        print(focusedQuadrant, stare_map)
-
+    
+    # remove the "ms" unit from the cron interval
+    to_int = lambda cron_fmt: int(cron_fmt[:-2])
+  
     stare_map[focusedQuadrant]+= to_int(CRON_INTERVAL)
 
     for quadrant in stare_map:
@@ -117,16 +138,5 @@ def sufficient_threshold(focusedQuadrant) -> bool:
     else:
         return False
 
-## TODO fix this
-def cursorInHotspot(hotspots: list[Hotspot]) -> bool:
-    cursor_y = actions.mouse_y()
-    cursor_x = actions.mouse_x()
 
-    # check if the cursor is in any of the hotspots. each hotspot has a x and y coordinate as well as a radius. they are all circles
-    for hotspot in hotspots:
-        INSIDE_X = hotspot.x - hotspot.radius <= cursor_x <= hotspot.x + hotspot.radius
-        INSIDE_Y = hotspot.y - hotspot.radius <= cursor_y <= hotspot.y + hotspot.radius
-        if INSIDE_X and INSIDE_Y:
-            return True
-    return False
 
