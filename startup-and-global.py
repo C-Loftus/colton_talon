@@ -3,7 +3,6 @@ import subprocess, os, time
 
 if os.name == 'nt':
     import win32gui
-import os
 
 def get_windows_running_apps():
     

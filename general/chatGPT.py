@@ -25,7 +25,7 @@ def gpt_query(prompt: str, content: str) -> Optional[str]:
     }
 
     data = {
-        'messages': [{'role': 'system', 'content': f"{prompt}:\n{content}"}],
+        'messages': [{'role': 'user', 'content': f"{prompt}:\n{content}"}],
         'max_tokens': 2024,
         'temperature': 0.6,
         'n': 1,

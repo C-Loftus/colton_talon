@@ -1,4 +1,4 @@
-from talon import actions,ui, scope
+from talon import actions,ui, scope, app
 import time, os
 
 COMMAND_MODE_APPLICATIONS=['Visual Studio Code']
@@ -44,4 +44,8 @@ def on_app_switch(application):
                 enable_mixed_mode()
                 print('auto switched to mixed mode')
 
-ui.register("app_activate", on_app_switch)
+def switcher():
+    ui.register("app_activate", on_app_switch)
+
+# we need to wait until it is loaded since otherwise it could fail when a mode is not defined during startup
+app.register("ready", switcher )

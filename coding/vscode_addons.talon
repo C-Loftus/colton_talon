@@ -5,7 +5,7 @@ mode: command
 hats permanently off: 
     user.change_setting("cursorless.showOnStart", 'false')
 
-hats permanently f11: 
+hats permanently on: 
     user.change_setting("cursorless.showOnStart", 'true')
     
 new window:
@@ -91,3 +91,6 @@ run that:
 
 ^question work$:
     "?"
+
+bar activity:
+    user.vscode("workbench.action.toggleActivityBarVisibility")
