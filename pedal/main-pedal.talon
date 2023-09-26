@@ -1,5 +1,6 @@
 # Left button (numlk)
 key(numlock:down):    
+    print("left")
     user.pedal_down('left') 
 key(numlock:up):       
     user.pedal_up('left') 
@@ -18,6 +19,9 @@ key(keypad_multiply:down):
     user.pedal_down('right')
 key(keypad_multiply:up):  
     user.pedal_up('right') 
+
+key(keypad_minus:up):
+    user.notify('minus')
 
 # KEY_NUM_LOCK 0xDB 219
 # KEY_KP_SLASH: 0xDC 220
