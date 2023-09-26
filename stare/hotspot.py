@@ -11,16 +11,8 @@ from typing import assert_never
 mod = Module()
 ctx = Context()
 
-hotspot1 = mod.setting(
-    "hotspot1",
-    str,
-    desc="Hotspot 1 settings",
-    default='"x": 1, "y": 0, "radius": 10, "color": "099990", "alpha": 0.9,"gradient": 0.9'
-)
-
-
-hotspot_show = mod.setting(
-    "hotspot_show",
+hotspot_enabled = mod.setting(
+    "hotspot_enabled",
     bool,
     desc="If true the hotspots are shown",
     default=True,
@@ -53,7 +45,7 @@ class Hotspot:
 
         self.x = float(conf["x"])
         self.y = float(conf["y"])
-        self.radius = float(conf["radius"])
+        self.diameter = float(conf["diameter"])
         self.color = str(conf["color"])
         self.alpha = float(conf["alpha"])
         self.gradient = float(conf["gradient"])
@@ -90,10 +82,12 @@ class Hotspot:
         self.canvas = None
 
 
-    def move_indicator(self):
+    # by default the coordinates are a percentage of the screen. 
+    # this function converts them to pixel coordinates
+    def _getPlottingCoords(self):
         screen: Screen = ui.main_screen()
         rect = screen.rect
-        radius = self.radius * screen.scale / 2
+        radius = self.diameter * screen.scale / 2
 
         x = rect.left + min(
             max(self.x * rect.width - radius, 0),
@@ -104,6 +98,10 @@ class Hotspot:
             max(self.y * rect.height - radius, 0),
             rect.height - 2 * radius,
         )
+        return (x, y, radius)
+
+    def move_indicator(self):
+        x, y, radius = self._getPlottingCoords()
 
         side = 2 * radius
         self.canvas.move(x, y)
@@ -113,59 +111,38 @@ class Hotspot:
         cursor_y = actions.mouse_y()
         cursor_x = actions.mouse_x()
 
-        screen: Screen = ui.main_screen()
-        rect = screen.rect
-        
-        x_coord_from_percentage = rect.left + min(
-            max(self.x * rect.width - self.radius, 0),
-            rect.width - 2 * self.radius,
-        )
+        x_coord_from_percentage, y_coord_from_percentage, radius = self._getPlottingCoords()
 
-        # y coordinate is wrong somehow
-        y_coord_from_percentage = rect.top + min(
-            max(self.y * rect.height - self.radius, 0),
-            rect.height - self.radius,
-        )
-
-        # check should be one radius lower TODO check why
 
         # check if the cursor is in any of the hotspots. each hotspot has a x and y coordinate as well as a radius. they are all circles
-        INSIDE_X = x_coord_from_percentage - self.radius <= cursor_x <= x_coord_from_percentage + self.radius
-        INSIDE_Y = y_coord_from_percentage - self.radius <= cursor_y <= y_coord_from_percentage + self.radius
+        INSIDE_X = x_coord_from_percentage - radius <= cursor_x <= x_coord_from_percentage + radius
+        INSIDE_Y = y_coord_from_percentage - radius  <= cursor_y <= y_coord_from_percentage + radius
 
         if INSIDE_X and INSIDE_Y:
+            print('cursor is inside')
             return True
         return False
     def get_unique_id(self) -> int:
         return self._uniqueID
+        
     
     def run_associated_action(self):
-        functionName = f"user.hotspot_{self.get_unique_id()}_focus"
-        #   run a function based on a string
-        getattr(actions, functionName)()
-
+        functionName = f"actions.user.hotspot_{self.get_unique_id()}_focus"
+        # run a python function from a string. eval is ok here because the string is not user input
+        eval(functionName)()
 
 
 def getHotSpots() -> list[Hotspot]:
     return hotspot_list
 
 def makeHotspotList() -> list[Hotspot]:
-    return [Hotspot("x 1 y 0 radius 20 color 808280 alpha 0.9 gradient 0.9"),
-            Hotspot("x 0 y 01 radius 50 color 899841 alpha 0.9 gradient 0.9"),
-            Hotspot("x 0.5 y 0.5 radius 50 color 893880 alpha 0.4 gradient 0.9")
+    return [Hotspot("x 1 y 0 diameter 20 color 808280 alpha 0.9 gradient 0.9"),
+            Hotspot("x 0 y 01 diameter 50 color 899841 alpha 0.9 gradient 0.9"),
+            Hotspot("x 0.5 y 0.5 diameter 50 color 893880 alpha 0.4 gradient 0.9")
             
             ]
 
 hotspot_list = makeHotspotList()
-
-setting_paths = {
-    s.path
-    for s in [
-        hotspot_show,
-        hotspot1
-    ]
-}
-
 
 def on_draw_wrapper(c: SkiaCanvas, current_hotspot: Hotspot):
 
@@ -189,7 +166,7 @@ def getHotspotIfFocused():
     hotSpots = getHotSpots()
     
     for hotSpot in hotSpots: 
-        if hotSpot.cursorInside() and settings.get("user.hotspot_show"):
+        if hotSpot.cursorInside():
             return hotSpot
     return None
                     
@@ -200,7 +177,7 @@ def update_hotspots():
     for hotspot in hotspot_list:
         canvas = hotspot.canvas
 
-        if hotspot_show.get():
+        if hotspot_enabled.get():
             if not canvas or canvas is None:
                 hotspot.show_indicator()
                 assert hotspot.canvas is not None and type(hotspot.canvas) is not NoneType
@@ -212,8 +189,9 @@ def update_hotspots():
 
 
 def on_update_settings(updated_settings: set[str]):
-    if setting_paths & updated_settings:
+    if {hotspot_enabled.path} & updated_settings:
         update_hotspots()
+
 
 def on_ready():
     update_hotspots()   

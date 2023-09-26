@@ -30,9 +30,13 @@ class Actions:
 
     def hotspot_2_focus():
         """Runs when the second hotspot is focused """
+        actions.user.notify("test2")
+        print("hotspot focus 2")
 
     def hotspot_3_focus():
         """Runs when the third hotspot is focused """
+        actions.user.notify("test3")
+        print("hotspot focus 3")
 
     def hotspot_4_focus():
         """Runs when the fourth hotspot is focused """
