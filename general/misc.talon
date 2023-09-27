@@ -28,34 +28,14 @@ frown:
 ^thumbs up$:
     user.paste("👍")
 
-hooks:
-    insert("()")
-    key(left)
 
-round:
-    insert("()")
-    key(left)
 scope: 
     user.paste("{\n\n}") 
     key(up)
 
-square:
-    user.paste("[]")
-    key(left)
-^skis$: 
-    user.paste("``")
-    key(left)
-
-# fishes:
-#     user.paste("<>")
-#     key(left)
 
 colgap:
     ": "
-
-^diamond$:
-    user.paste("<>")
-    key(left)
 
 ^and$:
     key(end)

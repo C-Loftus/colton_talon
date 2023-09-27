@@ -27,3 +27,7 @@ Talon is not like a traditional Python environment. Stylization and code choices
 - `global` variables are actually a _good_ practice for keeping state in Talon becuase of the fact each file defines voice commands that are only called from `.talon` scripts which don't have access to these `global` variables.
   - `global` is a simple way of sharing state across all related functions in one particular file, since we don't want to have to manually pass in state arguments through voice each time. It is easier to simply set it for an entire group of related commands.
   - For more complicated state that can be shared across many voice commands, Talon provides modules, tags, and scopes, all of which expose state to `.talon` scripts.
+
+# Acknowledgements
+
+[https://github.com/AndreasArvidsson/andreas-talon/](https://github.com/AndreasArvidsson/andreas-talon/)

@@ -1,5 +1,7 @@
-from talon import actions,ui, scope, app
+from talon import actions,ui, scope, app, Context
 import time, os
+
+ctx = Context()
 
 COMMAND_MODE_APPLICATIONS=['Visual Studio Code']
 previous_mode: str = None
@@ -35,7 +37,7 @@ def on_app_switch(application):
     if "sleep" not in scope.get("mode"):
         global previous_mode
         for app in COMMAND_MODE_APPLICATIONS: 
-            if app in application.name or application.name in app:
+            if app in application.name or application.name in app and actions.code.language() != "markdown":
                 enable_command_mode()
                 print('auto switched to command mode')
                 return

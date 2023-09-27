@@ -1,6 +1,5 @@
 # Left button (numlk)
 key(numlock:down):    
-    print("left")
     user.pedal_down('left') 
 key(numlock:up):       
     user.pedal_up('left') 
