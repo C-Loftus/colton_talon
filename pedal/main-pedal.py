@@ -238,7 +238,4 @@ def pedal_held_down() -> None:
             global wasHeld
             wasHeld = True
             
-
-
-check_freq_cron_format = str(int(CHECK_INTERVAL * 1000))
-cron.interval(f'{check_freq_cron_format}ms', pedal_held_down)
+cron.interval(cron.seconds_to_timespec(CHECK_INTERVAL), pedal_held_down)

@@ -1,4 +1,4 @@
-from talon import app, Context, actions, ui
+from talon import app, Context, actions, ui, cron
 import subprocess, os, time
 
 if os.name == 'nt':
@@ -62,17 +62,32 @@ def check_git():
         print("Your Talon User Directory is up to date!")
 
 
-if os.name != 'nt':
-    def app_ready_unix():
-        check_git()
-    app.register("ready", app_ready_unix)
+def disconnect_eye_tracker():
+    try:
+        actions.user.mouse_sleep()
+        actions.user.disconnect_ocr_eye_tracker()
+    except :
+        # if the eye tracker is already disconnected, just pass
+        # we don't care about errors here
+        pass
 
-if os.name == 'nt':
-    def app_ready_windows():
-        # for some reason this application doesn't auto start natively 
-        # through windows so we have to just press the key
-        actions.key(STRETCHLY := "super-9")
-    app.register("ready", app_ready_windows)
+def auto_actions_on_startup():
+
+    cron.after("4s", disconnect_eye_tracker )
+
+    match os.name:
+        case "nt":
+            # for some reason this application doesn't auto start natively 
+            # through windows so we have to just press the key
+            actions.key(STRETCHLY := "super-9")
+        
+        case "posix":
+            check_git()
+
+
+app.register("ready", auto_actions_on_startup)
+
+
 
 
 game_controller_config = (
