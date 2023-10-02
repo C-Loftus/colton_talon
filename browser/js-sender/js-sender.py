@@ -1,5 +1,5 @@
-from talon import Module, Context, actions, app, clip
-import os, time, subprocess
+from talon import Module, Context, actions, app, clip,fs
+import os, time, subprocess, shutil
 from typing import NewType
 
 ctx = Context()
@@ -11,16 +11,26 @@ script_directory = os.path.dirname(os.path.abspath(__file__))
 NaturalLanguageName = NewType('NaturalLanguageName', str)
 RawJSFileName = NewType('RawJSFileName', str)
 javascript_file_names: dict[NaturalLanguageName, RawJSFileName] = {}
+build_directory = os.path.join(script_directory, 'build')
+src_directory = os.path.join(script_directory, 'src')
 
-def build_capture_list():
+
+def copyJSToBuild():
+    # copy all raw js files to the build directory
+    print("Copying JS files to build directory")
+    for file in os.listdir(src_directory):
+        if file.endswith(".js"):
+            shutil.copy(os.path.join(src_directory, file), build_directory)
+
+def build_capture_list(path: str= None, flags: int= None ):
     '''
     Builds a mapping between spoken text and js file names.
     Files should be named with snakecase and be easy to dictate
     i.e. `console_log_test.js` would be dictated as "console log test" 
     '''
+    print("Building JS file name list")
+    copyJSToBuild()
     global javascript_file_names
-    # Specify the path to the 'build/' directory
-    build_directory = os.path.join(script_directory, 'build')
     
     # Check if the 'build/' directory exists
     if os.path.exists(build_directory) and os.path.isdir(build_directory):
@@ -41,6 +51,7 @@ def build_capture_list():
         print("The 'build/' directory does not exist.")
 
 build_capture_list()
+fs.watch(str(src_directory), build_capture_list)
 
 
 mod.list("talon_JS_Functions", desc="All the local javascript functions that can be sent to the browser")
@@ -55,24 +66,19 @@ def talon_JS_Functions(functionName: str) -> str:
 
 #  reads in the raw text from a javascript source file
 def fn_contents(js_build_file: str) -> str:
-    relative_path = os.path.join(script_directory, 'build',js_build_file)
+    relative_path = os.path.join(build_directory, js_build_file)
     with open(relative_path, 'r') as file:
         data = file.read()
         return data
 
 @mod.action_class
 class Actions:
-    def send_js(funct: str):
+    def copy_js(funct: str):
         '''copy JS to clipboard and send to browser'''
-        actions.key("ctrl-shift-i")
+        time.sleep(1)
         raw_text=fn_contents(funct) 
         clip.set_text(raw_text)
-        print("pasting", clip.text())
-        actions.user.paste(clip.text())
-        actions.key("enter")
-        print("test")
-        time.sleep(1)
-        actions.key("ctrl-shift-i")
+
 
     def build_js():
         """build typescript to raw js for browser execution"""

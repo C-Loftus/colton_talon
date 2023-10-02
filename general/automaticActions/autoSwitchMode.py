@@ -38,7 +38,7 @@ COMMAND_MODE_APPLICATIONS=['Visual Studio Code']
 previous_mode: str = None
 SLEEP_MODE_APPLICATIONS = []
 
-# auto dismiss popups on work computer
+# auto dismiss popups on work computer.
 def dismiss_popup(application):
     if "XamlAction" in application.name and os.name == 'nt':
         actions.insert("This is a bug in Delinea caused by a misrecognition of Talon. This is auto dismissed")
@@ -50,14 +50,14 @@ def dismiss_popup(application):
 
 def enable_mixed_mode():
     global previous_mode
-    previous_mode = "mixed"
+    previous_mode = scope.get("mode")
     actions.mode.disable("sleep")
     actions.mode.enable("dictation")
     actions.mode.enable("command")
 
 def enable_command_mode():
     global previous_mode
-    previous_mode = "command"
+    previous_mode = scope.get("mode")
     actions.mode.disable("sleep")
     actions.mode.disable("dictation")
     actions.mode.enable("command")
@@ -71,7 +71,7 @@ def on_app_switch(application):
     global previous_mode
     for app in COMMAND_MODE_APPLICATIONS: 
         if app in application.name or \
-            application.name in app and actions.code.language() != "markdown":
+            (application.name in app and actions.code.language() != "markdown"):
             enable_command_mode()
             return
     else:
@@ -83,3 +83,6 @@ def switcher():
 
 # we need to wait until it is loaded since otherwise it could fail when a mode is not defined during startup
 app.register("ready", switcher )
+t = {"fds": "fdsfds", 
+     "fdsfddsfsds": "fsdfsdfdsfd"
+     }

@@ -4,6 +4,12 @@ tag: browser
 
 -
 
-key(alt-g):
+javascript <user.talon_JS_Functions>:
     user.notify("Sending JS files to browser")
-    user.send_js("like_teams_message.js")
+    key("ctrl-shift-i")
+    user.copy_js("{user.talon_JS_Functions}")
+    key(ctrl-v)
+    sleep(2)
+    key(enter)
+    sleep(2)
+    key(ctrl-shift-i)

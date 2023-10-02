@@ -74,8 +74,10 @@ def disconnect_eye_tracker():
 def auto_actions_on_startup():
 
     cron.after("4s", disconnect_eye_tracker )
+    actions.key(BROWSER := "super-1")
 
     match os.name:
+        
         case "nt":
             # for some reason this application doesn't auto start natively 
             # through windows so we have to just press the key
@@ -83,7 +85,8 @@ def auto_actions_on_startup():
         
         case "posix":
             check_git()
-
+            
+            
 
 app.register("ready", auto_actions_on_startup)
 
