@@ -25,6 +25,7 @@ key(delete):
     key(voldown)
 
 
-change user session now:
-    sleep(4)
+change user session:
+    user.notify("shutting down")
+    sleep(8)
     user.system_command("shutdown /s /t 0")

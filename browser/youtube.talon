@@ -15,3 +15,8 @@ speed down <digits>:
     key("s:{digits_1}")
 
 ten: ""
+
+search <user.text>:
+    key("/")
+    "{user.text}"
+    key(enter)

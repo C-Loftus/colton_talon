@@ -34,7 +34,7 @@ class mods():
         actions.user.notify(f"auto switch mode is now: {resp}")
 
 
-COMMAND_MODE_APPLICATIONS=['Visual Studio Code']
+
 previous_mode: str = None
 SLEEP_MODE_APPLICATIONS = []
 
@@ -62,27 +62,64 @@ def enable_command_mode():
     actions.mode.disable("dictation")
     actions.mode.enable("command")
 
+
+def do_update():
+    if "user.auto_switch_mode" not in list(ctx.tags):
+        return False
+
+    if scope.get("mode") == "sleep":
+        return False
+
+    match actions.code.language():
+        case "markdown":
+            return False
+        
+    return True
+
+def on_title_switch(window):
+    if not do_update():
+        return
+        
+
+    MIXED_MODE_APPLICATIONS=["app.slack.com", "Microsoft Teams"]
+    for app_name in MIXED_MODE_APPLICATIONS:
+
+        if app_name in ui.active_window().title:
+
+            enable_mixed_mode()
+            return
+    
+    enable_command_mode()
+        # match ui.active_window().:
+        #     case [*_, "holidays"]:
+        #         return True
+        #     case [*_, "workday"]:
+        #         return False
+
+#course grained updates according to application name and not specific titles
 def on_app_switch(application):
-    dismiss_popup(application)
-    # print(ctx.tags, list(ctx.tags), "user.auto_switch_mode" in list(ctx.tags))
-    if "user.auto_switch_mode" not in list(ctx.tags) or "sleep" in scope.get("mode"):
+
+    if not do_update():
         return
 
-    global previous_mode
+    COMMAND_MODE_APPLICATIONS=['Visual Studio Code']
     for app in COMMAND_MODE_APPLICATIONS: 
-        if app in application.name or \
-            (application.name in app and actions.code.language() != "markdown"):
+
+        if app in application.name:
             enable_command_mode()
             return
-    else:
-        if previous_mode != "mixed":
-            enable_mixed_mode()
+        
+        title =  str(ui.active_window().title).lower()
+        if "modern calling" in title:
+            enable_command_mode()
+            return
+
 
 def switcher():
     ui.register("app_activate", on_app_switch)
+    ui.register("win_title", on_title_switch)
+    ui.register("app_activate", dismiss_popup)
+
 
 # we need to wait until it is loaded since otherwise it could fail when a mode is not defined during startup
 app.register("ready", switcher )
-t = {"fds": "fdsfds", 
-     "fdsfddsfsds": "fsdfsdfdsfd"
-     }

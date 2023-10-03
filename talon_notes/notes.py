@@ -1,4 +1,3 @@
-|
 from sys import stdout
 from talon import Module, actions, imgui
 import sqlite3, os, time, shutil

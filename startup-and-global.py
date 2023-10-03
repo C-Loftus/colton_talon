@@ -82,15 +82,15 @@ def auto_actions_on_startup():
             # for some reason this application doesn't auto start natively 
             # through windows so we have to just press the key
             actions.key(STRETCHLY := "super-9")
-        
+            actions.user.open_url('https://teams.microsoft.com')
+            actions.user.open_url('https://outlook.office.com/mail/')
+            
+
         case "posix":
             check_git()
             
             
-
 app.register("ready", auto_actions_on_startup)
-
-
 
 
 game_controller_config = (

@@ -10,12 +10,18 @@ model summarize:
     res = user.gpt_summarize_this()
     user.paste(res)
 
-# add context: 
-
-#     res = user.add_context()
-#     user.paste(res)
-
-model query <user.text>:
-    res = user.gpt_arbitrary_prompt(text)
+add context: 
+    res = user.gpt_add_context()
+    key(right)
+    key(enter)
     user.paste(res)
 
+model query <user.text>:
+    res = user.gpt_answer_question(text)
+    user.paste(res)
+
+model arbitrary:
+    text = user.draft_get_text()
+    user.draft_hide()
+    res = user.gpt_arbitrary_prompt(text)
+    user.paste(res)

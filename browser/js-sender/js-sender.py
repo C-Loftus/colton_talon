@@ -32,7 +32,6 @@ def build_capture_list(path: str= None, flags: int= None ):
     copyJSToBuild()
     global javascript_file_names
     
-    # Check if the 'build/' directory exists
     if os.path.exists(build_directory) and os.path.isdir(build_directory):
         file_names = os.listdir(build_directory)
         
@@ -40,10 +39,10 @@ def build_capture_list(path: str= None, flags: int= None ):
             try:
                 if not file_name.endswith(".js"):
                     continue
-                else:
-                    pretty_name = file_name.replace(".js", "")
-                pretty_name = pretty_name.replace("_", " ") if "_" in pretty_name else pretty_name
-                javascript_file_names[pretty_name] = file_name
+                
+                naturalLangName = file_name.replace(".js", "")
+                naturalLangName = naturalLangName.replace("_", " ") if "_" in naturalLangName else naturalLangName
+                javascript_file_names[naturalLangName] = file_name
             except :
                 #  should never trigger given the fact that the file name is auto generated from webpack
                 print(f'{file_name} triggered an exception when parsing')
@@ -68,14 +67,12 @@ def talon_JS_Functions(functionName: str) -> str:
 def fn_contents(js_build_file: str) -> str:
     relative_path = os.path.join(build_directory, js_build_file)
     with open(relative_path, 'r') as file:
-        data = file.read()
-        return data
+        return file.read()
 
 @mod.action_class
 class Actions:
     def copy_js(funct: str):
         '''copy JS to clipboard and send to browser'''
-        time.sleep(1)
         raw_text=fn_contents(funct) 
         clip.set_text(raw_text)
 

@@ -39,3 +39,22 @@ colgap:
 
 ^and$:
     key(end)
+
+cycle results:
+    #we don't have loops so we just have to repeat. easier than using pythonfor this small example
+    key(enter)
+    sleep(2)
+    key(enter)
+    sleep(2)
+    key(enter)
+    sleep(2)
+    key(enter)
+    sleep(2)
+    key(enter)
+    sleep(2)
+    key(enter)
+    sleep(2)
+    key(enter)
+    sleep(2)
+    key(enter)
+    sleep(2)
