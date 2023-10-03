@@ -84,8 +84,7 @@ class UserActions:
 
         return gpt_task(prompt, content)
 
-
-    def gpt_arbitrary_prompt(inputText: str):
+    def gpt_answer_question(inputText: str):
         """answer question"""
         prompt = """
         Using a professional tone, generate text that satisfies the question or request given in the prompt. 
@@ -112,6 +111,14 @@ class UserActions:
         content = actions.edit.selected_text()
 
         return gpt_task(prompt, content)
+
+    def gpt_arbitrary_prompt(prompt: str) -> str:
+        """Run a GPT task"""
+
+        content = actions.edit.selected_text()
+
+        return gpt_task(prompt, content)        
+
 
 
 

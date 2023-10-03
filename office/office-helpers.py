@@ -8,7 +8,7 @@ class Entrance:
     def email_entrance() -> str:
         """script the intro of an email"""
         res: str = clip.text()
-        first= res.split(",")[1]
+        first= res.split(",")[1].strip()
         return first 
     
      

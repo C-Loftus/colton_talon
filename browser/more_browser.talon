@@ -22,6 +22,7 @@ web search [<user.text>]:
     key(ctrl-l)
     sleep(.05)
     insert("{text}")
+    insert("{text}")
 
 page hunt [<user.text>]:
     key(ctrl-f)
@@ -50,11 +51,21 @@ pick <number_small>:
     key(enter)
 
 
-notion save:
+notion save [( as | to)] [{user.notionDatabases}]:
     key(ctrl-shift-k)
     sleep(1.5)
+    key(tab)
+    key(tab)
+    key(enter)
+    db = user.notionDatabases or ""
+    user.paste("{db}")
+    sleep(1.5)
+    key(tab)
+    sleep(.5)
+    key(enter)
     key(enter)
     key(escape)
+
 
 
 hence (toggle | switch): user.rango_command_without_target("toggleHints")

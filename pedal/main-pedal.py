@@ -2,7 +2,6 @@ from talon import Module, actions, cron, scope, Context, settings
 import time
 from typing import TypedDict
 
-
 mod = Module()
 # We use this state variable to make sure we aren't 
 # calling the pedal up command after holding it down
@@ -12,6 +11,8 @@ class KeyMap(TypedDict):
     left: bool
     right: bool
     center: bool
+
+
 
 map: KeyMap = {
     "left": False,
@@ -172,14 +173,14 @@ class Actions:
     def held_center():
         """ called when the right pedal is held down"""
         print("Held center")
-        global teamNotOutlook
-        teamNotOutlook = not teamNotOutlook
         chrome = actions.user.get_running_app("Chrome")
         actions.user.switcher_focus_app(chrome)
+        global teamNotOutlook
         if teamNotOutlook:
             actions.key("ctrl-shift-6")
         else:
             actions.key("ctrl-shift-7")
+        teamNotOutlook = not teamNotOutlook
 
 # Trigger a hold if a key has been held for SEC_TO_TRIGGER seconds
 # check if this threshold is met every SEC_TO_CHECK seconds
@@ -238,7 +239,4 @@ def pedal_held_down() -> None:
             global wasHeld
             wasHeld = True
             
-
-
-check_freq_cron_format = str(int(CHECK_INTERVAL * 1000))
-cron.interval(f'{check_freq_cron_format}ms', pedal_held_down)
+cron.interval(cron.seconds_to_timespec(CHECK_INTERVAL), pedal_held_down)

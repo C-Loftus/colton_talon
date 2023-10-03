@@ -1,4 +1,3 @@
-mode: command
 os: windows
 -
 
@@ -25,11 +24,8 @@ maximize:
 key(delete):
     key(voldown)
 
-# key():
-#     key(volup)
 
-exit session now:
-    key(ctrl-alt-t)
-    sleep(2)
-    user.paste("Stop-Computer -Force")
-    key(enter)
+change user session:
+    user.notify("shutting down")
+    sleep(8)
+    user.system_command("shutdown /s /t 0")

@@ -64,7 +64,7 @@ next sheet:
 previous sheet:
     key(ctrl-pageup)
 
-fit column:
+( fit column | sit colon | fit colon):
     key(alt-h)
     key(o)
     key(i)

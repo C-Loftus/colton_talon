@@ -6,9 +6,10 @@ setup:
 	mkdir -p ~/.talon/user   
 
 clone:
-	git clone https://github.com/C-Loftus/knaubsj_talon ~/.talon/user/knausj_talon
-	git clone https://github.com/C-Loftus/my_talon_scripts ~/.talon/user/myscripts
+	git clone https://github.com/C-Loftus/knausj_talon ~/.talon/user/knausj_talon
+	git clone https://github.com/C-Loftus/my_talon_scripts ~/.talon/user/my_talon_scripts
 	git clone https://github.com/paul-schaaf/talon-filetree-commands/
+	git clone "https://github.com/wolfmanstout/talon-gaze-ocr" ~/.talon/user/talon-gaze-ocr
 	# git clone https://github.com/tararoys/dense-mouse-grid ~/.talon/user/dense-mouse-grid
 
 fetch: pull
@@ -26,3 +27,6 @@ install:
 
 build: 
 	npm run build --prefix ./browser/js-sender
+
+config:
+	bash -c "cp -r ./.vscode/  ../."	
