@@ -1,3 +1,5 @@
+not app.name: ITGmania
+-
 # Left button (numlk)
 key(numlock:down):    
     user.pedal_down('left') 
@@ -6,10 +8,8 @@ key(numlock:up):
 
 # Center button (kpplus)
 key(keypad_divide:down):    
-    # print("center")
    user.pedal_down('center')
 key(keypad_divide:up):     
-    # print("center")
     user.pedal_up('center')
 
 

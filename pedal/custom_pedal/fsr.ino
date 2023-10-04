@@ -31,7 +31,7 @@
   // And the Keyboard library for Arduino
   void ButtonStart() {
     Keyboard.begin();
-  
+  }
   void ButtonPress(uint8_t button_num) {
     Keyboard.press(button_num);
   }
@@ -41,7 +41,7 @@
 #endif
 
 // Default threshold value for each of the sensors.
-const int16_t kDefaultThreshold = 1000;
+const int16_t kDefaultThreshold = 500;
 // Max window size for both of the moving averages classes.
 const size_t kWindowSize = 50;
 // Baud rate used for Serial communication. Technically ignored by Teensys.
@@ -565,6 +565,8 @@ void setup() {
   for (size_t i = 0; i < kNumSensors; ++i) {
     // Button numbers should start with 1.
     kSensors[i].Init(i + 1);
+    kSensors[i].UpdateThreshold(kDefaultThreshold);
+    
   }
   
   #if defined(CLEAR_BIT) && defined(SET_BIT)
