@@ -64,16 +64,13 @@ def enable_command_mode():
 
 
 def do_update():
+
     if "user.auto_switch_mode" not in list(ctx.tags):
         return False
 
-    if scope.get("mode") == "sleep":
+    if "sleep" in scope.get("mode"):
         return False
 
-    match actions.code.language():
-        case "markdown":
-            return False
-        
     return True
 
 def on_title_switch(window):
@@ -81,20 +78,30 @@ def on_title_switch(window):
         return
         
 
-    MIXED_MODE_APPLICATIONS=["app.slack.com", "Microsoft Teams"]
-    for app_name in MIXED_MODE_APPLICATIONS:
+    window_title = ui.active_window().title
 
-        if app_name in ui.active_window().title:
+    if "Microsoft Teams" in window_title:
 
+        if "?ctx=chat" in window_title:
             enable_mixed_mode()
             return
+            
+
+        enable_command_mode()
+        return
     
+    if "app.slack.com" in window_title:
+        enable_mixed_mode()
+        return
+
+
     enable_command_mode()
         # match ui.active_window().:
         #     case [*_, "holidays"]:
         #         return True
         #     case [*_, "workday"]:
         #         return False
+        # https://stackoverflow.com/questions/74378015/python-match-case-part-of-a-string
 
 #course grained updates according to application name and not specific titles
 def on_app_switch(application):
@@ -102,17 +109,20 @@ def on_app_switch(application):
     if not do_update():
         return
 
-    COMMAND_MODE_APPLICATIONS=['Visual Studio Code']
-    for app in COMMAND_MODE_APPLICATIONS: 
 
-        if app in application.name:
+    if 'Visual Studio Code' in application.name: 
+        if actions.code.language() == "markdown":
+            enable_mixed_mode()
+
+        else:
             enable_command_mode()
-            return
-        
-        title =  str(ui.active_window().title).lower()
-        if "modern calling" in title:
-            enable_command_mode()
-            return
+        return    
+    
+    
+    title =  str(ui.active_window().title).lower()
+    if "modern calling" in title:
+        enable_command_mode()
+        return
 
 
 def switcher():

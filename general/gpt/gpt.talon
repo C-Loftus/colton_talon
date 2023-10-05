@@ -10,7 +10,7 @@ model summarize:
     res = user.gpt_summarize_this()
     user.paste(res)
 
-add context: 
+model add context: 
     res = user.gpt_add_context()
     key(right)
     key(enter)

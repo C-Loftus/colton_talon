@@ -20,3 +20,13 @@ search <user.text>:
     key("/")
     "{user.text}"
     key(enter)
+
+next chapter: 
+    key(ctrl-right)
+
+previous chapter: 
+    key(ctrl-left)
+
+
+toggle mini: 
+    key(i)
