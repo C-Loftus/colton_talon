@@ -3,6 +3,7 @@ from talon import Context, Module, actions, settings, scope
 ctx = Context()
 ctx.matches = """app: vscode
 not title: /html/
+not tag: user.controlTabsWithPedal
 """
 
 ctx.settings["user.force_synchronous"] = False

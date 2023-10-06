@@ -104,3 +104,11 @@ class Actions:
         else:
             actions.key("ctrl-shift-7")
         teamNotOutlook = not teamNotOutlook
+
+        
+    def toggle_tab_mode():
+        """called when the center pedal is held down"""
+        if "user.tabsWithPedal" in list(ctx.tags):
+            ctx.tags = []
+        else:
+            ctx.tags = ["user.controlTabsWithPedal"]

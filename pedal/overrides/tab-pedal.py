@@ -1,10 +1,9 @@
 from talon import Context, Module, actions
 import time
 ctx = Context()
-ctx.matches = """tag: user.controlTabsWithPedal
-app: chrome
-"""
 
+ctx.matches = """tag: user.controlTabsWithPedal
+"""
 ctx.settings["user.force_synchronous"] = False
 
 #  functions to be overwritten based on the context

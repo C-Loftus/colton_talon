@@ -43,9 +43,3 @@ class UserActions:
         time.sleep(5)
         actions.insert(f'bat {temp_file_name}\n')
 
-    def toggle_tab_mode():
-        """called when the center pedal is held down"""
-        if "user.tabsWithPedal" in list(ctx.tags):
-            ctx.tags = []
-        else:
-            ctx.tags = ["user.controlTabsWithPedal"]
