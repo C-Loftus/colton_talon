@@ -4,6 +4,9 @@ mode: command
 # pull all talon scripts:
 #     user.system_command_nb("find ~/.talon/user -name .git -print -execdir git pull \;")
 
+target {user.website}:
+    user.launch_new_tab_if_not_opened("{website}")
+
 queer line: edit.delete_line()
 
 fly:
@@ -58,3 +61,6 @@ cycle results:
     sleep(2)
     key(enter)
     sleep(2)
+
+
+    

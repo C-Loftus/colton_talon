@@ -94,3 +94,6 @@ run that:
 
 bar activity:
     user.vscode("workbench.action.toggleActivityBarVisibility")
+
+toggle terminal: 
+    user.vscode("workbench.action.terminal.toggleTerminal")

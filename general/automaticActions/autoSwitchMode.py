@@ -48,19 +48,7 @@ def dismiss_popup(application):
         actions.key("enter")
 
 
-def enable_mixed_mode():
-    global previous_mode
-    previous_mode = scope.get("mode")
-    actions.mode.disable("sleep")
-    actions.mode.enable("dictation")
-    actions.mode.enable("command")
 
-def enable_command_mode():
-    global previous_mode
-    previous_mode = scope.get("mode")
-    actions.mode.disable("sleep")
-    actions.mode.disable("dictation")
-    actions.mode.enable("command")
 
 
 def do_update():
@@ -83,19 +71,19 @@ def on_title_switch(window):
     if "Microsoft Teams" in window_title:
 
         if "?ctx=chat" in window_title:
-            enable_mixed_mode()
+            actions.user.enable_mixed_mode()
             return
             
 
-        enable_command_mode()
+        actions.user.enable_command_mode()
         return
     
     if "app.slack.com" in window_title:
-        enable_mixed_mode()
+        actions.user.enable_mixed_mode()
         return
 
 
-    enable_command_mode()
+    actions.user.enable_command_mode()
         # match ui.active_window().:
         #     case [*_, "holidays"]:
         #         return True
@@ -112,16 +100,16 @@ def on_app_switch(application):
 
     if 'Visual Studio Code' in application.name: 
         if actions.code.language() == "markdown":
-            enable_mixed_mode()
+            actions.user.enable_mixed_mode()
 
         else:
-            enable_command_mode()
+            actions.user.enable_command_mode()
         return    
     
     
     title =  str(ui.active_window().title).lower()
     if "modern calling" in title:
-        enable_command_mode()
+        actions.user.enable_command_mode()
         return
 
 

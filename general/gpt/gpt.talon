@@ -16,7 +16,7 @@ model add context:
     key(enter)
     user.paste(res)
 
-model query <user.text>:
+model ask <user.text>:
     res = user.gpt_answer_question(text)
     user.paste(res)
 
@@ -25,3 +25,4 @@ model arbitrary:
     user.draft_hide()
     res = user.gpt_arbitrary_prompt(text)
     user.paste(res)
+

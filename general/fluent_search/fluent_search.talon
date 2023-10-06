@@ -27,7 +27,7 @@ launch bar: user.fluent_search("")
 launch running: key(ctrl-alt-shift-space)
 
 # -- Contexts
-^con [<user.text>]: user.fluent_search("processes\t{text or ''}")
+# ^con [<user.text>]: user.fluent_search("processes\t{text or ''}")
 
 # -- Menu search / Homerow
 # In-app search hotkey

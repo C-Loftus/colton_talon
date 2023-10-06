@@ -30,3 +30,6 @@ key(keypad_minus:up):
 # KEY_KP_MINUS 0xDE 222
 (pedal | pettle | paddle) help:
     user.pedal_help()
+
+toggle tab mode:
+    user.toggle_tab_mode() 

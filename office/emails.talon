@@ -1,4 +1,6 @@
 mode: command
+title: /outlook.office.com/
+tag: browser
 
 -
 
