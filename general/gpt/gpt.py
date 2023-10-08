@@ -57,7 +57,6 @@ def gpt_task(prompt: str, content: str) -> str:
 
     return resp
 
-
 @mod.action_class
 class UserActions:
 
@@ -78,7 +77,7 @@ class UserActions:
     def gpt_fix_grammar():
         """Grammar Check"""
         prompt = """
-        This is a Fix any mistakes or irregularities in grammar, spelling, or formatting. Use a professional business tone. 
+        Fix any mistakes or irregularities in grammar, spelling, or formatting. Use a professional business tone. 
         """
         content = actions.edit.selected_text()
 
@@ -121,4 +120,18 @@ class UserActions:
 
 
 
+    def gpt_auto_schematize():
+        """Schematize automatically"""
+        prompt = """
+        The given text is from responses to a survey. They are open ended and have no inherent structure. Map each of these responses to a schema that would be useful for summarizing all the responses and doing categorical analysis. Generate this schema on the fly by grouping responses. Return the responses in a list with a '_' separating each item. Don't make the schema overly specific. Don't make the schema category names longer than a sentence a maximum.
+        """
+        content = actions.edit.selected_text()
 
+        return gpt_task(prompt, content)
+
+
+    def gpt_schematize(responses: list[str], schema: list[str]):
+        """Schematize by a list"""
+        prompt = f"""
+        The given text is from responses to a survey. They are open ended and have no inherent structure. Map each of these responses to the given schema: {schema} Return the responses in a list with a '_' separating each item.
+        """

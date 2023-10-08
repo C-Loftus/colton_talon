@@ -11,6 +11,7 @@ clone:
 	git clone https://github.com/paul-schaaf/talon-filetree-commands/
 	git clone "https://github.com/wolfmanstout/talon-gaze-ocr" ~/.talon/user/talon-gaze-ocr
 	# git clone https://github.com/tararoys/dense-mouse-grid ~/.talon/user/dense-mouse-grid
+	git clone "https://github.com/C-Loftus/private-talon" ~/.talon/user/private-talon
 
 fetch: pull
 	cd ~/.talon/user/knausj_talon; git fetch upstream main

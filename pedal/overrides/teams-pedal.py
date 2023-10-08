@@ -1,13 +1,12 @@
 from talon import Context, Module, actions
-import time, random, math, os
 
 ctx = Context()
 mod = Module()
+
 mod.apps.teamsCallInBrowser = r"""
     title: /modern-calling/
     tag: browser
 """
-
 ctx.matches = """
 app: teamsCallInBrowser
 app: /microsoft teams/i
