@@ -6,7 +6,7 @@ not title: /html/
 not tag: user.controlTabsWithPedal
 """
 
-ctx.settings["user.force_synchronous"] = False
+ctx.settings["user.oneActionPerPedalPress"] = False
 
 ctx.tags = []
 pedal_scroll_amount = settings.get("user.pedal_scroll_amount") if settings.get("user.pedal_scroll_amount") else 0.2
@@ -79,10 +79,10 @@ class Actions:
 
 
     def left_down():
-        if not settings.get("user.force_synchronous"):
+        if not settings.get("user.oneActionPerPedalPress"):
             actions.user.mouse_scroll_down(pedal_scroll_amount)
 
     def right_down():
-        if not settings.get("user.force_synchronous"):
+        if not settings.get("user.oneActionPerPedalPress"):
             actions.user.mouse_scroll_up(pedal_scroll_amount)
 

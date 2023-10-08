@@ -1,11 +1,10 @@
-from talon import Module, Context,cron, actions
+from talon import Module, Context , actions
 
 import time
 import sys
 
 
 import tempfile
-import inspect
 
 ctx = Context()
 mod = Module()

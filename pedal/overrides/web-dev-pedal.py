@@ -22,7 +22,7 @@ app: web_dev
 """
 
 
-ctx.settings["user.force_synchronous"] = False
+ctx.settings["user.oneActionPerPedalPress"] = False
 
 @ctx.action_class("user")
 class Actions:

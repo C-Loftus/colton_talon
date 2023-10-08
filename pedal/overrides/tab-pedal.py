@@ -4,7 +4,7 @@ ctx = Context()
 
 ctx.matches = """tag: user.controlTabsWithPedal
 """
-ctx.settings["user.force_synchronous"] = False
+ctx.settings["user.oneActionPerPedalPress"] = False
 
 #  functions to be overwritten based on the context
 @ctx.action_class("user")

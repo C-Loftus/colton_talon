@@ -14,7 +14,7 @@ app: /microsoft teams/i
 
 speed_mode = False
 
-ctx.settings["user.force_synchronous"] = True
+ctx.settings["user.oneActionPerPedalPress"] = True
 
 @ctx.action_class("user")
 class Actions:

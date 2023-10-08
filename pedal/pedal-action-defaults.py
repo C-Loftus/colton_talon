@@ -4,21 +4,24 @@ mod = Module()
 ctx = Context()
 ctx.tags = []
 mod.tag("controlTabsWithPedal", desc="tag for controlling tabs with pedal")
+
 #  By default  this is false which signifies a continuously called function 
 # (Holding down scroll etc)
-force_synchronous = mod.setting(
-    "force_synchronous",
+mod.setting(
+    "oneActionPerPedalPress",
     type=bool,
     default=False, 
-    desc="force_synchronous",
+    desc="If a pedal is held down, only fire the action once.   In other words only trigger the pedal up action once.",
 )
 
 #  turns just the center pedal into a synchronous option
-force_synchronous_center = mod.setting(
-    "force_synchronous_center",
+# This defaults true so we can use the center pedal for things like toggling Talon sleep versus Talon wake
+#  where we don't want it to repeat
+mod.setting(
+    "oneActionOnCenterPress",
     type=bool,
     default=True,
-    desc="force_synchronous_center",
+    desc="If specifically the center pedal is held down, only fire the action once.   In other words only trigger the pedal up action once.",
 )
 
 pedal_scroll_amount=mod.setting(

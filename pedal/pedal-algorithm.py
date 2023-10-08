@@ -32,10 +32,10 @@ def on_interval() -> None:
     # with synchronous code we only call functions on the pedal up
     # pedal down functions  can be asynchronous and held down to repeat,
     #  which is impossible if we have to force synchronous
-    if settings.get("user.force_synchronous"):
+    if settings.get("user.oneActionPerPedalPress"):
         return
 
-    if map["center"] and not settings.get("user.force_synchronous_center"):
+    if map["center"] and not settings.get("user.oneActionPerPedalPress"):
         actions.user.center_down()
     elif map["left"]:
         actions.user.left_down()
@@ -66,7 +66,7 @@ class Actions:
         # if we have a  discrete action that needs to block (wait for return) and can't be asynchronous, 
         # then we can't use the cron job for quick calls in succession and as a result we have to do 
         # it synchronously on the pedal raise to only call it once
-        if settings.get("user.force_synchronous") == True:
+        if settings.get("user.oneActionPerPedalPress") == True:
             match key:
                 case "left":
                     actions.user.left_up( )
@@ -75,7 +75,7 @@ class Actions:
                 case "center":
                     actions.user.center_up()
 
-        elif settings.get("user.force_synchronous_center") == True and key == "center":
+        elif settings.get("user.oneActionOnCenterPress") == True and key == "center":
             actions.user.center_up()
 
 
@@ -97,10 +97,10 @@ def pedal_held_down() -> None:
             # we only want to trigger on synchronous actions since if it was asynchronous We might trigger it by mistake, 
             # for instance if you were scrolling down a lot and end up holding the pedal for 5 seconds
 
-            if settings.get("user.force_synchronous_center") and pedalDirection == "center":
+            if settings.get("user.oneActionOnCenterPress") and pedalDirection == "center":
                 actions.user.held_center()
                 
-            elif settings.get("user.force_synchronous"):
+            elif settings.get("user.oneActionPerPedalPress"):
                 print(f'{pedalDirection} hold triggered')
 
                 match pedalDirection:

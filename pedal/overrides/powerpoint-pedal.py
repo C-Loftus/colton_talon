@@ -6,8 +6,8 @@ ctx.matches = """title: /pptx/
 title: /PowerPoint/
 """
 
-ctx.settings["user.force_synchronous"] = False
-ctx.settings["user.force_synchronous_center"] = False
+ctx.settings["user.oneActionPerPedalPress"] = False
+ctx.settings["user.oneActionOnCenterPress"] = False
 
 
 

@@ -28,6 +28,7 @@ key(keypad_minus:up):
 # KEY_KP_SLASH: 0xDC 220
 # KEY_KP_ASTERISK: 0xDD 221
 # KEY_KP_MINUS 0xDE 222
+
 (pedal | pettle | paddle) help:
     user.pedal_help()
 

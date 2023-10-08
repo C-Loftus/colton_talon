@@ -6,7 +6,7 @@ ctx.matches = """app: vscode
 and title: /ipynb/
 """
 
-ctx.settings["user.force_synchronous"] = True
+ctx.settings["user.oneActionPerPedalPress"] = True
 
 pedal_scroll_amount = settings.get("user.pedal_scroll_amount")
 scroll, jump = False, False
@@ -15,18 +15,18 @@ scroll, jump = False, False
 class Actions:
 
     def left_down():
-        if not settings.get("user.force_synchronous") and scroll:
+        if not settings.get("user.oneActionPerPedalPress") and scroll:
             actions.user.mouse_scroll_down(pedal_scroll_amount)
 
     def right_down():
-        if not settings.get("user.force_synchronous") and scroll:
+        if not settings.get("user.oneActionPerPedalPress") and scroll:
             actions.user.mouse_scroll_up(pedal_scroll_amount)
 
     def left_right_down():
         global scroll
         scroll = not scroll
         print("Switching scroll mode to", scroll)
-        ctx.settings["user.force_synchronous"] = not ctx.settings["user.force_synchronous"]
+        ctx.settings["user.oneActionPerPedalPress"] = not ctx.settings["user.oneActionPerPedalPress"]
         if scroll:
             print("Scroll amount is", pedal_scroll_amount)
         

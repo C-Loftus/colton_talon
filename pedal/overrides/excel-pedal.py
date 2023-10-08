@@ -10,7 +10,7 @@ title: /.xlsx/i
 not app: vscode
 """
 
-ctx.settings["user.force_synchronous"] = False
+ctx.settings["user.oneActionPerPedalPress"] = False
 
 pedal_scroll_amount = settings.get("user.pedal_scroll_amount")
 #Create an enumeration for either horizontal or vertical
@@ -22,7 +22,7 @@ current_direction=SCROLL_DIRECTION.vertical
 class Actions:
 
     def left_down():
-        if not settings.get("user.force_synchronous"):
+        if not settings.get("user.oneActionPerPedalPress"):
             if current_direction==SCROLL_DIRECTION.vertical:
                 # actions.user.mouse_scroll_down(pedal_scroll_amount)
                 actions.key("down")
@@ -32,7 +32,7 @@ class Actions:
     
 
     def right_down():
-        if not settings.get("user.force_synchronous"):
+        if not settings.get("user.oneActionPerPedalPress"):
             if current_direction==SCROLL_DIRECTION.vertical:
                 # actions.user.mouse_scroll_up(pedal_scroll_amount)
                 actions.key("up")
