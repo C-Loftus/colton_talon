@@ -18,5 +18,6 @@ ten: ""
 
 search <user.text>:
     key("/")
+    key(ctrl-a)
     "{user.text}"
     key(enter)
