@@ -5,3 +5,4 @@ if, ifStatement.consequence
 if else, ifElseStatement.consequence
 link, link.text
 try, tryCatchStatement.body
+bold, bold.text

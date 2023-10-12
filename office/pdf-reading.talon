@@ -1,9 +1,10 @@
 tag: browser
 title: /.pdf/i
-
+title: /PowerPoint/i
 -
 
 copy image <number>:
+    user.notify("Coping image")
     key(ctrl-l)
     key(ctrl-c)
     url = clip.text()

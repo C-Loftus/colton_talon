@@ -44,7 +44,7 @@ class Actions:
 
     def center_right_down():
         """Center and Right pedal"""
-        update_tag(ctx, "pedal.scroll")
+        # update_tag(ctx, "pedal.scroll")
 
 
     def left_up():
@@ -86,3 +86,7 @@ class Actions:
         if not settings.get("user.oneActionPerPedalPress"):
             actions.user.mouse_scroll_up(pedal_scroll_amount)
 
+    def reset_pedal_state():
+        """called when the center pedal is held down"""
+        ctx.tags = []
+        ctx.settings['user.pedal_scroll_amount'] = 0.2

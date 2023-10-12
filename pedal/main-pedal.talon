@@ -19,8 +19,9 @@ key(keypad_multiply:down):
 key(keypad_multiply:up):  
     user.pedal_up('right') 
 
-key(keypad_minus:up):
-    user.notify('minus')
+key(keypad_minus):
+    sleep(0.01)
+    
 
 # ASCII Keyboard Codes for Arduino or Custom Pedals3
 # https://www.arduino.cc/reference/en/language/functions/usb/keyboard/keyboardmodifiers/
@@ -34,3 +35,6 @@ key(keypad_minus:up):
 
 toggle tab mode:
     user.toggle_tab_mode() 
+
+reset (penal | pedal | pettle | paddle) state: 
+    user.reset_pedal_state()

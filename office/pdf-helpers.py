@@ -18,12 +18,20 @@ class Actions:
         # https://jdhao.github.io/2019/11/20/convert_pdf_to_image_imagemagick/
         file_description="_".join(file_description.split())
 
+        # todays date
+        today = time.strftime("%Y-%m-%d", time.gmtime())
+
         filename= os.path.join(Path.home(), 
                                "tmp",
-                               "download.pdf")
+                               f"{today}-download.pdf")
         
-        if not os.path.exists(filename):
-            urllib.request.urlretrieve(url, filename)
+        try:
+            if not os.path.exists(filename):
+                urllib.request.urlretrieve(url, filename)
+        except Exception as e:
+            actions.user.notify(e)
+            return
+            
 
         output_filename =  os.path.join(Path.home(), "tmp", f'page-{page_number}_{file_description}.png')
 

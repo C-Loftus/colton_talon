@@ -20,7 +20,11 @@ class Actions:
 
         return string.replace(" ", "")
     
+    def compile_markdown():
+        """Compiles all markdown files in the current directory to docx"""
+        cmd = r"Get-ChildItem -Filter *.md | ForEach-Object { $outputFile = [System.IO.Path]::ChangeExtension($_.FullName, '.docx'); pandoc -t latex+raw_tex $_.FullName | pandoc -f latex --data-dir=docs/rendering/ -o $outputFile }"
 
+        actions.user.paste(cmd)
 
     def change_setting(setting_name: str, setting_value: Union[str, int, bool]):
         """

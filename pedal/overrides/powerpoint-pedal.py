@@ -3,12 +3,11 @@ import time
 
 ctx = Context()
 ctx.matches = """title: /pptx/
-title: /PowerPoint/
 """
+# title: /PowerPoint/
 
 ctx.settings["user.oneActionPerPedalPress"] = False
 ctx.settings["user.oneActionOnCenterPress"] = False
-
 
 
 

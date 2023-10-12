@@ -9,6 +9,9 @@ target {user.website}:
 
 queer line: edit.delete_line()
 
+inter:
+    key(enter)
+
 fly:
     key(end)
 
@@ -62,5 +65,7 @@ cycle results:
     key(enter)
     sleep(2)
 
+# copy path:
+    # shift right click
 
     
