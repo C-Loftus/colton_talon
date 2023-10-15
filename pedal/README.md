@@ -15,6 +15,7 @@ This script works by doing the following
 -  Functions that should only be triggered once should be placed within a pedal up action.  This is since we know that a pedal up action will only be triggered once per pedal press. 
 -   On the other hand, functions that should be triggered multiple times should be placed within a pedal down action.  This is since Talon will repeatedly trigger the pedal down action while the pedal is held down, even for just a short period of time.
 
+
 ## Overrides
 
 - Each file in this directory defines contextually scoped pedal behavior
