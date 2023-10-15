@@ -1,9 +1,10 @@
 from talon import Context, Module, actions, settings
-import time, multiprocessing
 
 ctx = Context()
 ctx.matches = """app: vscode
 and title: /ipynb/
+not title: /Interactive/
+not tag: user.controlTabsWithPedal
 """
 
 ctx.settings["user.oneActionPerPedalPress"] = True

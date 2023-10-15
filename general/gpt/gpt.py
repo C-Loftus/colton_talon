@@ -6,19 +6,14 @@ from talon import Module, actions, clip
 # TODO: Make it only available to run one request at a time
 
 mod = Module()
-# mod.setting(
-#     "open_ai_fixup_prompt",
-#     type=str,
-#     default="Fix any grammar, ponctuation, and typos.",
-#     desc="Prompt to use when using GPT to fix misrecognitions.",
-# )
+mod.list("promptNoArgument", desc="GPT Prompts Without Arguments")
 
 
 def gpt_query(prompt: str, content: str) -> Optional[str]:
     try:
         TOKEN = os.environ["OPENAI_API_KEY"]
     except:
-        print("OPENAI API Key not loaded")
+        actions.user.notify("OPENAI API Key not loaded")
     headers = {
         'Content-Type': 'application/json',
         'Authorization': f'Bearer {TOKEN}'
@@ -60,6 +55,13 @@ def gpt_task(prompt: str, content: str) -> str:
 @mod.action_class
 class UserActions:
 
+    def gpt_prompt_no_argument(prompt: str):
+        """Run a GPT task"""
+
+        content = actions.edit.selected_text()
+
+        return gpt_task(prompt, content)
+
     def gpt_fix_delimited(contentToFix: str, delimiter: str ="_"):
         """ 
         Take a list of words/phrases return them  with the proper formatting and any typos fixed in a delimited string
@@ -74,15 +76,6 @@ class UserActions:
         assert type(result) != None
         return result
 
-    def gpt_fix_grammar():
-        """Grammar Check"""
-        prompt = """
-        Fix any mistakes or irregularities in grammar, spelling, or formatting. Use a professional business tone. 
-        """
-        content = actions.edit.selected_text()
-
-        return gpt_task(prompt, content)
-
     def gpt_answer_question(inputText: str):
         """answer question"""
         prompt = """
@@ -91,25 +84,6 @@ class UserActions:
 
         return gpt_task(prompt, inputText)
 
-    def gpt_summarize_this():
-        """summarize data"""
-        prompt = """
-        Summarize this text into a format suitable for business notes. Use a professional business tone.
-        """
-        content = actions.edit.selected_text()
-
-        return gpt_task(prompt, content)
-
- 
-    def gpt_add_context():
-        """ add additional context"""
-        prompt = """
-        Add additional text to the sentence that would be appropriate to the situation and useful in consulting project.  Use a professional business tone
-        """
-
-        content = actions.edit.selected_text()
-
-        return gpt_task(prompt, content)
 
     def gpt_arbitrary_prompt(prompt: str) -> str:
         """Run a GPT task"""
@@ -118,20 +92,3 @@ class UserActions:
 
         return gpt_task(prompt, content)        
 
-
-
-    def gpt_auto_schematize():
-        """Schematize automatically"""
-        prompt = """
-        The given text is from responses to a survey. They are open ended and have no inherent structure. Map each of these responses to a schema that would be useful for summarizing all the responses and doing categorical analysis. Generate this schema on the fly by grouping responses. Return the responses in a list with a '_' separating each item. Don't make the schema overly specific. Don't make the schema category names longer than a sentence a maximum.
-        """
-        content = actions.edit.selected_text()
-
-        return gpt_task(prompt, content)
-
-
-    def gpt_schematize(responses: list[str], schema: list[str]):
-        """Schematize by a list"""
-        prompt = f"""
-        The given text is from responses to a survey. They are open ended and have no inherent structure. Map each of these responses to the given schema: {schema} Return the responses in a list with a '_' separating each item.
-        """

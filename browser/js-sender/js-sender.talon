@@ -13,7 +13,7 @@ user script <user.talon_JS_Functions>:
     sleep(2)
     key(enter)
     sleep(2)
-    key(ctrl-shift-i)
+    key(ctrl-shift-j)
 
 help user script:
     user.help_list("user.talon_JS_Functions")

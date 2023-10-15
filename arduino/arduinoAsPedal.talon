@@ -24,7 +24,7 @@ gamepad(west:up):
     # user.pedal_up('right')
     key(alt-;)
 
-toggle pedal:
+toggle arduino as pedal:
     user.toggleAsPedal()
 
 # gamepad(d_pad_up:down):             

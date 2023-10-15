@@ -80,13 +80,7 @@ class Actions:
         """Right pedal up"""
     def center_up():
         """Center pedal up"""
-        modes = scope.get("mode")
-        if "sleep" in modes:
-            # mode = "sleep"
-            actions.speech.enable()
-        else:    
-            actions.speech.disable()    
-    
+        actions.user.toggle_sleep_mode()
     
     def held_left():
         """ called when the left pedal is held down"""
@@ -115,3 +109,8 @@ class Actions:
             ctx.tags = []
         else:
             ctx.tags = ["user.controlTabsWithPedal"]
+
+    def reset_pedal_state():
+        """"""
+        ctx.tags = []
+        ctx.settings['user.pedal_scroll_amount'] = 0.1

@@ -1,7 +1,7 @@
 import contextlib
 from threading import Lock
 from typing import ContextManager, Generic, TypeVar
-from talon import Module, actions, Context
+from talon import Module, actions, Context, scope
 
 mod = Module()
 ctx = Context()
@@ -69,3 +69,12 @@ class Actions:
         actions.mode.disable("sleep")
         actions.mode.disable("dictation")
         actions.mode.enable("command")
+
+    def toggle_sleep_mode():
+        """toggle sleep mode"""
+        modes = scope.get("mode")
+        if "sleep" in modes:
+            # mode = "sleep"
+            actions.speech.enable()
+        else:    
+            actions.speech.disable()    

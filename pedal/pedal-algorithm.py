@@ -35,7 +35,7 @@ def on_interval() -> None:
     if settings.get("user.oneActionPerPedalPress"):
         return
 
-    if map["center"] and not settings.get("user.oneActionPerPedalPress"):
+    if map["center"] and not settings.get("user.oneActionOnCenterPress"):
         actions.user.center_down()
     elif map["left"]:
         actions.user.left_down()
@@ -83,8 +83,8 @@ class Actions:
 def pedal_held_down() -> None:
 
     for pedalDirection in map:
-        isHeldDown = map[pedalDirection]
-        if isHeldDown == True:
+        isPressed = map[pedalDirection]
+        if isPressed == True:
             held_seconds[pedalDirection] += CHECK_INTERVAL
         else:
             held_seconds[pedalDirection] = 0

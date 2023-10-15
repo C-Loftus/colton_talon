@@ -16,11 +16,14 @@ clone:
 fetch: pull
 	cd ~/.talon/user/knausj_talon; git fetch upstream main
 pull:
-	find ~/.talon/user -name .git -print -execdir git pull --ff-only \;
+	bash -c 'find ../. -name .git -print -execdir git pull \;'
+	# find ~/.talon/user -name .git -print -execdir git pull --ff-only \;
 
 windows:
 	# mimic xbox controller to get rid of direct input and get xinput for talon. Talon uses gilrs and needs xinput
-	echo "https://github.com/csutorasa/XOutput"
+	echo "https://github.com/csutorasa/XOutput" 
+	scoop install imagemagick
+	scoop install ffmpeg
 
 install:
 	npm run install --prefix ./browser/js-sender
@@ -31,3 +34,4 @@ build:
 
 config:
 	bash -c "cp -r ./.vscode/  ../."	
+

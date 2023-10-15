@@ -81,9 +81,18 @@ def on_title_switch(window):
     if "app.slack.com" in window_title:
         actions.user.enable_mixed_mode()
         return
+    if "outlook.office.com" in window_title:
+        actions.user.enable_mixed_mode()
+        return
 
 
-    actions.user.enable_command_mode()
+    if 'Visual Studio Code' in window_title: 
+        if actions.code.language() == "markdown":
+            actions.user.enable_mixed_mode()
+
+        else:
+            actions.user.enable_command_mode()
+        return    
         # match ui.active_window().:
         #     case [*_, "holidays"]:
         #         return True

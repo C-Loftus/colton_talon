@@ -97,3 +97,10 @@ bar activity:
 
 toggle terminal: 
     user.vscode("workbench.action.terminal.toggleTerminal")
+
+talon pull repositories:
+    user.vscode("workbench.action.terminal.focus")
+    sleep(.1)
+    user.paste("bash -c 'find . -name .git -print -execdir git pull \;'")
+    sleep(.1)
+    key(enter)

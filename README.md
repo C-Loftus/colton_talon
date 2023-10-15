@@ -2,7 +2,11 @@
 
 These are all written for my own setup but are public in case others might find them useful. All of these are supplementary to the standard knausj (now called the talon `community`) repo on the most recent release.
 
-## Install Talon and My Scripts
+## Install Just One Script Directory from this Repo
+
+[https://download-directory.github.io/](https://download-directory.github.io/)
+
+## Install Talon and All My Scripts
 
 (Script below assumes fish, change the set command for bash)
 
