@@ -42,6 +42,13 @@ scope:
 
 colgap:
     ": "
+spam:
+    ", "
+
+scrape:
+    edit.extend_word_left()
+    edit.delete()
+
 
 ^and$:
     key(end)

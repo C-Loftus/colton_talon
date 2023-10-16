@@ -8,6 +8,7 @@ ctx = Context()
 ctx.tags = ["user.auto_switch_mode"]
 tags: set[str] = set()
 
+STRECHLY_KILLED = False
 
 def add_tag(tag: str):
     tags.add(tag)
@@ -105,7 +106,7 @@ def on_app_switch(application):
 
     if not do_update():
         return
-
+    global STRECHLY_KILLED
 
     if 'Visual Studio Code' in application.name: 
         if actions.code.language() == "markdown":
@@ -117,9 +118,23 @@ def on_app_switch(application):
     
     
     title =  str(ui.active_window().title).lower()
-    if "modern calling" in title:
+    if "modern-calling" in title:
+        # kill the stretchy application
+        # try:
+        #     os.system("taskkill /f /im Stretchly.exe")
+        #     actions.user.notify("killed stretchy")
+        #     STRECHLY_KILLED = True
+        #     time.sleep(2)
+        # except:
+        #     actions.user.notify("could not kill stretchy")
+        #     STRECHLY_KILLED = False
+
         actions.user.enable_command_mode()
         return
+    # elif STRECHLY_KILLED == True:
+    #     actions.key(STRETCHLY := "super-9")
+    #     STRECHLY_KILLED = False
+
 
 
 def switcher():

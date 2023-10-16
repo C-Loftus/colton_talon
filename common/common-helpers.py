@@ -1,7 +1,8 @@
 import contextlib
 from threading import Lock
+import os, pathlib
 from typing import ContextManager, Generic, TypeVar
-from talon import Module, actions, Context, scope
+from talon import Module, actions, Context, scope, clip
 
 mod = Module()
 ctx = Context()
@@ -78,3 +79,14 @@ class Actions:
             actions.speech.enable()
         else:    
             actions.speech.disable()    
+
+    def focus_chrome():
+        """focus chrome"""
+        chrome = actions.user.get_running_app("Chrome")
+        actions.user.switcher_focus_app(chrome)
+
+    def focus_vscode():
+        """focus vscode"""
+        vscode = actions.user.get_running_app("Code")
+        actions.user.switcher_focus_app(vscode)
+

@@ -21,8 +21,7 @@ web search [<user.text>]:
     key(ctrl-t)
     key(ctrl-l)
     sleep(.05)
-    insert("{text}")
-    insert("{text}")
+    insert("{text}\n")
 
 page hunt [<user.text>]:
     key(ctrl-f)
@@ -55,7 +54,9 @@ notion save [( as | to)] [{user.notionDatabases}]:
     key(ctrl-shift-k)
     sleep(1.5)
     key(tab)
+    sleep(0.1)
     key(tab)
+    sleep(0.1)
     key(enter)
     db = user.notionDatabases or ""
     user.paste("{db}")
@@ -63,7 +64,9 @@ notion save [( as | to)] [{user.notionDatabases}]:
     key(tab)
     sleep(.5)
     key(enter)
+    sleep(0.1)
     key(enter)
+    sleep(0.1)
     key(escape)
 
 ^help notion$:

@@ -16,5 +16,3 @@ jump chrome:
     chrome = user.get_running_app("Chrome")
     user.switcher_focus_app(chrome)
     key(ctrl-shift-r)
-
-    

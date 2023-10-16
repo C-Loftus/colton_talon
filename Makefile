@@ -24,12 +24,15 @@ windows:
 	echo "https://github.com/csutorasa/XOutput" 
 	scoop install imagemagick
 	scoop install ffmpeg
+	scoop install pandoc
+	scoop install screentogif
+	scoop install obs-studio
+
 
 install:
 	npm run install --prefix ./browser/js-sender
-	npm run build --prefix ./browser/js-sender
 
-build: 
+build: install 
 	npm run build --prefix ./browser/js-sender
 
 config:

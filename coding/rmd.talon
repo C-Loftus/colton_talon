@@ -31,7 +31,6 @@ run below:
 
 boilerplate:
     user.paste("""---\ntitle: "PDF Summary\nauthor: "Colton Loftus"\ndate: "`r format(Sys.time(), '%d %B, %Y')`"\noutput: html_document\n---\n\n```{r setup, include=FALSE""")
-
     user.paste("""}\nknitr::opts_chunk$set(echo = TRUE, warning = FALSE)\nlibrary(readr)\nlibrary(dplyr)\n```\n\n""")
     '\n```'
     user.paste("{}")

@@ -1,7 +1,12 @@
 app: vscode
 mode: command
+not mode: dictation
 
 -
+
+# used for cursorless chaining
+then: skip()
+
 hats permanently off: 
     user.change_setting("cursorless.showOnStart", 'false')
 
@@ -80,7 +85,7 @@ Compile typescript:
     user.paste("npx tsc; node dist/src/index.js")
     key(enter)
 Compile typescript tests:
-    user.Right("workbench.action.terminal.focus")
+    user.vscode("workbench.action.terminal.focus")
     sleep(.3)
     user.paste("npx tsc; node dist/src/tests.js")
     key(enter)
@@ -98,7 +103,7 @@ bar activity:
 toggle terminal: 
     user.vscode("workbench.action.terminal.toggleTerminal")
 
-talon pull repositories:
+pull user directory:
     user.vscode("workbench.action.terminal.focus")
     sleep(.1)
     user.paste("bash -c 'find . -name .git -print -execdir git pull \;'")

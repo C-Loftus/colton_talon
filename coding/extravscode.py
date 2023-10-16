@@ -1,7 +1,7 @@
 
 from typing import Union
 import json
-import re
+import re, os
 from os.path import expanduser
 from pathlib import Path
 
@@ -26,6 +26,27 @@ class Actions:
 
         actions.user.paste(cmd)
 
+    def compile_powerpoint(file_name: str):
+        """compiles to pptx"""
+        # get the filename without the .md extension
+        file_name = file_name[:-3]
+
+        #  -t is needed to specify the output format
+        cmd= f"pandoc {file_name}.md -t pptx -o {file_name}.pptx"
+        actions.user.paste(cmd)
+
+    def get_dirname():
+        """get current base name"""
+        actions.user.vscode("copyFilePath")
+        path= clip.get()
+        return os.path.dirname(path)
+    
+    def get_basename():
+        """get current base name"""
+        actions.user.vscode("copyFilePath")
+        path= clip.get()
+        return os.path.basename(path)
+
     def change_setting(setting_name: str, setting_value: Union[str, int, bool]):
         """
         Changes a VSCode setting by name
@@ -47,3 +68,4 @@ class Actions:
             rf'\1"{setting_name}": {json.dumps(setting_value)}\2', original_settings
         )
         original_settings_path.write_text(new_settings)
+
