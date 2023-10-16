@@ -108,12 +108,15 @@ def on_app_switch(application):
         return
     global STRECHLY_KILLED
 
-    if 'Visual Studio Code' in application.name: 
+    # actions.user.notify(f'{actions.code.language(), application.name}')
+    # The Linux name is just code but on windows it seems to be visual studio code
+    if 'Code' in application.name: 
         if actions.code.language() == "markdown":
             actions.user.enable_mixed_mode()
 
         else:
             actions.user.enable_command_mode()
+            # actions.user.notify(f'{actions.code.language()}')
         return    
     
     
