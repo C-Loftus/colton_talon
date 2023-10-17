@@ -17,3 +17,5 @@ model arbitrary:
     user.paste(result)
 
 
+^model help$:
+    user.help_list("user.promptNoArgument")

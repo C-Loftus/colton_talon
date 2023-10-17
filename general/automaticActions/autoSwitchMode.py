@@ -1,4 +1,4 @@
-from talon import actions,ui, scope, app, Context, Module
+from talon import actions,ui, scope, app, Context, Module, cron
 import time, os
 
 mod = Module()
@@ -8,7 +8,7 @@ ctx = Context()
 ctx.tags = ["user.auto_switch_mode"]
 tags: set[str] = set()
 
-STRECHLY_KILLED = False
+STRECHLY_RUNNING = True
 
 def add_tag(tag: str):
     tags.add(tag)
@@ -94,21 +94,28 @@ def on_title_switch(window):
         else:
             actions.user.enable_command_mode()
         return    
-        # match ui.active_window().:
-        #     case [*_, "holidays"]:
-        #         return True
-        #     case [*_, "workday"]:
-        #         return False
-        # https://stackoverflow.com/questions/74378015/python-match-case-part-of-a-string
+    
+    global STRECHLY_RUNNING
+    if not STRECHLY_RUNNING and os.name == 'nt':
+
+        def start_strechly():
+            actions.key(STRETCHLY := "super-9")
+            global STRECHLY_RUNNING
+            STRECHLY_RUNNING = True
+            actions.user.notify("started stretchy")
+
+        cron.after("5s", start_strechly)
+        
 
 #course grained updates according to application name and not specific titles
 def on_app_switch(application):
 
     if not do_update():
         return
-    global STRECHLY_KILLED
+
 
     # actions.user.notify(f'{actions.code.language(), application.name}')
+
     # The Linux name is just code but on windows it seems to be visual studio code
     if 'Code' in application.name: 
         if actions.code.language() == "markdown":
@@ -121,29 +128,30 @@ def on_app_switch(application):
     
     
     title =  str(ui.active_window().title).lower()
-    if "modern-calling" in title:
+    if "modern-calling" in title and os.name == 'nt':
+        global STRECHLY_RUNNING
         # kill the stretchy application
-        # try:
-        #     os.system("taskkill /f /im Stretchly.exe")
-        #     actions.user.notify("killed stretchy")
-        #     STRECHLY_KILLED = True
-        #     time.sleep(2)
-        # except:
-        #     actions.user.notify("could not kill stretchy")
-        #     STRECHLY_KILLED = False
+        try:
+            os.system("taskkill /f /im Stretchly.exe")
+            actions.user.notify("killed stretchy")
+            STRECHLY_RUNNING = False
+        except:
+            actions.user.notify("could not kill stretchy")
+            STRECHLY_RUNNING = True
 
         actions.user.enable_command_mode()
         return
-    # elif STRECHLY_KILLED == True:
-    #     actions.key(STRETCHLY := "super-9")
-    #     STRECHLY_KILLED = False
-
 
 
 def switcher():
+    match os.name:
+        case 'nt':
+            ui.register("app_activate", dismiss_popup)
+        case _: 
+            pass
+
     ui.register("app_activate", on_app_switch)
     ui.register("win_title", on_title_switch)
-    ui.register("app_activate", dismiss_popup)
 
 
 # we need to wait until it is loaded since otherwise it could fail when a mode is not defined during startup

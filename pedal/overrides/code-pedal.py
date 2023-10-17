@@ -60,7 +60,6 @@ class Actions:
             actions.user.vscode("workbench.action.terminal.toggleTerminal")
             return
 
-
     def center_up():
         """Center pedal"""
         if display:
@@ -75,9 +74,6 @@ class Actions:
                 actions.speech.disable()
 
 
-        
-
-
     def left_down():
         if not settings.get("user.oneActionPerPedalPress"):
             actions.user.mouse_scroll_down(pedal_scroll_amount)
@@ -90,3 +86,12 @@ class Actions:
         """called when the center pedal is held down"""
         ctx.tags = []
         ctx.settings['user.pedal_scroll_amount'] = 0.2
+
+
+    # def noise_trigger_hiss(active: bool):
+    #     """
+    #     Called when the user makes a 'hiss' noise. Listen to
+    #     https://noise.talonvoice.com/static/previews/hiss.mp3 for an
+    #     example.
+    #     """ 
+    #     actions.user.notify('test')
