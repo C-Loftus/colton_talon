@@ -25,7 +25,6 @@ windows:
 	scoop install imagemagick
 	scoop install ffmpeg
 	scoop install pandoc
-	scoop install screentogif
 	scoop install obs-studio
 
 

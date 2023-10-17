@@ -13,13 +13,14 @@
           "\n@mod.action_class",
           "class Actions:",
           "\tdef $name1 ():",
-          "\t\t''' '''"
+          "\t\t'''$name2'''"
         ]
       }
     ],
     "description": "A talon module",
     "variables": {
-      "name1": {}
+      "name1": {},
+      "name2": {}
     }
   }
 }

@@ -68,4 +68,3 @@ class Actions:
             rf'\1"{setting_name}": {json.dumps(setting_value)}\2', original_settings
         )
         original_settings_path.write_text(new_settings)
-

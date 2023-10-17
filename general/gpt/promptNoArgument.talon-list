@@ -8,6 +8,8 @@ create table: The following markdown text is raw data. The first row is the head
 
 fix grammar: Fix any mistakes or irregularities in grammar, spelling, or formatting. Use a professional business tone. 
 
+fixed grammar casually: The following text is the result of voice dictation and might have errors. Fix any mistakes or irregularities in grammar, spelling, or formatting. Keep a casual tone appropriate for a blog.  Do not change the original structure of the text.
+
 summarize this: Summarize this text into a format suitable for business notes. Use a professional business tone.
 
 bullet points: Using a professional business tone, convert the every paragraph into a one heading with series of bullet points underneath it. Each paragraph is separated by a new line. Separate paragraphs should not have combined bullet points. This should all be done in markdown syntax. If it is a small paragraph than you can just leave it as a heading and not add bullet points. Do not reduce content, only reduce things that would be redundant. These bullet points should be in a useful format for notes for those who want to quickly look at it. If there is a citation in the markdown original then keep the citation just at the top and not within every individual bullet point. 
