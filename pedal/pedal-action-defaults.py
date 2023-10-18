@@ -84,10 +84,12 @@ class Actions:
     
     def held_left():
         """ called when the left pedal is held down"""
-        if "user.tabsWithPedal" in list(ctx.tags):
+        if "user.controlTabsWithPedal" in list(ctx.tags):
             ctx.tags = []
         else:
             ctx.tags = ["user.controlTabsWithPedal"]
+        actions.user.notify('controlling tabs')
+
     def held_right():
         """ called when the right pedal is held down"""
     def held_center():

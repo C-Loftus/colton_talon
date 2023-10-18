@@ -1,1 +1,2 @@
 Spoken form, Regex
+subword, "([A-Z]?[a-z]+)|([A-Z]+(?![a-z]))"

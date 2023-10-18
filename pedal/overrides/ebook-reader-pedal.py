@@ -1,9 +1,8 @@
 from talon import Context, Module, actions
 
 ctx = Context()
-ctx.matches = """
-os: windows
-and app.exe: calibre-parallel.exe
+ctx.matches = r"""
+title: /e-book viewer/i
 """
 
 
