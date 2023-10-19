@@ -1,4 +1,5 @@
 from talon import Module, actions, scope, Context, settings
+from .pedal_types import AppToActivate
 
 mod = Module()
 ctx = Context()
@@ -24,13 +25,21 @@ mod.setting(
     desc="If specifically the center pedal is held down, only fire the action once.   In other words only trigger the pedal up action once.",
 )
 
-pedal_scroll_amount=mod.setting(
+mod.setting(
     "pedal_scroll_amount",
     type=float,
     default=0.1,
     desc="pedal_scroll_amount",
 )
-teamNotOutlook=False
+
+mod.setting(
+    'secondsToTriggerPedalHold',
+    type=int,
+    default=2,
+    desc='secondsToTriggerPedalHold',
+)
+
+holdTriggerApp = AppToActivate.MICROSOFT_TEAMS
 
 
 # default implementations to override contextually
@@ -97,13 +106,17 @@ class Actions:
         print("Held center")
         chrome = actions.user.get_running_app("Chrome")
         actions.user.switcher_focus_app(chrome)
-        global teamNotOutlook
-        if teamNotOutlook:
-            actions.key("ctrl-shift-6")
-        else:
-            actions.key("ctrl-shift-7")
-        teamNotOutlook = not teamNotOutlook
 
+        global holdTriggerApp
+        match holdTriggerApp: 
+            case AppToActivate.MICROSOFT_TEAMS:
+                actions.key("ctrl-shift-6")
+                holdTriggerApp = AppToActivate.MICROSOFT_OUTLOOK
+            case AppToActivate.MICROSOFT_OUTLOOK:
+                actions.key("ctrl-shift-7")
+                holdTriggerApp = AppToActivate.MICROSOFT_TEAMS
+            case _:
+                raise ValueError(f"AppToActivate is of type {type(holdTriggerApp)} but must be within {AppToActivate}")
         
     def toggle_tab_mode():
         """called when the center pedal is held down"""

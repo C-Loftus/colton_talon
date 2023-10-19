@@ -1,37 +1,32 @@
-from talon import Module, actions, cron, scope, Context, settings
-import time
-from typing import TypedDict
+from talon import Module, actions, cron, settings
 from .pedal_types import PedalStateMap
 
 mod = Module()
-ctx = Context()
 
 map = PedalStateMap(bool)
 held_seconds = PedalStateMap(float)
-# Trigger a hold if a key has been held for SEC_TO_TRIGGER seconds
-# check if this threshold is met every SEC_TO_CHECK seconds
-SEC_TO_TRIGGER = 2
 
 
-def on_interval() -> None:
+def handle_down_pedal() -> None:
 
-    # if map contains at least 2 true values, then we have a double keypress
+    # Double presses are always triggered and thus don't need to be checked for
     if map.multiple_held():
 
-        if map["left"] and map["right"]:
-            
-            actions.user.left_right_down()
-        elif map["left"] and map["center"]:
-            actions.user.left_center_down()
-        elif map["center"] and map["right"]:
-            actions.user.center_right_down()
+        match sorted(map.held_pedals()):
+            case ["left", "right"]:
+                actions.user.left_right_down()
+            case ["center", "right"]:
+                actions.user.center_right_down()
+            case ["center", "left"]:
+                actions.user.left_center_down()
+            case ["center", "left", "right"]:
+                actions.user.left_center_right_down()
     
         map.reset()
         return  
 
-    # with synchronous code we only call functions on the pedal up
-    # pedal down functions  can be asynchronous and held down to repeat,
-    #  which is impossible if we have to force synchronous
+    # Only trigger the up action once if the setting is enabled
+    # So we should return and skip the down action if the setting is enabled
     if settings.get("user.oneActionPerPedalPress"):
         return
 
@@ -49,54 +44,60 @@ class Actions:
 
     def pedal_down(key: str):
         """Map the key name to down"""
+
+        if key not in map.pedals:
+            raise KeyError(f'Pedal must be in {map.pedals }')
+
         map[key]=True
 
 
     def pedal_up(key: str):
         """Pedal up"""
-        # If you have a synchronous double keypress that has already reset the map, then we don't want to do anything.
-        # this prevents single actions mistakenly firing after the double action
+
+        if key not in map.pedals:
+            raise KeyError(f'Pedal must be in {map.pedals }')
+
+        # If you have a double keypress that has already reset the map, then 
+        # we don't want to do anything.
+        # This prevents single actions mistakenly firing after the double action
         if map[key] == False or held_seconds.wasHeld == True:
             held_seconds.wasHeld = False
+            # If it was held we don't want to call the up function as well
             return
         else: 
             map[key]=False
 
 
-        # if we have a  discrete action that needs to block (wait for return) and can't be asynchronous, 
-        # then we can't use the cron job for quick calls in succession and as a result we have to do 
-        # it synchronously on the pedal raise to only call it once
-        if settings.get("user.oneActionPerPedalPress") == True:
-            match key:
-                case "left":
-                    actions.user.left_up( )
-                case "right":
-                    actions.user.right_up( )
-                case "center":
-                    actions.user.center_up()
+        # If we are doing more than one action on a pedal press
+        # then we don't want to call the up function as well
+        if settings.get("user.oneActionPerPedalPress") == False:
+            
+            if settings.get("user.oneActionOnCenterPress") == True and key == "center":
+                actions.user.center_up()
+            return
 
-        elif settings.get("user.oneActionOnCenterPress") == True and key == "center":
-            actions.user.center_up()
+        match key:
+            case "left":
+                actions.user.left_up( )
+            case "right":
+                actions.user.right_up( )
+            case "center":
+                actions.user.center_up()
 
 
-
-def pedal_held_down() -> None:
+def handle_held_pedal() -> None:
 
     for pedalDirection in map:
-        isPressed = map[pedalDirection]
-        if isPressed == True:
+        isPressed = (map[pedalDirection] == True)
+        if isPressed:
             held_seconds[pedalDirection] += CHECK_INTERVAL
         else:
             held_seconds[pedalDirection] = 0
-    
-        if held_seconds[pedalDirection] == SEC_TO_TRIGGER:
-            # We reset the hold time so we can potentially trigger the action again after the trigger time passes once more.
-            
-            held_seconds.reset()
 
-            # we only want to trigger on synchronous actions since if it was asynchronous We might trigger it by mistake, 
-            # for instance if you were scrolling down a lot and end up holding the pedal for 5 seconds
+        if held_seconds[pedalDirection] == settings.get("user.secondsToTriggerPedalHold"):
 
+            # only trigger on oneAction pedals since we don't want a repeated call to also 
+            # trigger a hold (ie scrolling down should not also trigger a hold)
             if settings.get("user.oneActionOnCenterPress") and pedalDirection == "center":
                 actions.user.held_center()
                 
@@ -110,6 +111,9 @@ def pedal_held_down() -> None:
                         actions.user.held_center()
                     case "left":
                         actions.user.held_left()
+
+            # if no hold was triggered, just return
+            # and don't do anything with the map
             else: 
                 return
             
@@ -118,5 +122,5 @@ def pedal_held_down() -> None:
             held_seconds.reset()
             held_seconds.wasHeld = True
 
-cron.interval("16ms", on_interval)
-cron.interval(cron.seconds_to_timespec(CHECK_INTERVAL := .5), pedal_held_down)
+cron.interval("16ms", handle_down_pedal)
+cron.interval(cron.seconds_to_timespec(CHECK_INTERVAL := .5), handle_held_pedal)

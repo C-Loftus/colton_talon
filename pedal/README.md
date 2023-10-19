@@ -10,11 +10,16 @@ This script works by doing the following
 ## Repeated or Single Function Calls
 
 - For certain functions we only want to trigger them once every time we press the pedal. ( This for instance could be an API call or some sort of remote procedure call) `user.oneActionPerPedalPress` specifies contexts with these functions. Otherwise, by default all functions can be automatically repeated and you can hold the pedal down to trigger multiple actions in quick succession
-  - For instance, scrolling down a page can be done  by holding the pedal down
-  -  However, if we are communicating with Visual Studio Code through  a `user.vscode` command,  we should block until we get a response.  In this context it would be appropriate to have only one action per pedal press.
--  Functions that should only be triggered once should be placed within a pedal up action.  This is since we know that a pedal up action will only be triggered once per pedal press. 
--   On the other hand, functions that should be triggered multiple times should be placed within a pedal down action.  This is since Talon will repeatedly trigger the pedal down action while the pedal is held down, even for just a short period of time.
+  - For instance, scrolling down a page can be done by holding the pedal down
+  - However, if we are doing a Visual Studio Code RPC through a `user.vscode` command, we should block until we get a response. In this context it would be appropriate to have only one action per pedal press.
+- Functions that should only be triggered once should be placed within a pedal up action. This is since we know that a pedal up action will only be triggered once per pedal press.
+- On the other hand, functions that should be triggered multiple times should be placed within a pedal down action. This is since Talon will repeatedly trigger the pedal down action while the pedal is held down, even for just a short period of time.
 
+## Holds
+
+- Holds are a specific type of action that is only triggered after the pedal has been held down first certain amount of seconds.
+- Holds can only be triggered in contexts where `user.oneActionPerPedalPress` is True, otherwise, the action will just repeat and the hold won't be triggered.
+  - So for instance, scrolling with the pedal has `user.oneActionPerPedalPress` set to False, so we can scroll down a page repeatedly without triggering a hold.
 
 ## Overrides
 

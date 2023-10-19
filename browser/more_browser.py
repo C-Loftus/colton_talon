@@ -3,6 +3,7 @@ from talon import Module, Context, actions, clip
 import webbrowser
 
 mod = Module()
+mod.list("notionDatabases", "notion databases that are available to save to")
 
 
 @mod.action_class

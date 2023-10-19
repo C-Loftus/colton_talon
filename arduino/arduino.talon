@@ -9,7 +9,6 @@
 # Thus we need a mutually exclusive tag for the proper override
 
 tag: user.asArduino
-
 -
 
 gamepad(west):              
@@ -17,9 +16,10 @@ gamepad(west):
 gamepad(east):              
     print("east/B")
 gamepad(south):             
+    user.toggleFluentSearchTags()
     key(ctrl-alt-;)
 gamepad(north):             
-    print("north/Y")
+    user.switch_between_code_and_chrome()   
 
 toggle arduino as pedal:
     user.toggleAsPedal()

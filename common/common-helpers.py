@@ -2,7 +2,7 @@ import contextlib
 from threading import Lock
 import os, pathlib
 from typing import ContextManager, Generic, TypeVar
-from talon import Module, actions, Context, scope, clip
+from talon import Module, actions, Context, scope, clip, ui
 
 mod = Module()
 ctx = Context()
@@ -90,3 +90,14 @@ class Actions:
         vscode = actions.user.get_running_app("Code")
         actions.user.switcher_focus_app(vscode)
 
+    def switch_between_code_and_chrome():
+        """switch between code and chrome"""
+        active_app = ui.active_app().name       
+        if "Code" in active_app:
+            actions.user.focus_chrome()
+        elif "Chrome" in active_app:
+            actions.user.focus_vscode()
+        else:
+            actions.user.focus_chrome()
+        actions.sleep("100ms")
+        # actions.key("escape")

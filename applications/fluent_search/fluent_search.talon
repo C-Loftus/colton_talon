@@ -8,8 +8,8 @@ os: windows
 
 # -- Homerow
 # Search in-app using Screen hotkey (displays labels; frontmost app)
-# ^ax$: 
-#     key(alt-;)
+^ax$: 
+    key(alt-;)
 
 # Search using Screen hotkey (displays labels; screen 1 only)
 ^ax screen$: key(ctrl-alt-;)

@@ -14,5 +14,4 @@ remove highlighting:
     key(n)
 clear formatting: key(ctrl-space)
 
-key(ctrl-shift-alt-j):
-    print("test")
+format strike through: key(ctrl-shift-x)

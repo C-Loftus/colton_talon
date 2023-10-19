@@ -53,3 +53,24 @@ class PedalStateMap(Generic[T := TypeVar("T", bool, float)] ):
 
     def multiple_held(self):
         return sum([getattr(self, key) for key in self.pedals]) >= 2
+
+    def held_pedals(self) -> list[str]:
+
+        def get_pedals() -> list[str]:
+            match MAP_TYPE := type(getattr(self, self.pedals[0])): 
+                case bool():
+                    return [key for key in self.pedals if getattr(self, key)]
+                case float():
+                    return [key for key in self.pedals if getattr(self, key) > 0]
+                case _:
+                    raise ValueError(f"PedalStateMap is of type {MAP_TYPE} but must be within {T.__constraints__}")    
+            
+        return sorted(get_pedals())
+
+import enum
+
+class AppToActivate(enum.Enum):
+    MICROSOFT_TEAMS = "Microsoft Teams"
+    MICROSOFT_OUTLOOK = "Microsoft Outlook"
+
+        

@@ -1,23 +1,34 @@
+
+# specify the Talon user directory depending on operating system
+ifeq ($(OS),Windows_NT)
+	TALON_USER_DIR = $(USERPROFILE)/AppData/Roaming/talon/user
+else
+	TALON_USER_DIR =  ~/.talon/user
+endif
+
+
 setup: 
 	curl "https://talonvoice.com/dl/latest/talon-linux.tar.xz" --output talon.tar.xz
 	tar -vxf talon.tar.xz
 	rm -f talon.tar.xz
 	mv talon/ ~/talon
-	mkdir -p ~/.talon/user   
+	mkdir -p $(TALON_USER_DIR)   
 
 clone:
-	git clone https://github.com/C-Loftus/knausj_talon ~/.talon/user/knausj_talon
-	git clone https://github.com/C-Loftus/my_talon_scripts ~/.talon/user/my_talon_scripts
-	git clone https://github.com/paul-schaaf/talon-filetree-commands/
-	git clone "https://github.com/wolfmanstout/talon-gaze-ocr" ~/.talon/user/talon-gaze-ocr
-	# git clone https://github.com/tararoys/dense-mouse-grid ~/.talon/user/dense-mouse-grid
-	git clone "https://github.com/C-Loftus/private-talon" ~/.talon/user/private-talon
+	git clone https://github.com/C-Loftus/knausj_talon $(TALON_USER_DIR)/knausj_talon
+	git clone https://github.com/C-Loftus/my_talon_scripts $(TALON_USER_DIR)/my_talon_scripts
+	git clone https://github.com/paul-schaaf/talon-filetree-commands/ $(TALON_USER_DIR)/filetree
+	git clone "https://github.com/wolfmanstout/talon-gaze-ocr" $(TALON_USER_DIR)/gaze-ocr
+	git clone "https://github.com/C-Loftus/private-talon" $(TALON_USER_DIR)/private-talon
 
+	# git clone https://github.com/tararoys/dense-mouse-grid $(TALON_USER_DIR)/dense-mouse-grid
+	
 fetch: pull
-	cd ~/.talon/user/knausj_talon; git fetch upstream main
+	cd $(TALON_USER_DIR)/knausj_talon; git fetch upstream main
+
+# git -C ../private-talon pull origin master;
 pull:
-	bash -c 'find ../. -name .git -print -execdir git pull \;'
-	# find ~/.talon/user -name .git -print -execdir git pull --ff-only \;
+	bash -c 'find ../. -type d -name '*private*' -prune -o -name .git -print -execdir git pull --ff-only \;'
 
 windows:
 	# mimic xbox controller to get rid of direct input and get xinput for talon. Talon uses gilrs and needs xinput
