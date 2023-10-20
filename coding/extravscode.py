@@ -15,16 +15,22 @@ class Actions:
 
     def remove_spaces(string: str): 
         """"Removes Spaces from String"""
-        if string.endswith("\n"):
-            print("YES")
-
         return string.replace(" ", "")
     
-    def compile_markdown():
+    def compile_all_markdown():
         """Compiles all markdown files in the current directory to docx"""
         cmd = r"Get-ChildItem -Filter *.md | ForEach-Object { $outputFile = [System.IO.Path]::ChangeExtension($_.FullName, '.docx'); pandoc -t latex+raw_tex $_.FullName | pandoc -f latex --data-dir=docs/rendering/ -o $outputFile }"
 
         actions.user.paste(cmd)
+
+    def compile_word(file_name: str):
+        """compiles to docx"""
+        # get the filename without the .md extension
+        file_name = file_name[:-3]
+
+        #  -t is needed to specify the output format
+        cmd= f"pandoc {file_name}.md -t docx -o {file_name}.docx"
+        actions.user.paste(cmd)  
 
     def compile_powerpoint(file_name: str):
         """compiles to pptx"""

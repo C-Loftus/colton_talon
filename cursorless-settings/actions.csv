@@ -20,7 +20,7 @@ extract, extractVariable
 float, insertEmptyLineAfter
 fold, foldRegion
 follow, followLink
-format, applyFormatter
+form, applyFormatter
 give, deselect
 highlight, highlight
 hover, showHover

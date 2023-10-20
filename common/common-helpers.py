@@ -1,8 +1,5 @@
-import contextlib
-from threading import Lock
-import os, pathlib
-from typing import ContextManager, Generic, TypeVar
-from talon import Module, actions, Context, scope, clip, ui
+from typing import ContextManager
+from talon import Module, actions, Context, scope, clip, ui, cron
 
 mod = Module()
 ctx = Context()
@@ -108,3 +105,17 @@ class Actions:
         actions.sleep(6)
         actions.user.screenshot_window_clipboard()
         actions.key("f11")
+
+    def return_to_current_app_after(seconds: int): 
+        """Return to the current app after a certain ones seconds"""
+        active_app = ui.active_app().name
+        saved_application= actions.user.get_running_app(active_app)
+        
+        def return_to_app():
+            try:
+                actions.user.switcher_focus_app(saved_application)
+            except:
+                actions.user.notify("return to app failed")
+                print(f'Could not return to {saved_application}')
+
+        cron.after(cron.seconds_to_timespec(seconds) , return_to_app)
