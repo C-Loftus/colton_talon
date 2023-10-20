@@ -2,9 +2,16 @@ from talon import Context, Module, actions, settings
 import time
 
 ctx = Context()
-ctx.matches = """title: /pptx/
+ctx.matches = r"""app: powerpointInBrowser
+app: /Microsoft PowerPoint/i
 """
 # title: /PowerPoint/
+
+mod = Module()
+mod.apps.powerpointInBrowser = """
+    title: /pptx/
+    tag: browser
+"""
 
 ctx.settings["user.oneActionPerPedalPress"] = False
 ctx.settings["user.oneActionOnCenterPress"] = False

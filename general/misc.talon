@@ -12,7 +12,7 @@ queer line: edit.delete_line()
 inter:
     key(enter)
 
-fly:
+(fly | why):
     key(end)
 
 bullet:
@@ -45,13 +45,29 @@ colgap:
 spam:
     ", "
 
-scrape:
+(scrape | scrip):
     edit.extend_word_left()
     edit.delete()
 
 
 ^and$:
     key(end)
+
+bring screenshot:
+    user.grab_browser_window_slow()
+    sleep(0.5)
+    user.focus_vscode()
+    sleep(0.5)
+    key(end)
+    key(end)
+    key(enter)
+    key(ctrl-v)
+    key(end)
+    sleep(0.5)
+    key(enter)
+    key(end)
+    user.focus_chrome()
+    
 
 cycle results:
     #we don't have loops so we just have to repeat. easier than using pythonfor this small example

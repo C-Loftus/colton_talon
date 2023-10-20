@@ -1,11 +1,33 @@
 # My Talon Pedal
 
-This script works by doing the following
+## How to Use This Code Yourself
 
-- If a pedal is pushed down, the a pedal map gets ,updated with a 'True' Boolean value.
+- By default the pedal code assumes your hardware is pressing the following keys: `numlock` `keypad_divide` `keypad_multiply` `keypad_minus` (These are the keys within the `main-pedal.talon` file)
+  - If your pedal can't be remapped in hardware, you can use software to remap the keys
+    - Check out [https://talon.wiki/hardware/#custom-gamepads](https://talon.wiki/hardware/#custom-gamepads) for more information on ways to remap at the software level
+  - If that is not possible, you can just change the keys in the `main-pedal.talon` file to whatever keys you want
+    - Make sure they are keys that you don't use often, since they will be consumed by Talon and not sent to other OS applications
+- Clone this repo into your Talon user directory
+  - If you have the pedal configuration listed above, it should work out of the box
+
+## Custom Behavior and Internals
+
+**Please read this documentation before customizing**
+
+This code works by doing the following:
+
+- If a pedal is pushed down, the internal pedal map gets updated
 - The dictionary is then read using a cron job.
-- The corresponding function is then called based on the dictionary state.
-  - i.e. if the left and center pedal are held at same time, it will call `actions.user.left_center_down()`
+- The corresponding function is then called based on the map state.
+  - i.e. if the left and center pedal are pressed at same time, it will call `actions.user.left_center_down()`
+
+## Overrides and Actions
+
+- Each file in the `overrides` directory defines contextually scoped pedal behavior
+- Define a function in a file to override the base `pedal-action-defaults.py`
+- You can also contextually set `user.pedal_scroll_amount` to contextually set how much the pedal will scroll up/down every second it is held down
+- Copy the code in `.template.py` and change the functions you want to create new pedal scopes
+  - `.template.py` is a template and not actually used by Talon since it is prefixed with a `.`
 
 ## Repeated or Single Function Calls
 
@@ -17,13 +39,18 @@ This script works by doing the following
 
 ## Holds
 
-- Holds are a specific type of action that is only triggered after the pedal has been held down first certain amount of seconds.
+- Holds are a specific type of action that is only triggered after the pedal has been held down for a certain amount of seconds.
+  - By default, 2 seconds is the hold time.
 - Holds can only be triggered in contexts where `user.oneActionPerPedalPress` is True, otherwise, the action will just repeat and the hold won't be triggered.
   - So for instance, scrolling with the pedal has `user.oneActionPerPedalPress` set to False, so we can scroll down a page repeatedly without triggering a hold.
 
-## Overrides
+## Custom Hardware
 
-- Each file in this directory defines contextually scoped pedal behavior
-- Define a function in a file to override the base `pedal-action-defaults.py`
-- You can also contextually set `user.pedal_scroll_amount` to contextually set how much the pedal will scroll up/down every second it is held down
-- Copy the code in `.template.py` and change the functions you want to create new pedal scopes
+- If you have an arduino and want to make a custom pedal that can use this repo's code, you can use the `fsr.ino` file in the `arduino_custom_pedal` directory
+  - That arduino code is a fork of [https://github.com/teejusb/fsr/blob/master/fsr.ino](https://github.com/teejusb/fsr/blob/master/fsr.ino)-
+  - For info on creating a custom pedal with Arduino see [https://www.arduino.cc/reference/en/language/functions/usb/keyboard/keyboardmodifiers/](https://www.arduino.cc/reference/en/language/functions/usb/keyboard/keyboardmodifiers/)
+    - Key codes are as follows:
+      - KEY_NUM_LOCK 0xDB 219
+      - KEY_KP_SLASH: 0xDC 220
+      - KEY_KP_ASTERISK: 0xDD 221
+      - KEY_KP_MINUS 0xDE 222

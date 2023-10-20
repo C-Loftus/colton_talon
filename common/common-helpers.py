@@ -101,3 +101,10 @@ class Actions:
             actions.user.focus_chrome()
         actions.sleep("100ms")
         # actions.key("escape")
+
+    def grab_browser_window_slow():
+        """grab browser window and wait for the pop up to disappear after going full screen"""
+        actions.key("f11")
+        actions.sleep(6)
+        actions.user.screenshot_window_clipboard()
+        actions.key("f11")

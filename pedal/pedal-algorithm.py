@@ -1,27 +1,34 @@
-from talon import Module, actions, cron, settings
+from talon import Module, actions, cron, settings, Context
 from .pedal_types import PedalStateMap
 
 mod = Module()
+ctx = Context()
+ctx.tags = []
 
 map = PedalStateMap(bool)
 held_seconds = PedalStateMap(float)
 
+
+mod.tag("disablePedal", desc="Tag to disable pedal presses from doing anything")
 
 def handle_down_pedal() -> None:
 
     # Double presses are always triggered and thus don't need to be checked for
     if map.multiple_held():
 
-        match sorted(map.held_pedals()):
-            case ["left", "right"]:
-                actions.user.left_right_down()
-            case ["center", "right"]:
-                actions.user.center_right_down()
-            case ["center", "left"]:
-                actions.user.left_center_down()
-            case ["center", "left", "right"]:
-                actions.user.left_center_right_down()
-    
+        pedals = map.held_pedals()
+
+        if "east" in pedals and "west" in pedals:
+            actions.user.left_right_down()
+        elif "east" in pedals and "north" in pedals:
+            actions.user.center_right_down()
+        elif "north" in pedals and "west" in pedals:
+            actions.user.left_center_down()
+        elif "east" in pedals and "north" in pedals \
+            and "west" in pedals:
+            actions.user.left_center_right_down()
+        # TODO south
+
         map.reset()
         return  
 
@@ -30,23 +37,35 @@ def handle_down_pedal() -> None:
     if settings.get("user.oneActionPerPedalPress"):
         return
 
-    if map["center"] and not settings.get("user.oneActionOnCenterPress"):
+    if map["north"] and not settings.get("user.oneActionOnCenterPress"):
         actions.user.center_down()
-    elif map["left"]:
+    elif map["west"]:
         actions.user.left_down()
-    elif map["right"]:
+    elif map["east"]:
         actions.user.right_down()
-
+    elif map["south"]:
+        actions.user.south_down()
 
 
 @mod.action_class
 class Actions:
+
+    def disable_pedal_toggle():
+        """Toggle the disablePedal tag"""
+        if "user.disablePedal" in ctx.tags:
+            ctx.tags = []
+        else:
+            ctx.tags = ["user.disablePedal"]
+
 
     def pedal_down(key: str):
         """Map the key name to down"""
 
         if key not in map.pedals:
             raise KeyError(f'Pedal must be in {map.pedals }')
+
+        if "user.disablePedal" in ctx.tags:
+            return
 
         map[key]=True
 
@@ -72,17 +91,19 @@ class Actions:
         # then we don't want to call the up function as well
         if settings.get("user.oneActionPerPedalPress") == False:
             
-            if settings.get("user.oneActionOnCenterPress") == True and key == "center":
+            if settings.get("user.oneActionOnCenterPress") == True and key == "north":
                 actions.user.center_up()
             return
 
         match key:
-            case "left":
+            case "west":
                 actions.user.left_up( )
-            case "right":
+            case "east":
                 actions.user.right_up( )
-            case "center":
+            case "north":
                 actions.user.center_up()
+            case "south":
+                actions.user.south_up()
 
 
 def handle_held_pedal() -> None:
@@ -98,19 +119,21 @@ def handle_held_pedal() -> None:
 
             # only trigger on oneAction pedals since we don't want a repeated call to also 
             # trigger a hold (ie scrolling down should not also trigger a hold)
-            if settings.get("user.oneActionOnCenterPress") and pedalDirection == "center":
+            if settings.get("user.oneActionOnCenterPress") and pedalDirection == "north":
                 actions.user.held_center()
                 
             elif settings.get("user.oneActionPerPedalPress"):
                 print(f'{pedalDirection} hold triggered')
 
                 match pedalDirection:
-                    case "right":
+                    case "east":
                         actions.user.held_right()
-                    case "center":
+                    case "north":
                         actions.user.held_center()
-                    case "left":
+                    case "west":
                         actions.user.held_left()
+                    case "south":
+                        actions.user.held_south()
 
             # if no hold was triggered, just return
             # and don't do anything with the map

@@ -3,7 +3,7 @@ from typing import TypeVar, Generic
 
 class PedalStateMap(Generic[T := TypeVar("T", bool, float)] ):
 
-    pedals = ["left", "right", "center"]
+    pedals = ["north", "south", "east", "west"]
 
     wasHeld: bool
 
@@ -57,13 +57,13 @@ class PedalStateMap(Generic[T := TypeVar("T", bool, float)] ):
     def held_pedals(self) -> list[str]:
 
         def get_pedals() -> list[str]:
-            match MAP_TYPE := type(getattr(self, self.pedals[0])): 
+            match MAP_TYPE := (getattr(self, self.pedals[0])): 
                 case bool():
                     return [key for key in self.pedals if getattr(self, key)]
                 case float():
                     return [key for key in self.pedals if getattr(self, key) > 0]
                 case _:
-                    raise ValueError(f"PedalStateMap is of type {MAP_TYPE} but must be within {T.__constraints__}")    
+                    raise ValueError(f"Map is of type {MAP_TYPE} but must be within {T.__constraints__}")    
             
         return sorted(get_pedals())
 
