@@ -13,13 +13,13 @@ class Actions:
 
 
 
-    def left_up():
+    def west_up():
         actions.key('up')
 
 
-    def right_up():
+    def east_up():
         actions.key(GO_UP_ENTIRE_SPLIT_PAGE_LAYOUT := 'down')
 
-    # def center_up():
+    # def north_up():
     #     actions.key("space")
         

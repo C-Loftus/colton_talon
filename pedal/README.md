@@ -8,6 +8,7 @@
   - If that is not possible, you can just change the keys in the `main-pedal.talon` file to whatever keys you want
     - Make sure they are keys that you don't use often, since they will be consumed by Talon and not sent to other OS applications
 - Clone this repo into your Talon user directory
+  - You can download the code from just this folder by using [https://download-directory.github.io/](https://download-directory.github.io/)
   - If you have the pedal configuration listed above, it should work out of the box
 
 ## Custom Behavior and Internals

@@ -27,18 +27,18 @@ ctx.settings["user.oneActionPerPedalPress"] = False
 @ctx.action_class("user")
 class Actions:
 
-    # def left_right_down():
+    # def east_west_down():
     #     """Left and Right pedal"""
 
-    # def left_up():
+    # def west_up():
     #     """left pedal"""
 
-    # def left_down():
+    # def west_down():
     #     """left pedal down"""   
 
-    # def center_down():
+    # defnorth_down():
 
-    def center_up():
+    def north_up():
         """
         Switch between chrome and vscode with a
         pedal press if you are doing web dev
@@ -52,10 +52,10 @@ class Actions:
             actions.user.switcher_focus("Visual Studio Code")
     
 
-    # def right_down():
+    # def east_down():
     #     """right pedal down"""
 
-    # def center_up():
+    # def north_up():
     #     """center pedal"""
 
         

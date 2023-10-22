@@ -19,14 +19,14 @@ def handle_down_pedal() -> None:
         pedals = map.held_pedals()
 
         if "east" in pedals and "west" in pedals:
-            actions.user.left_right_down()
+            actions.user.east_west_down()
         elif "east" in pedals and "north" in pedals:
-            actions.user.center_right_down()
+            actions.user.east_north_down()
         elif "north" in pedals and "west" in pedals:
-            actions.user.left_center_down()
+            actions.user.north_west_down()
         elif "east" in pedals and "north" in pedals \
             and "west" in pedals:
-            actions.user.left_center_right_down()
+            actions.user.east_north_west_down()
         # TODO south
 
         map.reset()
@@ -38,11 +38,11 @@ def handle_down_pedal() -> None:
         return
 
     if map["north"] and not settings.get("user.oneActionOnCenterPress"):
-        actions.user.center_down()
+        actions.user.north_down()
     elif map["west"]:
-        actions.user.left_down()
+        actions.user.west_down()
     elif map["east"]:
-        actions.user.right_down()
+        actions.user.east_down()
     elif map["south"]:
         actions.user.south_down()
 
@@ -92,16 +92,16 @@ class Actions:
         if settings.get("user.oneActionPerPedalPress") == False:
             
             if settings.get("user.oneActionOnCenterPress") == True and key == "north":
-                actions.user.center_up()
+                actions.user.north_up()
             return
 
         match key:
             case "west":
-                actions.user.left_up( )
+                actions.user.west_up( )
             case "east":
-                actions.user.right_up( )
+                actions.user.east_up( )
             case "north":
-                actions.user.center_up()
+                actions.user.north_up()
             case "south":
                 actions.user.south_up()
 
@@ -120,18 +120,18 @@ def handle_held_pedal() -> None:
             # only trigger on oneAction pedals since we don't want a repeated call to also 
             # trigger a hold (ie scrolling down should not also trigger a hold)
             if settings.get("user.oneActionOnCenterPress") and pedalDirection == "north":
-                actions.user.held_center()
+                actions.user.north_center()
                 
             elif settings.get("user.oneActionPerPedalPress"):
                 print(f'{pedalDirection} hold triggered')
 
                 match pedalDirection:
-                    case "east":
-                        actions.user.held_right()
-                    case "north":
-                        actions.user.held_center()
                     case "west":
-                        actions.user.held_left()
+                        actions.user.held_west( )
+                    case "east":
+                        actions.user.held_east( )
+                    case "north":
+                        actions.user.held_north()
                     case "south":
                         actions.user.held_south()
 

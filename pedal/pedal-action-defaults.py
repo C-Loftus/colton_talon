@@ -47,16 +47,16 @@ holdTriggerApp = AppToActivate.MICROSOFT_TEAMS
 class Actions:
 
 
-    def left_center_right_down():
+    def east_north_west_down():
         """Left, Center and Right pedal"""
 
-    def center_right_down():
+    def center_east_down():
         """Center and Right pedal"""
         ctx.settings['user.pedal_scroll_amount'] = 0.2
         print("Speed reset to 0.2")
 
 
-    def left_right_down():
+    def east_west_down():
         """Left and Right pedal"""
         ctx.settings['user.pedal_scroll_amount'] = settings.get("user.pedal_scroll_amount")
         ctx.settings['user.pedal_scroll_amount']+=0.2
@@ -66,14 +66,14 @@ class Actions:
         """Left and Center pedal"""
 
 
-    def left_down():
+    def west_down():
         """Left pedal"""
         actions.user.mouse_scroll_down(settings.get("user.pedal_scroll_amount"))
 
-    def right_down():
+    def east_down():
         """Right pedal"""
         actions.user.mouse_scroll_up(settings.get("user.pedal_scroll_amount"))
-    def center_down():
+    def north_down():
         """Center pedal"""
         # modes = scope.get("mode")
         # if "sleep" in modes:
@@ -83,15 +83,15 @@ class Actions:
         #     actions.speech.disable()
         # time.sleep(2)
 
-    def left_up():
+    def west_up():
         """Left pedal up"""
-    def right_up():
+    def east_up():
         """Right pedal up"""
-    def center_up():
+    def north_up():
         """Center pedal up"""
         actions.user.toggle_sleep_mode()
     
-    def held_left():
+    def held_west():
         """ called when the left pedal is held down"""
         if "user.controlTabsWithPedal" in list(ctx.tags):
             ctx.tags = []
@@ -99,9 +99,9 @@ class Actions:
             ctx.tags = ["user.controlTabsWithPedal"]
         actions.user.notify('controlling tabs')
 
-    def held_right():
+    def held_east():
         """ called when the right pedal is held down"""
-    def held_center():
+    def held_north():
         """ called when the right pedal is held down"""
         print("Held center")
         chrome = actions.user.get_running_app("Chrome")

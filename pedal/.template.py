@@ -11,36 +11,36 @@ ctx.settings["user.oneActionPerPedalPress"] = False
 @ctx.action_class("user")
 class Actions:
 
-    def left_right_down():
+    def east_west_down():
         """Left and Right pedal"""
 
     def left_center_down():
         """Left and Center pedal"""
 
-    def center_right_down():
+    def center_east_down():
         """Center and Right pedal"""
 
-    def left_center_right_down():
+    def east_north_west_down():
         """Left, Center and Right pedal"""
 
-    def left_up():
+    def west_up():
         """left pedal"""
 
-    def left_down():
+    def west_down():
         """left pedal down"""
 
-    def right_up():
+    def east_up():
         """right pedal"""
-    def right_down():
+    def east_down():
         """right pedal down"""
 
-    def center_up():
+    def north_up():
         """center pedal"""
 
-    def held_center():
+    def held_north():
         """called when the center pedal is held down"""
-    def held_left():
+    def held_west():
         """ called when the left pedal is held down"""
-    def held_right():
+    def held_east():
         """ called when the right pedal is held down"""
         

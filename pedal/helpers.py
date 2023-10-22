@@ -11,16 +11,16 @@ mod = Module()
 
 
 functions = [
-    # actions.user.left_center_right_down.__call__,
-    "user.center_right_down",
-    "user.left_right_down",
+    # actions.user.east_north_west_down.__call__,
+    "user.center_east_down",
+    "user.east_west_down",
     "user.left_center_down",
-    "user.left_down",
-    "user.right_down",
+    "user.west_down",
+    "user.east_down",
     "user.center_down",
-    "user.left_up",
-    "user.right_up",
-    "user.center_up"
+    "user.west_up",
+    "user.east_up",
+    "user.north_up"
 ]
 
 @mod.action_class

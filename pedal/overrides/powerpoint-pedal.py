@@ -21,31 +21,25 @@ ctx.settings["user.oneActionOnCenterPress"] = False
 
 @ctx.action_class("user")
 class Actions:
-    def left_down():
+    def west_down():
         """Left pedal"""
         # un focus any edited text
         actions.key("escape:2")
         actions.key("down")
         time.sleep(0.5)
 
-    def right_down():
+    def east_down():
         """Right pedal"""
         # un focus any edited text
         actions.key("escape:2")
         actions.key("up")
         time.sleep(0.5)
 
-    def center_down():
+    def north_down():
         """center pedal"""
         actions.key("tab")
         time.sleep(0.5)
 
 
-    def left_right_down():
-        """Left and Right pedal"""
-
-
-    def center_up():
-        """center pedal"""
 
         

@@ -30,21 +30,21 @@ ctx.settings["user.oneActionPerPedalPress"] = True
 @ctx.action_class("user")
 class CallActions:
 
-    def left_up():
+    def west_up():
         # os.system("amixer -D pulse sset Master 5%- > /dev/null")
         actions.key("voldown")
 
-    def right_up():
+    def east_up():
         actions.key("volup")
 
 @teams_context.action_class("user")
 class TeamsActions:
 
-    def left_right_down():
+    def east_west_down():
         actions.key("ctrl-shift-m")
 
 @zoom_context.action_class("user")
 class ZoomActions:
 
-    def left_right_down():
+    def east_west_down():
         actions.key("alt-a")

@@ -27,7 +27,7 @@ def update_tag(ctx, tag):
 @ctx.action_class("user")
 class Actions:
 
-    def left_right_down():
+    def east_west_down():
         """Left and Right pedal"""
         global jump, display
         jump = not jump
@@ -35,32 +35,32 @@ class Actions:
         print("Switching jump mode to", jump)
 
 
-    def left_center_down():
+    def north_west_down():
         """Left and Center pedal"""
         global display, jump
         display = not display
         jump = False
         print("Switching display mode to", display)
 
-    def center_right_down():
+    def east_north_down():
         """Center and Right pedal"""
         # update_tag(ctx, "pedal.scroll")
 
 
-    def left_up():
+    def west_up():
         """Left pedal"""
 
         if display:
             actions.user.vscode("workbench.action.toggleSidebarVisibility")
             return
 
-    def right_up():
+    def east_up():
         """Right pedal"""
         if display:
             actions.user.vscode("workbench.action.terminal.toggleTerminal")
             return
 
-    def center_up():
+    def north_up():
         """Center pedal"""
         if display:
             actions.app.tab_next()
@@ -74,11 +74,11 @@ class Actions:
                 actions.speech.disable()
 
 
-    def left_down():
+    def west_down():
         if not settings.get("user.oneActionPerPedalPress"):
             actions.user.mouse_scroll_down(pedal_scroll_amount)
 
-    def right_down():
+    def east_down():
         if not settings.get("user.oneActionPerPedalPress"):
             actions.user.mouse_scroll_up(pedal_scroll_amount)
 

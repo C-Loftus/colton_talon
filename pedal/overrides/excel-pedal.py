@@ -21,7 +21,7 @@ current_direction=SCROLL_DIRECTION.vertical
 @ctx.action_class("user")
 class Actions:
 
-    def left_down():
+    def west_down():
         if not settings.get("user.oneActionPerPedalPress"):
             if current_direction==SCROLL_DIRECTION.vertical:
                 # actions.user.mouse_scroll_down(pedal_scroll_amount)
@@ -32,7 +32,7 @@ class Actions:
         actions.sleep(0.1)
     
 
-    def right_down():
+    def east_down():
         if not settings.get("user.oneActionPerPedalPress"):
             if current_direction==SCROLL_DIRECTION.vertical:
                 # actions.user.mouse_scroll_up(pedal_scroll_amount)
@@ -43,7 +43,7 @@ class Actions:
                 actions.key("right")
         actions.sleep(0.1)
 
-    def left_right_down():
+    def east_west_down():
         global current_direction
         print("Excel direction switched")
         
