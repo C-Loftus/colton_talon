@@ -106,6 +106,12 @@ toggle terminal:
 pull user directory:
     user.vscode("workbench.action.terminal.focus")
     sleep(.1)
-    user.paste("bash -c 'find . -name .git -print -execdir git pull \;'")
+    user.paste("bash -c 'find . -name .git -print -execdir git pull \\;")
     sleep(.1)
+    key(enter)
+
+hunt {user.decoded_language_mode} <user.text>: 
+    user.find_everywhere(text)
+    key(tab:7)
+    "*{user.decoded_language_mode}"
     key(enter)

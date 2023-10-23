@@ -2,7 +2,7 @@
 
 ## How to Use This Code Yourself
 
-- By default the pedal code assumes your hardware is pressing the following keys: `numlock` `keypad_divide` `keypad_multiply` `keypad_minus` (These are the keys within the `main-pedal.talon` file)
+- By default the pedal code assumes your hardware is pressing the following keys: `numlock` `keypad_divide` `keypad_multiply` `keypad_minus` (These are the keys within the `main-pedal.talon` file). These keys update the state of the `north`, `west`, `east`, and `south` pedals in the map object in the Python code.
   - If your pedal can't be remapped in hardware, you can use software to remap the keys
     - Check out [https://talon.wiki/hardware/#custom-gamepads](https://talon.wiki/hardware/#custom-gamepads) for more information on ways to remap at the software level
   - If that is not possible, you can just change the keys in the `main-pedal.talon` file to whatever keys you want
