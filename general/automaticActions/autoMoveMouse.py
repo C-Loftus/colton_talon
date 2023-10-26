@@ -29,3 +29,19 @@ class act:
         else:
             job =  cron.interval("50s", mouse_move_random)
             
+    def mouse_move_center_active_window():
+        """move the mouse cursor to the center of the active window"""
+
+        rect = ui.active_window().rect
+        ctrl.mouse_move(rect.left + (rect.width / 2), rect.top + (rect.height / 2))
+
+    def mouse_move_center_specific_window(window_name: str):
+        """move the mouse cursor to the center of a specific window"""
+
+        windows = ui.windows()
+        for win in windows:
+            application_name = win.app.name
+            if window_name in application_name:
+                rect = win.rect
+                ctrl.mouse_move(rect.left + (rect.width / 2), rect.top + (rect.height / 2))
+                return 

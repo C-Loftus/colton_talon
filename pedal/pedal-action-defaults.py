@@ -58,12 +58,13 @@ class Actions:
 
     def east_west_down():
         """Left and Right pedal"""
-        ctx.settings['user.pedal_scroll_amount'] = settings.get("user.pedal_scroll_amount")
-        ctx.settings['user.pedal_scroll_amount']+=0.2
-        print(f'Speed set to: {ctx.settings["user.pedal_scroll_amount"]}')
+
 
     def east_north_down():
         """Center and Right pedal"""
+        ctx.settings['user.pedal_scroll_amount'] = settings.get("user.pedal_scroll_amount")
+        ctx.settings['user.pedal_scroll_amount']+=0.2
+        print(f'Speed set to: {ctx.settings["user.pedal_scroll_amount"]}')
 
     def north_west_down():
         """Left and Center pedal"""

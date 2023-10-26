@@ -1,4 +1,5 @@
 Spoken form, VSCode command
 run are, r.runSelection
 join, editor.action.joinLines
-run cell, notebook.cell.executeAndFocusContainers
+run, notebook.cell.executeAndFocusContainers
+run, calva.evaluateCurrentTopLevelForm

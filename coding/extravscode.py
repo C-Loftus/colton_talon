@@ -9,6 +9,17 @@ from talon import Context, Module, actions, app, clip
 from typing import Any
 
 mod = Module()
+mod.list("markdownOutputType", desc="markdown output type")
+
+import win32com.client
+
+wmi = win32com.client.GetObject("winmgmts:")
+for usb_device in wmi.InstancesOf("Win32_PnPEntity"):
+    if "USB" in usb_device.PNPDeviceID:
+        device_name = usb_device.Description
+        print("Device Name:", device_name)
+
+
 
 @mod.action_class
 class Actions:
@@ -23,9 +34,7 @@ class Actions:
 
         actions.user.paste(cmd)
 
-    def compile_word(file_name: str):
-        """compiles to docx"""
-        # get the filename without the .md extension
+
         file_name = file_name[:-3]
 
         #  -t is needed to specify the output format
@@ -38,20 +47,38 @@ class Actions:
         file_name = file_name[:-3]
 
         #  -t is needed to specify the output format
-        cmd= f"pandoc {file_name}.md -t pptx -o {file_name}.pptx"
+        cmd= f"pandoc file_name}.md -t pptx -o {file_name}.pptx"
         actions.user.paste(cmd)
 
-    def get_dirname():
+    def open_compiled_word(file_name: str) -> None:
+        """opens the compiled word file"""
+        file_name = file_name[:-3]
+        cmd= f"start '{file_name}.docx'"
+        actions.user.paste(cmd)
+
+    def open_compiled_powerpoint(file_name: str) -> None:
+        """opens the compiled powerpoint file"""
+        file_name = file_name[:-3]
+        cmd= f"start '{file_name}.pptx'"
+        actions.user.paste(cmd)
+
+
+    def get_dirname() -> str:
         """get current base name"""
         actions.user.vscode("copyFilePath")
-        path= clip.get()
+        path= clip.text()
         return os.path.dirname(path)
     
-    def get_basename():
+    def get_basename() -> str:
         """get current base name"""
         actions.user.vscode("copyFilePath")
-        path= clip.get()
+        path= clip.text()
         return os.path.basename(path)
+    
+    def get_full_path() -> str:
+        """get current full path"""
+        actions.user.vscode("copyFilePath")
+        return clip.text()
 
     def change_setting(setting_name: str, setting_value: Union[str, int, bool]):
         """

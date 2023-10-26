@@ -9,7 +9,7 @@ mod = Module()
 mod.list("promptNoArgument", desc="GPT Prompts Without Arguments")
 
 
-def gpt_query(prompt: str, content: str) -> Optional[str]:
+def gpt_query(prompt: str, content: str) -> str:
     try:
         TOKEN = os.environ["OPENAI_API_KEY"]
     except:
@@ -40,7 +40,7 @@ def gpt_query(prompt: str, content: str) -> Optional[str]:
     else:
         actions.user.notify("GPT Failure")
         print(response.json())
-        return None
+        return ""
 
 def gpt_task(prompt: str, content: str) -> str:
     """Run a GPT task"""
@@ -55,7 +55,7 @@ def gpt_task(prompt: str, content: str) -> str:
 @mod.action_class
 class UserActions:
 
-    def gpt_prompt_no_argument(prompt: str):
+    def gpt_prompt_no_argument(prompt: str) -> str:
         """Run a GPT task"""
 
         content = actions.edit.selected_text()

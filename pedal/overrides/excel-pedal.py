@@ -29,7 +29,7 @@ class Actions:
             else:
                 # actions.user.mouse_scroll_left(pedal_scroll_amount)
                 actions.key("left")
-        actions.sleep(0.1)
+        actions.sleep(0.3)
     
 
     def east_down():
@@ -41,7 +41,7 @@ class Actions:
             else:
                 # actions.user.mouse_scroll_right(pedal_scroll_amount)
                 actions.key("right")
-        actions.sleep(0.1)
+        actions.sleep(0.3)
 
     def east_west_down():
         global current_direction

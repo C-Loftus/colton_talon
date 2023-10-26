@@ -3,12 +3,12 @@ os: windows
 
 focus <user.running_applications>: user.switcher_focus(running_applications)
 
+focus both <user.running_applications>:
+    user.switcher_focus(running_applications)
+    user.mouse_move_center_active_window()
 
-move left:
-    key(super-shift-left)
 
-move right:
-    key(super-shift-right)
+
 
 snap right:
     key(super-right) 

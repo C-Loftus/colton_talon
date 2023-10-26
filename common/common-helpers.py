@@ -1,5 +1,6 @@
 from typing import ContextManager
 from talon import Module, actions, Context, scope, clip, ui, cron
+import win32com, time
 
 mod = Module()
 ctx = Context()
@@ -106,16 +107,23 @@ class Actions:
         actions.user.screenshot_window_clipboard()
         actions.key("f11")
 
-    def return_to_current_app_after(seconds: int): 
+    def return_to_current_app_after(seconds: float): 
         """Return to the current app after a certain ones seconds"""
-        active_app = ui.active_app().name
-        saved_application= actions.user.get_running_app(active_app)
+        active_app = ui.active_app()
         
         def return_to_app():
             try:
-                actions.user.switcher_focus_app(saved_application)
+                active_app.focus()
+                time.sleep(0.1)
             except:
                 actions.user.notify("return to app failed")
-                print(f'Could not return to {saved_application}')
+                raise Exception (f'Could not return to {active_app.name}')
 
         cron.after(cron.seconds_to_timespec(seconds) , return_to_app)
+
+    def text_to_speech(text: str) -> None:
+        """text to speech"""
+        speaker = win32com.client.Dispatch("SAPI.SpVoice")
+        speaker.Speak(text)
+
+

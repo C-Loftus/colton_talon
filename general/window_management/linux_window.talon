@@ -19,11 +19,6 @@ bounce <number_small> :
 
 
 
-move left:
-    key(super-shift-left)
-
-move right:
-    key(super-shift-right)
 
 focus left: 
     key(super-left)

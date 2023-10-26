@@ -6,6 +6,7 @@ ctx.matches = """title: /watch/
 title: /soundcloud/
 title: /Internet Archive/
 title: /linkedin.com/learning/i
+title: /listen.overdrive.com/
 """
 
 speed_mode = False
