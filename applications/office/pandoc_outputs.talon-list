@@ -4,7 +4,6 @@ list:  user.pandoc_output_format
 
 powerpoint
 word
-powerpoint
 pdf 
 html
 latex

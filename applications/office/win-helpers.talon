@@ -15,3 +15,8 @@ copy path:
     key(ctrl-c)
     key(escape)
     user.notify(clip.text())
+
+close <user.running_applications>:
+    user.switcher_focus(running_applications)
+    sleep(.4)
+    key(alt-f4)

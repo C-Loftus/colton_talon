@@ -3,6 +3,17 @@ title: /.docx/
 
 -
 
+read aloud:
+    key(f10)
+    sleep(.2)
+    key(w)
+    sleep(.2)
+    key(l)
+    sleep(.2)
+    key(2)
+    sleep(.2)
+    key(ctrl-alt-space)
+
 
 paste that:
     key(ctrl-shift-v)
