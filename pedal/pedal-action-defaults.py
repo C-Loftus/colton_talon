@@ -89,6 +89,9 @@ class Actions:
         # else:    
         #     actions.speech.disable()
         # time.sleep(2)
+    
+    def south_down():
+        """south down"""
 
     def west_up():
         """Left pedal up"""
@@ -97,6 +100,9 @@ class Actions:
     def north_up():
         """Center pedal up"""
         actions.user.toggle_sleep_mode()
+
+    def south_up():
+        """test"""
     
     def held_west():
         """ called when the left pedal is held down"""

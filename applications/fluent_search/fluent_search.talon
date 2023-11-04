@@ -16,7 +16,6 @@ os: windows
 
 ^fluent search$: 
     user.toggleFluentSearchTags()
-    key(ctrl-alt-;)
 
 # -- LaunchBar
 # Search hotkey (in fluent_search.py)

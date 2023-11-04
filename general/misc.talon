@@ -7,10 +7,7 @@ mode: command
 target {user.website}:
     user.launch_new_tab_if_not_opened("{website}")
 
-queer line: edit.delete_line()
 
-inter:
-    key(enter)
 
 (fly | why):
     key(end)
@@ -45,13 +42,7 @@ colgap:
 spam:
     ", "
 
-(scrape | scrip):
-    edit.extend_word_left()
-    edit.delete()
 
-
-^and$:
-    key(end)
 
 bring screenshot:
     user.grab_browser_window_slow()
@@ -91,4 +82,5 @@ cycle results:
 # copy path:
     # shift right click
 
-    
+
+

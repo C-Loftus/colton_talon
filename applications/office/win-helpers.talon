@@ -10,5 +10,8 @@ speak this:
 # We don't have a guarantee that the item will be correctly orders
 #  so we just approximate the location and that the user has to press enter
 copy path:
-    key(shift-f10)
-    key(down:10)
+    key(ctrl-l)
+    sleep(.1)
+    key(ctrl-c)
+    key(escape)
+    user.notify(clip.text())

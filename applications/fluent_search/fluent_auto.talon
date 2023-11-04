@@ -1,17 +1,15 @@
 tag: user.fluentSearchHintsOpen
-mode:  command
 -
 
 ^<user.letter> <user.letter>$: 
     key(letter)
     key(letter_2)
-    sleep(0.2)
-    key(ctrl-alt-;)
+    sleep(.5)
+    key(ctrl-alt-;  )
 
 ^fluent search$:  
-    user.toggleFluentSearchTags()
-    key(ctrl-alt-;)
+    user.toggleFluentSearchTags()   
 
 # key(escape):
 #     key(escape)
-#     user.toggleFluentSearchTags()
+#     user.toggleFluentSearchTags() 

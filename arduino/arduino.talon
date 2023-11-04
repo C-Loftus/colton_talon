@@ -15,13 +15,14 @@ gamepad(west):
     key(end)
 gamepad(east):              
     print("east/B")
-gamepad(south):             
+gamepad(south):                 
     user.toggleFluentSearchTags()
-    key(ctrl-alt-;)
 gamepad(north):             
     user.switch_between_code_and_chrome()   
 
 toggle arduino as pedal:
     user.toggleAsPedal()
+
+
 
 

@@ -1,6 +1,11 @@
 from typing import ContextManager
 from talon import Module, actions, Context, scope, clip, ui, cron
-import win32com, time
+import win32com, time, os
+
+if os.name == 'nt':
+    import win32com.client
+
+
 
 mod = Module()
 ctx = Context()
@@ -121,9 +126,7 @@ class Actions:
 
         cron.after(cron.seconds_to_timespec(seconds) , return_to_app)
 
-    def text_to_speech(text: str) -> None:
-        """text to speech"""
-        speaker = win32com.client.Dispatch("SAPI.SpVoice")
-        speaker.Speak(text)
-
-
+    def get_usb_device_names():
+        """get usb device names"""
+        wmi = win32com.client.GetObject("winmgmts:")
+        return [usb.DeviceID for usb in wmi.InstancesOf("Win32_USBHub")]

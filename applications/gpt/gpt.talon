@@ -2,6 +2,7 @@ mode: command
 
 -
 
+
 model ask <user.text>:
     res = user.gpt_answer_question(text)
     user.paste(res)

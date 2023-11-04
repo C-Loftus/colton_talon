@@ -1,7 +1,7 @@
 
 # specify the Talon user directory depending on operating system
 ifeq ($(OS),Windows_NT)
-	TALON_USER_DIR = $(USERPROFILE)/AppData/Roaming/talon/user
+	TALON_USER_DIR = $(USERPROFILE)\AppData\Roaming\talon\user
 else
 	TALON_USER_DIR =  ~/.talon/user
 endif
@@ -37,6 +37,7 @@ windows:
 	scoop install ffmpeg
 	scoop install pandoc
 	scoop install obs-studio
+	scoop install https://raw.githubusercontent.com/chawyehsu/dorado/master/bucket/filebrowser.json
 
 
 install:

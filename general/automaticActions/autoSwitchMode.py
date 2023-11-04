@@ -79,13 +79,12 @@ def on_title_switch(window):
         actions.user.enable_command_mode()
         return
     
-    if "app.slack.com" in window_title:
-        actions.user.enable_mixed_mode()
-        return
-    if "outlook.office.com" in window_title:
-        actions.user.enable_mixed_mode()
-        return
+    mixed_websites = ["app.slack.com", "outlook.office.com", "chat.openai.com"]
 
+    for website in mixed_websites:
+        if website in window_title:
+            actions.user.enable_mixed_mode()
+            return
 
     if 'Visual Studio Code' in window_title: 
         if actions.code.language() == "markdown":
@@ -156,3 +155,7 @@ def switcher():
 
 # we need to wait until it is loaded since otherwise it could fail when a mode is not defined during startup
 app.register("ready", switcher )
+
+
+
+
