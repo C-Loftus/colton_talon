@@ -1,7 +1,8 @@
 from talon import Module, actions, Context
 import requests
-import json, os, time
+import json, os, time, subprocess, multiprocessing
 from pathlib import Path
+import threading
 
 if os.name == 'nt':
     import win32com.client
@@ -15,16 +16,28 @@ class Actions:
     def robot_tts(text: str):
         '''text to speech with robot voice'''
 
-    def natural_tts(text: str):
-        """text to speech"""
+    def edge_tts(text: str):
+        '''text to speech with edge'''
+        # edge-playback --text "Hello, world!"
+        #get path of this file
+        this_path = os.path.dirname(os.path.realpath(__file__))
+        script_path = os.path.join(this_path, 'edge-playback.ps1')
 
+        actions.user.notify('Starting edge TTS')
+        p = subprocess.Popen(["powershell.exe", script_path, text], shell=True, env=None, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        p_status = p.wait()
+        stdout, stderr = p.communicate()
+        print(stdout, stderr)
+        return (stdout, stderr)
+
+    def natural_tts(text: str):
+        """text to speech with natural voice"""
         # Split the text into batches of 2400 characters
         batch_size = 2400
         batches = [text[i:i+batch_size] 
                    for i in range(0, len(text), batch_size)
                 ]
-        
-        def send_request(batched_text: str):
+        for batched_text in batches:
             # Define the API endpoint URL
             url = 'https://api.elevenlabs.io/v1/text-to-speech/21m00Tcm4TlvDq8ikWAM?optimize_streaming_latency=0&output_format=mp3_44100_128'
     
@@ -77,8 +90,6 @@ class Actions:
                 f.write(response.content)
             print('Audio file saved as ' + full_name)
 
-        for batch in batches:
-            send_request(batch)         
 
 ctxWindows = Context()
 ctxWindows.matches = r"""
@@ -91,7 +102,11 @@ class UserActions:
     def robot_tts(text: str):
         """text to speech"""
         speaker = win32com.client.Dispatch("SAPI.SpVoice")
-        speaker.Speak(text)
 
-
+        # speaker.Speak(text)
+        # open a process that will speak the text
+        # p = multiprocessing.Process(target=speaker.Speak, args=(text,))
+        # p.start()
+        t = threading.Thread(target=speaker.Speak, args=(text,))
+        t.start()
 

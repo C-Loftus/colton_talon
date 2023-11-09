@@ -1,6 +1,8 @@
 from typing import ContextManager
 from talon import Module, actions, Context, scope, clip, ui, cron
 import win32com, time, os
+from talon_init import TALON_HOME
+
 
 if os.name == 'nt':
     import win32com.client
@@ -130,3 +132,14 @@ class Actions:
         """get usb device names"""
         wmi = win32com.client.GetObject("winmgmts:")
         return [usb.DeviceID for usb in wmi.InstancesOf("Win32_USBHub")]
+
+    def get_talon_home():
+        """get talon home"""
+        return TALON_HOME
+    
+    def relative_dir_to_talon_home(paths: str):
+        """get relative dir to talon home"""
+        paths = paths.split("^")
+        """get relative dir to talon home"""
+        return os.path.join(TALON_HOME, "user", *paths)
+        

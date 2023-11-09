@@ -37,6 +37,8 @@ windows:
 	scoop install ffmpeg
 	scoop install pandoc
 	scoop install obs-studio
+	scoop install mpv
+
 	scoop install https://raw.githubusercontent.com/chawyehsu/dorado/master/bucket/filebrowser.json
 
 
@@ -49,3 +51,5 @@ build: install
 config:
 	bash -c "cp -r ./.vscode/  ../."	
 
+python:
+	pipx install edge-tts

@@ -1,9 +1,6 @@
 mode: command
 -
 
-# pull all talon scripts:
-#     user.system_command_nb("find ~/.talon/user -name .git -print -execdir git pull \;")
-
 target {user.website}:
     user.launch_new_tab_if_not_opened("{website}")
 
@@ -12,8 +9,7 @@ target {user.website}:
 (fly | why):
     key(end)
 
-bullet:
-    "* "
+
 
 voyage: 
     key(volup:3)
