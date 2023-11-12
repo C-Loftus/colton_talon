@@ -1,6 +1,12 @@
+import subprocess
 from typing import ContextManager
 from talon import Module, actions, Context, scope, clip, ui, cron
-import win32com, time
+import time
+import webbrowser
+try:
+    import win32com
+except:
+    pass
 
 mod = Module()
 ctx = Context()
@@ -123,7 +129,38 @@ class Actions:
 
     def text_to_speech(text: str) -> None:
         """text to speech"""
-        speaker = win32com.client.Dispatch("SAPI.SpVoice")
-        speaker.Speak(text)
 
+    def lsusb():
+        """list usb devices"""
 
+    def default_browser() -> str:
+        """get default browser"""
+        return webbrowser.get().name
+
+ctxLinux = Context()
+ctxLinux.matches = r"""
+os: linux
+"""
+@ctxLinux.action_class("user")
+class LinuxHelpersActions:
+    def lsusb():
+        """list usb devices"""
+        # run lsusb on linux
+        proc = subprocess.Popen(["lsusb"], stdout=subprocess.PIPE)
+        output = proc.stdout.read()
+        return output.decode("utf-8")
+    
+
+ctxWindows = Context()
+ctxWindows.matches = r"""
+os: windows
+"""
+@ctxWindows.action_class("user")
+class WindowsHelpersActions:
+    def text_to_speech(text: str) -> None:
+        """text to speech"""
+        speak = win32com.client.Dispatch("SAPI.SpVoice")
+        speak.Speak(text)
+        
+        
+    
