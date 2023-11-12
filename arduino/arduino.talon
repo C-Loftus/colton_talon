@@ -11,17 +11,16 @@
 tag: user.asArduino
 -
 
-gamepad(west):              
-    key(end)
-gamepad(east):              
+gamepad(west):
+    speech.toggle()
+gamepad(east):
     print("east/B")
-gamepad(south):             
+gamepad(south):
     user.toggleFluentSearchTags()
-    key(ctrl-alt-;)
-gamepad(north):             
-    user.switch_between_code_and_chrome()   
+gamepad(north):
+    user.switch_between_code_and_chrome()
+    sleep(0.4)
+    user.notify("Switched")
 
 toggle arduino as pedal:
     user.toggleAsPedal()
-
-

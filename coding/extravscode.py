@@ -11,13 +11,6 @@ from typing import Any
 mod = Module()
 mod.list("markdownOutputType", desc="markdown output type")
 
-import win32com.client
-
-wmi = win32com.client.GetObject("winmgmts:")
-for usb_device in wmi.InstancesOf("Win32_PnPEntity"):
-    if "USB" in usb_device.PNPDeviceID:
-        device_name = usb_device.Description
-        print("Device Name:", device_name)
 
 
 
@@ -28,39 +21,7 @@ class Actions:
         """"Removes Spaces from String"""
         return string.replace(" ", "")
     
-    def compile_all_markdown():
-        """Compiles all markdown files in the current directory to docx"""
-        cmd = r"Get-ChildItem -Filter *.md | ForEach-Object { $outputFile = [System.IO.Path]::ChangeExtension($_.FullName, '.docx'); pandoc -t latex+raw_tex $_.FullName | pandoc -f latex --data-dir=docs/rendering/ -o $outputFile }"
-
-        actions.user.paste(cmd)
-
-
-        file_name = file_name[:-3]
-
-        #  -t is needed to specify the output format
-        cmd= f"pandoc {file_name}.md -t docx -o {file_name}.docx"
-        actions.user.paste(cmd)  
-
-    def compile_powerpoint(file_name: str):
-        """compiles to pptx"""
-        # get the filename without the .md extension
-        file_name = file_name[:-3]
-
-        #  -t is needed to specify the output format
-        cmd= f"pandoc file_name}.md -t pptx -o {file_name}.pptx"
-        actions.user.paste(cmd)
-
-    def open_compiled_word(file_name: str) -> None:
-        """opens the compiled word file"""
-        file_name = file_name[:-3]
-        cmd= f"start '{file_name}.docx'"
-        actions.user.paste(cmd)
-
-    def open_compiled_powerpoint(file_name: str) -> None:
-        """opens the compiled powerpoint file"""
-        file_name = file_name[:-3]
-        cmd= f"start '{file_name}.pptx'"
-        actions.user.paste(cmd)
+ 
 
 
     def get_dirname() -> str:

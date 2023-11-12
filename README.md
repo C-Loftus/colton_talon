@@ -2,6 +2,8 @@
 
 These are all written for my own setup but are public in case others might find them useful. All of these are supplementary to the standard knausj (now called the talon `community`) repo on the most recent release.
 
+- I have my own fork of `community` and use this as 
+
 ## Git Helpers
 
 ### Install Just One Script Directory from this Repo
@@ -11,7 +13,6 @@ These are all written for my own setup but are public in case others might find 
 ### View History of a Given File
 
 [https://github.githistory.xyz](https://github.githistory.xyz)
-
 
 ## Install Talon and All My Scripts
 

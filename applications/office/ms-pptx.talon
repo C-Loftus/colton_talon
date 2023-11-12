@@ -16,3 +16,6 @@ tag: browser
     sleep(6)
     user.screenshot_window_clipboard()
     key(f11)
+
+^grab fast window clip$:
+    user.screenshot_window_clipboard()

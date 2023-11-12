@@ -1,22 +1,15 @@
 mode: command
 -
 
-# pull all talon scripts:
-#     user.system_command_nb("find ~/.talon/user -name .git -print -execdir git pull \;")
-
 target {user.website}:
     user.launch_new_tab_if_not_opened("{website}")
 
-queer line: edit.delete_line()
 
-inter:
-    key(enter)
 
 (fly | why):
     key(end)
 
-bullet:
-    "* "
+
 
 voyage: 
     key(volup:3)
@@ -45,13 +38,7 @@ colgap:
 spam:
     ", "
 
-(scrape | scrip):
-    edit.extend_word_left()
-    edit.delete()
 
-
-^and$:
-    key(end)
 
 bring screenshot:
     user.grab_browser_window_slow()
@@ -91,4 +78,5 @@ cycle results:
 # copy path:
     # shift right click
 
-    
+
+

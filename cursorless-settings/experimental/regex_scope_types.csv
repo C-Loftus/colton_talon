@@ -1,2 +1,3 @@
-Spoken form, Regex
-subword, "([A-Z]?[a-z]+)|([A-Z]+(?![a-z]))"
+Spoken form ,Regex
+subword     ,"([A-Z]?[a-z]+)|([A-Z]+(?![a-z]))"
+

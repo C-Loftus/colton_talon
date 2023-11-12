@@ -1,12 +1,7 @@
 import subprocess
 from typing import ContextManager
 from talon import Module, actions, Context, scope, clip, ui, cron
-import time
-import webbrowser
-try:
-    import win32com
-except:
-    pass
+import win32com, time
 
 mod = Module()
 ctx = Context()
@@ -127,6 +122,21 @@ class Actions:
 
         cron.after(cron.seconds_to_timespec(seconds) , return_to_app)
 
+    def get_usb_device_names():
+        """get usb device names"""
+        wmi = win32com.client.GetObject("winmgmts:")
+        return [usb.DeviceID for usb in wmi.InstancesOf("Win32_USBHub")]
+
+    def get_talon_home():
+        """get talon home"""
+        return TALON_HOME
+    
+    def relative_dir_to_talon_home(paths: str):
+        """get relative dir to talon home"""
+        paths = paths.split("^")
+        """get relative dir to talon home"""
+        return os.path.join(TALON_HOME, "user", *paths)
+        
     def text_to_speech(text: str) -> None:
         """text to speech"""
 

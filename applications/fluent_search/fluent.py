@@ -4,7 +4,7 @@ from talon import Context, Module, actions, app, ui
 
 mod = Module()
 ctx = Context()
-
+ctx.tags = []
 ctx.matches = """
 os: windows
 """
@@ -12,7 +12,7 @@ os: windows
 mod.tag("fluentSearchHintsOpen", "Current input method can use pedal press commands")
 
 isSearching = False
-
+        
 def wait_for_fluent_search_window():
     for _ in range(10):
         if ui.active_app().name == "FluentSearch":
@@ -37,6 +37,7 @@ class Action:
 class UserActions:
     def toggleFluentSearchTags():
             """Toggle asPedal Tag"""
+            actions.key("ctrl-alt-;")
             global isSearching
             if isSearching:
                 ctx.tags = ["user.fluentSearchHintsOpen"]

@@ -5,8 +5,8 @@ title: /.xlsx/i
 not app: vscode
 -
 
-settings():
-    key_hold = 50
+# settings():
+#     key_hold = 50
 
 take <user.excel_cell>:
     key(ctrl-g)

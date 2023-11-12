@@ -1,19 +1,28 @@
 import requests
 import json, os
 from typing import Optional
-from talon import Module, actions, clip
+from talon import Module, actions, clip, app
 
 # TODO: Make it only available to run one request at a time
 
-mod = Module()
+mod = Module() 
+# Stores all our prompts that don't require arguments 
+# (ie those that just take in the clipboard text)
 mod.list("promptNoArgument", desc="GPT Prompts Without Arguments")
 
+# Necessary for those who don't have custom notifications installed
+def notify(message: str):
+    try:
+        actions.user.notify(message)
+    except:
+        app.notify(message)
 
 def gpt_query(prompt: str, content: str) -> str:
     try:
         TOKEN = os.environ["OPENAI_API_KEY"]
     except:
-        actions.user.notify("OPENAI API Key not loaded")
+        notify("GPT Failure: No API Key")   
+
     headers = {
         'Content-Type': 'application/json',
         'Authorization': f'Bearer {TOKEN}'
@@ -28,18 +37,23 @@ def gpt_query(prompt: str, content: str) -> str:
         'model': 'gpt-3.5-turbo'
     }
 
-    actions.user.notify("GPT Task Started")
+    notify("GPT Task Started")
 
     response = requests.post(
         'https://api.openai.com/v1/chat/completions',
         headers=headers, data=json.dumps(data))
 
     if response.status_code == 200:
-        actions.user.notify("GPT Task Done")
+
+        notify("GPT Task Completed")
+
         return response.json()['choices'][0]['message']['content'].strip()
     else:
-        actions.user.notify("GPT Failure")
+        # Necessary for those who don't have custom notifications installed
+        notify("GPT Failure: Check API Key or Prompt")
+
         print(response.json())
+
         return ""
 
 def gpt_task(prompt: str, content: str) -> str:

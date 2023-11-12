@@ -1,0 +1,9 @@
+list:  user.pandoc_output_format
+
+- 
+
+powerpoint
+word
+pdf 
+html
+latex
