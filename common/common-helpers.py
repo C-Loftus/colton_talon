@@ -1,7 +1,8 @@
 import subprocess
 from typing import ContextManager
 from talon import Module, actions, Context, scope, clip, ui, cron
-import win32com, time
+import time, os, webbrowser
+from talon_init import TALON_HOME
 
 mod = Module()
 ctx = Context()
@@ -17,7 +18,9 @@ def remove_tag(tag: str):
     tags.discard(tag)
     ctx.tags = list(tags) 
 
-
+if os.name == "nt":
+    import win32com
+    import win32com.client 
 
 
 # Make the Mutex generic over the value it stores.

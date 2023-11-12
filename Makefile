@@ -28,7 +28,7 @@ fetch: pull
 
 # git -C ../private-talon pull origin master;
 pull:
-	bash -c 'find ../. -type d -name '*private*' -prune -o -name .git -print -execdir git pull --ff-only \;'
+	cd ..; ls | xargs -I{} git -C {} pull
 
 windows:
 	# mimic xbox controller to get rid of direct input and get xinput for talon. Talon uses gilrs and needs xinput
