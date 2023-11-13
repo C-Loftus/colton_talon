@@ -1,7 +1,8 @@
 import subprocess
 from typing import ContextManager
 from talon import Module, actions, Context, scope, clip, ui, cron
-import win32com, time
+import win32com, time, os
+from talon_init import TALON_HOME
 
 mod = Module()
 ctx = Context()

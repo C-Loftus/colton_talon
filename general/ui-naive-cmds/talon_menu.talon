@@ -39,3 +39,9 @@ enable conformer:
 #     sleep(0.05)
 #     sleep(0.55)
 #     user.mouse_helper_position_restore()
+
+^target comments$:
+    user.mouse_helper_position_save()
+    user.mouse_helper_move_image_relative("2023-11-10_12.26.25.003443.png", 0)
+    sleep(0.05)
+    mouse_click(0)
