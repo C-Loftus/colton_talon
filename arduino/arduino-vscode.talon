@@ -3,10 +3,15 @@ app: vscode
 
 -
 
-
-gamepad(east): 
+gamepad(east):
     user.vscode("workbench.action.toggleZenMode")
-gamepad(west): 
-    user.split_window_right()
-gamepad(south):
+gamepad(west):
     key(tab)
+gamepad(south):
+    key(enter)
+gamepad(north:down):
+    user.pedal_down("south")
+
+gamepad(north:up):
+    user.pedal_up("south")
+    

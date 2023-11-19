@@ -87,7 +87,12 @@ class Actions:
         ctx.tags = []
         ctx.settings['user.pedal_scroll_amount'] = 0.2
 
+    def south_down():
+        """called when the south pedal is down"""
+        actions.key("enter")
+        actions.sleep("5000ms")
 
+                
     # def noise_trigger_hiss(active: bool):
     #     """
     #     Called when the user makes a 'hiss' noise. Listen to

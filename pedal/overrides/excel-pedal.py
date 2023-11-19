@@ -3,14 +3,10 @@ import enum
 
 ctx = Context()
 ctx.matches = """
-mode: command
 title: /Excel/i
 not app: vscode
 title: /.xlsx/i
-
 not app: vscode
-
-
 """
 
 ctx.settings["user.oneActionPerPedalPress"] = False
