@@ -9,6 +9,12 @@ entrance <user.rango_target>:
     name = user.email_entrance()
     "Hi {name}, "
 
+target chat:
+    key(ctrl-shift-2)
+
+target compose:
+    key(alt-shift-c)
+
 # like <user.rango_target>:
 #     user.rango_command_with_target("hoverElement", rango_target)
 #     key(tab)

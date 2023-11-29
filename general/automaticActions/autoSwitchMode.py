@@ -9,6 +9,7 @@ ctx.tags = ["user.auto_switch_mode"]
 tags: set[str] = set()
 
 STRECHLY_RUNNING = True
+AUTO_STRETCHLY = False
 
 def add_tag(tag: str):
     tags.add(tag)
@@ -95,7 +96,7 @@ def on_title_switch(window):
         return    
     
     global STRECHLY_RUNNING
-    if not STRECHLY_RUNNING and os.name == 'nt':
+    if not STRECHLY_RUNNING and os.name == 'nt' and AUTO_STRETCHLY:
 
         def start_strechly():
             actions.key(STRETCHLY := "super-9")
@@ -127,7 +128,7 @@ def on_app_switch(application):
     
     
     title =  str(ui.active_window().title).lower()
-    if "modern-calling" in title and os.name == 'nt':
+    if "modern-calling" in title and os.name == 'nt' and AUTO_STRETCHLY:
         global STRECHLY_RUNNING
         # kill the stretchy application
         try:

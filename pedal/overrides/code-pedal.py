@@ -7,6 +7,8 @@ not tag: user.controlTabsWithPedal
 """
 
 ctx.settings["user.oneActionPerPedalPress"] = False
+ctx.settings["user.oneActionOnCenterPress"] = True 
+
 
 ctx.tags = []
 pedal_scroll_amount = settings.get("user.pedal_scroll_amount") if settings.get("user.pedal_scroll_amount") else 0.2
