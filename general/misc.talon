@@ -1,44 +1,36 @@
 mode: command
 -
 
-target {user.website}:
-    user.launch_new_tab_if_not_opened("{website}")
-
-
+# The visit command within rango is better than this
+# target {user.website}:
+#     user.launch_new_tab_if_not_opened("{website}")
 
 (fly | why):
     key(end)
 
-
-
-voyage: 
+voyage:
     key(volup:3)
 
-vacate: 
+vacate:
     key(voldown:3)
 
 smile:
     key(volup)
 
-    
 frown:
     key(voldown)
 
 ^thumbs up$:
     user.paste("👍")
 
-
-scope: 
-    user.paste("{\n\n}") 
+scope:
+    user.paste("{\n\n}")
     key(up)
-
 
 colgap:
     ": "
 spam:
     ", "
-
-
 
 bring screenshot:
     user.grab_browser_window_slow()
@@ -54,7 +46,6 @@ bring screenshot:
     key(enter)
     key(end)
     user.focus_chrome()
-    
 
 cycle results:
     #we don't have loops so we just have to repeat. easier than using pythonfor this small example
@@ -76,7 +67,8 @@ cycle results:
     sleep(2)
 
 # copy path:
-    # shift right click
+# shift right click
+# mimic()
 
 
 

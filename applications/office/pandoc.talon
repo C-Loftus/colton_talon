@@ -32,7 +32,7 @@ check compiled {user.pandoc_output_format} [<number_small>]:
 compile and check {user.pandoc_output_format} [<number_small>]:
     path = user.get_dirname()
     user.vscode("workbench.action.terminal.focus")
-    clip.set_text("mkdir -p  2>$null {path}/build; cd '{path}'; ")
+    clip.set_text("mkdir -p  2>$null '{path}/build'; cd '{path}'; ")
     key(ctrl-shift-v)
 
     file = user.get_basename()

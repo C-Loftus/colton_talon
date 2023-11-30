@@ -7,6 +7,8 @@ not tag: user.controlTabsWithPedal
 """
 
 ctx.settings["user.oneActionPerPedalPress"] = False
+ctx.settings["user.oneActionOnCenterPress"] = True 
+
 
 ctx.tags = []
 pedal_scroll_amount = settings.get("user.pedal_scroll_amount") if settings.get("user.pedal_scroll_amount") else 0.2
@@ -87,7 +89,12 @@ class Actions:
         ctx.tags = []
         ctx.settings['user.pedal_scroll_amount'] = 0.2
 
+    def south_down():
+        """called when the south pedal is down"""
+        actions.key("enter")
+        actions.sleep("5000ms")
 
+                
     # def noise_trigger_hiss(active: bool):
     #     """
     #     Called when the user makes a 'hiss' noise. Listen to

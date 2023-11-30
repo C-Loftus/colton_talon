@@ -81,7 +81,9 @@ def auto_actions_on_startup():
         case "nt":
             # for some reason this application doesn't auto start natively 
             # through windows so we have to just press the key
-            actions.key(STRETCHLY := "super-9")
+            # actions.key(STRETCHLY := "super-9")
+            # check uptime and only run this if it's been less than 5 minutes
+            # since boot don't use psutil TODO this
             actions.user.open_url('https://teams.microsoft.com')
             actions.user.open_url('https://outlook.office.com/mail/')
             

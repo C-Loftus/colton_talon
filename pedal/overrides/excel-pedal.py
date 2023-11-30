@@ -3,14 +3,10 @@ import enum
 
 ctx = Context()
 ctx.matches = """
-mode: command
 title: /Excel/i
 not app: vscode
 title: /.xlsx/i
-
 not app: vscode
-
-
 """
 
 ctx.settings["user.oneActionPerPedalPress"] = False
@@ -34,26 +30,26 @@ class Actions:
     #         else:
     #             # actions.user.mouse_scroll_left(pedal_scroll_amount)
     #             actions.key("left")
-    #     actions.sleep(0.3)
+    #     actions.sleep(0.8)
     def west_down():
-        actions.key("ctrl-enter")
+        # actions.key("ctrl-enter")
         actions.key('left')
-        actions.sleep(0.3)
+        actions.sleep(0.2)
     
     def north_down():
-        actions.key("ctrl-enter")
+        # actions.key("ctrl-enter")
         actions.key('up')
-        actions.sleep(0.3)
+        actions.sleep(0.2)
     
     def south_down():
-        actions.key("ctrl-enter")
+        # actions.key("ctrl-enter")
         actions.key('down')
-        actions.sleep(0.3)
+        actions.sleep(0.2)
 
     def east_down():
-        actions.key("ctrl-enter")
+        # actions.key("ctrl-enter")
         actions.key('right')
-        actions.sleep(0.3)
+        actions.sleep(0.2)
 
     # def east_down():
         
@@ -67,7 +63,7 @@ class Actions:
     #         else:
     #             # actions.user.mouse_scroll_right(pedal_scroll_amount)
     #             actions.key("right")
-    #     actions.sleep(0.3)
+    #     actions.sleep(0.8)
 
     # def east_west_down():
     #     global current_direction
