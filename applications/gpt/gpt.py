@@ -82,7 +82,7 @@ class UserActions:
         """
 
         prompt = f"""I will give you a list of words or phrases that are survey responses. Fix these responses so they have the proper formatting and expand any abbreviations to the phrase that would make sense contextually. Return them all as a list with a '{delimiter}' separating each item. If similar words show up multiple times, they should be formatted the same way as other occurrences. So for instance, "face book" and "FB" should both be returned as "Facebook" or if the list is a list of pharmaceutical companies, "astra" should become "AstraZeneca".
- 
+
         """
 
         result = gpt_task(prompt, contentToFix)

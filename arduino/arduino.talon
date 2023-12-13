@@ -17,8 +17,8 @@ gamepad(west):
 gamepad(east):
     print("east/B")
 gamepad(south):
-    user.toggleFluentSearchTags()
-# i1
+    # user.toggleFluentSearchTags()
+    user.toggle_reader()
 
 toggle arduino as pedal:
     user.toggleAsPedal()

@@ -7,7 +7,7 @@ tag: user.nvda_running
 """
 
 ctx.settings["user.oneActionPerPedalPress"] = False
-ctx.settings["user.oneActionOnCenterPress"] = False 
+ctx.settings["user.oneActionOnCenterPress"] = True
     
 @ctx.action_class("user")
 class Actions:
@@ -24,8 +24,8 @@ class Actions:
         actions.sleep("1s")
 
 
-    def north_down():
-        # actions.user.with_nvda_mod_press
-        actions.key("tab")
-        actions.sleep("2s")
+    # def north_down():
+    #     # actions.user.with_nvda_mod_press
+    #     actions.key("tab")
+    #     actions.sleep("2s")
         

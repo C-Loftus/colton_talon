@@ -74,7 +74,7 @@ def disconnect_eye_tracker():
 def auto_actions_on_startup():
 
     cron.after("4s", disconnect_eye_tracker )
-    actions.key(BROWSER := "super-1")
+    # actions.key(BROWSER := "super-1")
 
     match os.name:
         
@@ -84,9 +84,9 @@ def auto_actions_on_startup():
             # actions.key(STRETCHLY := "super-9")
             # check uptime and only run this if it's been less than 5 minutes
             # since boot don't use psutil TODO this
-            actions.user.open_url('https://teams.microsoft.com')
-            actions.user.open_url('https://outlook.office.com/mail/')
-            
+            # actions.user.open_url('https://teams.microsoft.com')
+            # actions.user.open_url('https://outlook.office.com/mail/')
+            pass
 
         case "posix":
             check_git()
