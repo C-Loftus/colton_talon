@@ -1,6 +1,5 @@
 import requests
 import json, os
-from typing import Optional
 from talon import Module, actions, clip, app
 
 # TODO: Make it only available to run one request at a time
@@ -10,7 +9,7 @@ mod = Module()
 # (ie those that just take in the clipboard text)
 mod.list("promptNoArgument", desc="GPT Prompts Without Arguments")
 
-# Necessary for those who don't have custom notifications installed
+# Defaults to Andreas's custom notifications if you have them installed
 def notify(message: str):
     try:
         actions.user.notify(message)
@@ -49,11 +48,8 @@ def gpt_query(prompt: str, content: str) -> str:
 
         return response.json()['choices'][0]['message']['content'].strip()
     else:
-        # Necessary for those who don't have custom notifications installed
         notify("GPT Failure: Check API Key or Prompt")
-
         print(response.json())
-
         return ""
 
 def gpt_task(prompt: str, content: str) -> str:

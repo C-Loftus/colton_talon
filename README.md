@@ -1,8 +1,19 @@
 # My Talon Scripts
 
-These are all written for my own setup but are public in case others might find them useful. All of these are supplementary to the standard knausj (now called the talon `community`) repo on the most recent release.
+All of these are supplementary to the standard knausj (now called the talon `community`) repo on the most recent release.
 
-- I have my own fork of `community` and use this as 
+- I have my own fork of `community` and use this for any personal code
+
+# Functionality
+
+- Send custom JS/TS to the browser from within Talon
+- Operate a pedal with custom overrides and multiple presses at once
+- Pandoc via voice for office use (converting between word docs/slides/etc.)
+- Various config and helper actions
+- Voice commands for git pulling
+- and more!
+
+GPT and AI functionality has been moved into a separate repo [https://github.com/C-Loftus/colton_talon](https://github.com/C-Loftus/colton_talon) for easier usability.
 
 ## Git Helpers
 
