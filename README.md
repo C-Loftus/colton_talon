@@ -10,7 +10,7 @@ All of these are supplementary to the standard knausj (now called the talon `com
 - Operate a pedal with custom overrides and multiple presses at once
 - Pandoc via voice for office use (converting between word docs/slides/etc.)
 - Various config and helper actions
-- Voice commands for git pulling
+- Voice commands for updating the entire Talon user directory 
 - and more!
 
 GPT and AI functionality has been moved into a separate repo [https://github.com/C-Loftus/colton_talon](https://github.com/C-Loftus/colton_talon) to share easier in the community.
