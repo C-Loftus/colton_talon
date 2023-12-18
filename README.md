@@ -13,7 +13,7 @@ All of these are supplementary to the standard knausj (now called the talon `com
 - Voice commands for git pulling
 - and more!
 
-GPT and AI functionality has been moved into a separate repo [https://github.com/C-Loftus/colton_talon](https://github.com/C-Loftus/colton_talon) for easier usability.
+GPT and AI functionality has been moved into a separate repo [https://github.com/C-Loftus/colton_talon](https://github.com/C-Loftus/colton_talon) to share easier in the community.
 
 ## Git Helpers
 
