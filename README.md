@@ -17,7 +17,7 @@ GPT and AI functionality has been moved into a separate repo [https://github.com
 
 ## Git Helpers for Getting Specific Code from this Repo
 
-### Install Just One Directory from this Repo
+### Install Just One Directory
 
 [https://download-directory.github.io/](https://download-directory.github.io/)
 
