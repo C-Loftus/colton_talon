@@ -15,9 +15,9 @@ All of these are supplementary to the standard knausj (now called the talon `com
 
 GPT and AI functionality has been moved into a separate repo [https://github.com/C-Loftus/colton_talon](https://github.com/C-Loftus/colton_talon) to share easier in the community.
 
-## Git Helpers
+## Git Helpers for Getting Specific Code from this Repo
 
-### Install Just One Script Directory from this Repo
+### Install Just One Directory from this Repo
 
 [https://download-directory.github.io/](https://download-directory.github.io/)
 
