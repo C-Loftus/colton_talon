@@ -4,7 +4,7 @@ not app: vscode
 -
 folk is code:               user.focus_vscode()
 folk is chrome:             user.focus_chrome()
-folk is <user.running_applications>: user.(running_applications)
+folk is <user.running_applications>: user.switcher_focus(running_applications)
 
 #Match cursorless syntax
 format <user.formatters> at this: user.formatters_reformat_selection(formatters)

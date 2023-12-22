@@ -21,6 +21,7 @@ class focus:
                 time.sleep(0.1)
                 app.focus()
                 break
+    
 
 
     # def open_or_focus_tab(url: str):

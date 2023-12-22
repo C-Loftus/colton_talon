@@ -10,3 +10,4 @@ title: /Untitled/
 class CodeActions:
     def language():
         return "markdown"
+    
