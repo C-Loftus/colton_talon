@@ -43,3 +43,8 @@ compile and check {user.pandoc_output_format} [<number_small>]:
     file = user.get_full_path()
     number_small = number_small or 10
     user.check_compiled_file(file, user.pandoc_output_format, number_small)
+
+
+
+
+

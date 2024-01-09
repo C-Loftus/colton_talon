@@ -72,12 +72,12 @@ def on_title_switch(window):
 
     if "Microsoft Teams" in window_title:
 
-        if "?ctx=chat" in window_title:
-            actions.user.enable_mixed_mode()
-            return
+        # if "?ctx=chat" in window_title:
+        #     return
+        actions.user.enable_mixed_mode()
             
 
-        actions.user.enable_command_mode()
+        # actions.user.enable_command_mode()
         return
     
     mixed_websites = ["app.slack.com", "outlook.office.com", "chat.openai.com"]

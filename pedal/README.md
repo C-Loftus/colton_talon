@@ -55,3 +55,7 @@ This code works by doing the following:
       - KEY_KP_SLASH: 0xDC 220
       - KEY_KP_ASTERISK: 0xDD 221
       - KEY_KP_MINUS 0xDE 222
+
+## Misc
+
+If the pedal doesn't work alongside NVDA you may need to restart NVDA

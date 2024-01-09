@@ -5,14 +5,14 @@ not mode: dictation
 -
 
 # used for cursorless chaining
-then: skip()
+then:                       skip()
 
-hats permanently off: 
+hats permanently off:
     user.change_setting("cursorless.showOnStart", 'false')
 
-hats permanently on: 
+hats permanently on:
     user.change_setting("cursorless.showOnStart", 'true')
-    
+
 new window:
     key(ctrl-shift-n)
 
@@ -28,7 +28,6 @@ kill program:
     key(ctrl-c)
 hints toggle:
     user.vscode("cursorless.toggleDecorations")
-
 
 restart python:
     key(ctrl-shift-alt-f)
@@ -60,13 +59,11 @@ switch project:
 special:
     "``"
     key(left:1)
-    
-close folders: user.vscode("workbench.files.action.collapseExplorerFolders")
+
+close folders:              user.vscode("workbench.files.action.collapseExplorerFolders")
 # bar collapse: user.vscode("workbench.files.action.collapseExplorerFolders")
 
-
-format document: user.vscode("editor.action.formatDocument")
-
+format document:            user.vscode("editor.action.formatDocument")
 
 run rust:
     user.vscode("workbench.action.terminal.focus")
@@ -100,7 +97,7 @@ run that:
 bar activity:
     user.vscode("workbench.action.toggleActivityBarVisibility")
 
-toggle terminal: 
+toggle terminal:
     user.vscode("workbench.action.terminal.toggleTerminal")
 
 pull user directory:
@@ -110,8 +107,14 @@ pull user directory:
     sleep(.1)
     key(enter)
 
-hunt {user.decoded_language_mode} <user.text>: 
+hunt {user.decoded_language_mode} <user.text>:
     user.find_everywhere(text)
     key(tab:7)
     "*{user.decoded_language_mode}"
     key(enter)
+
+enable completions:
+    user.change_setting("github.copilot.editor.enableAutoCompletions", true)
+
+disable completions:
+    user.change_setting("github.copilot.editor.enableAutoCompletions", false)

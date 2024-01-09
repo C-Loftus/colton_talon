@@ -79,7 +79,7 @@ class Entrance:
         #  -t is needed to specify the output format
         output_path = os.path.join(os.path.dirname(full_path), "build", f"{file_name_without_extension}.{output_ext}")
 
-        cmd= f"pandoc '{full_path}' -o '{output_path}'"
+        cmd= f"pandoc '{full_path}' -F mermaid-filter.cmd -o '{output_path}'"
         actions.user.paste(cmd)
 
     def open_compiled_file(full_path: str, output_format: str):

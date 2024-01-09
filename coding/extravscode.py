@@ -7,6 +7,7 @@ from pathlib import Path
 
 from talon import Context, Module, actions, app, clip
 from typing import Any
+import platform
 
 mod = Module()
 mod.list("markdownOutputType", desc="markdown output type")
@@ -50,12 +51,17 @@ class Actions:
         """
 
         if type(setting_value) == str and (setting_value == 'true' or setting_value == 'false'):
-            setting_value=bool(setting_value)
+            setting_value = bool(setting_value)
 
+        if platform.system() == 'Windows':
+            original_settings_path = Path(
+                expanduser("~\\AppData\\Roaming\\Code\\User\\settings.json")
+            )
+        else:
+            original_settings_path = Path(
+                expanduser("~/.config/Code/User/settings.json")
+            )
 
-        original_settings_path = Path(
-            expanduser("~/.config/Code/User/settings.json")
-        )
         original_settings = original_settings_path.read_text()
         regex = re.compile(rf'^(\s*)"{setting_name}": .*[^,](,?)$', re.MULTILINE)
         new_settings = regex.sub(
