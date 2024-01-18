@@ -5,6 +5,9 @@ mode: command
 # target {user.website}:
 #     user.launch_new_tab_if_not_opened("{website}")
 
+# used for cursorless chaining
+ergo:                       skip()
+
 (fly | why):
     key(end)
 
@@ -69,6 +72,3 @@ cycle results:
 # copy path:
 # shift right click
 # mimic()
-
-
-

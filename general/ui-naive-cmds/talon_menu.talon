@@ -65,3 +65,12 @@ toggle conformer:
     sleep(1.5)
     user.move_to_spot("conformer")
     user.click_spot("conformer")
+
+speak pilot:
+    user.mouse_helper_position_save()
+    user.mouse_helper_move_image_relative("2024-01-16_13.02.11.870487.png", 0)
+    sleep(0.05)
+    mouse_click(0)
+    sleep(0.05)
+    user.mouse_helper_position_restore()
+    user.tts(clip.text())
