@@ -19,3 +19,9 @@ tag: browser
 
 ^grab fast window clip$:
     user.screenshot_window_clipboard()
+
+format black:
+    user.rango_run_action_on_reference("clickElement", "black")
+    sleep(6.5)
+    user.rango_run_action_on_reference("clickElement", "color")
+    key(escape)

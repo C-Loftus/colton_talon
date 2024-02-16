@@ -17,16 +17,15 @@ change <user.excel_cell>:
     key(enter)
     key(backspace)
 
-take  <user.excel_cell> past <user.excel_cell>: 
+take  <user.excel_cell> past <user.excel_cell>:
     key(ctrl-g)
     insert("{user.excel_cell}:{user.excel_cell_2}")
     key(enter)
 
-take until <user.excel_cell>: 
+take until <user.excel_cell>:
     key(ctrl-g)
     insert("A1:{user.excel_cell}")
     key(enter)
-
 
 take column:
     key(ctrl-shift-down)
@@ -34,8 +33,6 @@ take column:
 copy column:
     key(ctrl-shift-down)
     key(ctrl-c)
-
-
 
 carve column:
     key(ctrl-shift-down)
@@ -74,14 +71,14 @@ fit row:
     key(o)
     key(a)
 
-format currency: key(ctrl-shift-$)
-format percent: key(ctrl-shift-%)
-format date: key(ctrl-shift-#)
-format time: key(ctrl-shift-@)
-format scientific: key(ctrl-shift-^)
-format number: key(ctrl-shift-!)
-format strike: key(ctrl-5)
-hints toggle: key(alt)
+format currency:            key(ctrl-shift-$)
+format percent:             key(ctrl-shift-%)
+format date:                key(ctrl-shift-#)
+format time:                key(ctrl-shift-@)
+format scientific:          key(ctrl-shift-^)
+format number:              key(ctrl-shift-!)
+format strike:              key(ctrl-5)
+hints toggle:               key(alt)
 
 new column:
     key(right)
@@ -104,14 +101,26 @@ model fix this:
     key(enter)
     user.paste_delimited(delimRes, "_", "column")
 
-
 chuck this:
     key(ctrl--)
     key(enter)
-
 
 copy append:
     mouse_click(0)
     text = clip.text()
     key(ctrl-c)
     clip.set_text("{text}\n{clip.text()}")
+
+(carrot | caret):
+    key(right)
+
+remove filters:
+    key(alt-d)
+    key(d)
+    key(f)
+
+follow link:
+    key(ctrl-c)
+    sleep(0.3)
+    user.open_url(clip.text())
+             
