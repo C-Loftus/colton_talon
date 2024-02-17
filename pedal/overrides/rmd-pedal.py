@@ -1,5 +1,4 @@
 from talon import Context, Module, actions, settings
-import time, multiprocessing
 
 ctx = Context()
 ctx.matches = """app: vscode
