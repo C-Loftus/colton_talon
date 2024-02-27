@@ -8,27 +8,27 @@ os: windows
 
 # -- Homerow
 # Search in-app using Screen hotkey (displays labels; frontmost app)
-^ax$: 
+^fluent$:
     key(alt-;)
 
 # Search using Screen hotkey (displays labels; screen 1 only)
-^ax screen$: key(ctrl-alt-;)
+^fluent screen$:            key(ctrl-alt-;)
 
-^fluent search$: 
+^fluent search$:
     user.toggleFluentSearchTags()
 
 # -- LaunchBar
 # Search hotkey (in fluent_search.py)
-launch <user.text>: user.fluent_search("apps\t{text}")
+launch <user.text>:         user.fluent_search("apps\t{text}")
 launch brief {user.abbreviation}: user.fluent_search("apps\t{abbreviation}")
-launch bar: user.fluent_search("")
+launch bar:                 user.fluent_search("")
 # Search using Processes hotkey
-launch running: key(ctrl-alt-shift-space)
+launch running:             key(ctrl-alt-shift-space)
 
 # -- Contexts
 # ^con [<user.text>]: user.fluent_search("processes\t{text or ''}")
 
 # -- Menu search / Homerow
 # In-app search hotkey
-^(ax|menu) [<user.text>]$:
+^(fluent |menu) [<user.text>]$:
     user.fluent_search_in_app(text or "", false)

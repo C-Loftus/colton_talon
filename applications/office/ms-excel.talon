@@ -123,4 +123,6 @@ follow link:
     key(ctrl-c)
     sleep(0.3)
     user.open_url(clip.text())
-             
+
+insert bullet:
+    "•"

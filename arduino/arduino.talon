@@ -16,6 +16,7 @@ gamepad(west):
     speech.toggle()
 gamepad(east):
     print("east/B")
+
 gamepad(south):
     # user.toggleFluentSearchTags()
     user.toggle_reader()
