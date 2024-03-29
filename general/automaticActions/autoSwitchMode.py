@@ -87,7 +87,6 @@ def on_title_switch(window):
 def on_app_switch(application):
     if not do_update():
         return
-    print("app switched")
 
     # actions.user.notify(f'{actions.code.language(), application.name}')
 
