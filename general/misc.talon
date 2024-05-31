@@ -86,6 +86,3 @@ fat <user.word>:
     insert('{word}')
     sleep(.2)
     key(enter)
-
-key(ctrl-shift-alt-g):
-    user.test_reader_addon()

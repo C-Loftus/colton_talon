@@ -9,6 +9,7 @@ ctx = Context()
 
 tags: set[str] = set()
 
+
 def add_tag(tag: str):
     tags.add(tag)
     ctx.tags = list(tags)
@@ -16,17 +17,18 @@ def add_tag(tag: str):
 
 def remove_tag(tag: str):
     tags.discard(tag)
-    ctx.tags = list(tags) 
+    ctx.tags = list(tags)
+
 
 if os.name == "nt":
     import win32com
-    import win32com.client 
+    import win32com.client
 
 
 # Make the Mutex generic over the value it stores.
 # In this way we can get proper typing from the `lock` method.
 # class Mutex(Generic[T:=TypeVar("T")]):
-#   # Store the protected value inside the mutex 
+#   # Store the protected value inside the mutex
 #   def __init__(self, value: T):
 #     # Name it with two underscores to make it a bit harder to accidentally
 #     # access the value from the outside.
@@ -79,8 +81,8 @@ class Actions:
         if "sleep" in modes:
             # mode = "sleep"
             actions.speech.enable()
-        else:    
-            actions.speech.disable()    
+        else:
+            actions.speech.disable()
 
     def focus_chrome():
         """focus chrome"""
@@ -94,7 +96,7 @@ class Actions:
 
     def switch_between_code_and_chrome():
         """switch between code and chrome"""
-        active_app = ui.active_app().name       
+        active_app = ui.active_app().name
         if "Code" in active_app:
             actions.user.focus_chrome()
         elif "Chrome" in active_app:
@@ -111,19 +113,19 @@ class Actions:
         actions.user.screenshot_window_clipboard()
         actions.key("f11")
 
-    def return_to_current_app_after(seconds: float): 
+    def return_to_current_app_after(seconds: float):
         """Return to the current app after a certain ones seconds"""
         active_app = ui.active_app()
-        
+
         def return_to_app():
             try:
                 active_app.focus()
                 time.sleep(0.1)
             except:
                 actions.user.notify("return to app failed")
-                raise Exception (f'Could not return to {active_app.name}')
+                raise Exception(f"Could not return to {active_app.name}")
 
-        cron.after(cron.seconds_to_timespec(seconds) , return_to_app)
+        cron.after(cron.seconds_to_timespec(seconds), return_to_app)
 
     def get_usb_device_names():
         """get usb device names"""
@@ -133,13 +135,13 @@ class Actions:
     def get_talon_home():
         """get talon home"""
         return TALON_HOME
-    
+
     def relative_dir_to_talon_home(paths: str):
         """get relative dir to talon home"""
         paths = paths.split("^")
         """get relative dir to talon home"""
         return os.path.join(TALON_HOME, "user", *paths)
-        
+
     def text_to_speech(text: str) -> None:
         """text to speech"""
 
@@ -150,10 +152,13 @@ class Actions:
         """get default browser"""
         return webbrowser.get().name
 
+
 ctxLinux = Context()
 ctxLinux.matches = r"""
 os: linux
 """
+
+
 @ctxLinux.action_class("user")
 class LinuxHelpersActions:
     def lsusb():
@@ -162,18 +167,17 @@ class LinuxHelpersActions:
         proc = subprocess.Popen(["lsusb"], stdout=subprocess.PIPE)
         output = proc.stdout.read()
         return output.decode("utf-8")
-    
+
 
 ctxWindows = Context()
 ctxWindows.matches = r"""
 os: windows
 """
+
+
 @ctxWindows.action_class("user")
 class WindowsHelpersActions:
     def text_to_speech(text: str) -> None:
         """text to speech"""
         speak = win32com.client.Dispatch("SAPI.SpVoice")
         speak.Speak(text)
-        
-        
-    
