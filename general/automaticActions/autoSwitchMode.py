@@ -154,9 +154,9 @@ def switcher():
     ui.register("win_title", on_title_switch)
 
 
+
 # we need to wait until it is loaded since otherwise it could fail when a mode is not defined during startup
 app.register("ready", switcher )
-
 
 
 

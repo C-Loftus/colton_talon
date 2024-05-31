@@ -54,3 +54,7 @@ wrap, wrapWithPairedDelimiter
 # 2023-12-19 12:12:29 - New entries automatically added by cursorless
 break, breakLine
 join, joinLines
+
+# 2024-04-20 16:29:47 - New entries automatically added by cursorless
+decrement, decrement
+increment, increment

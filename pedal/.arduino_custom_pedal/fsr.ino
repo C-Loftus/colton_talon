@@ -1,3 +1,5 @@
+/* Code for creating a hardware FSR Pedal */
+
 #include <inttypes.h>
 
 #if !defined(__AVR_ATmega32U4__) && !defined(__AVR_ATmega328P__) && \
