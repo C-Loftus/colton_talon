@@ -22,7 +22,6 @@ settings():
     # Subtitles are positioned at the bottom of the screen
     user.subtitles_y = 0.93
 
-
     # ==============================
     # NOTIFICATION SETTINGS
     # ==============================
@@ -46,4 +45,5 @@ settings():
     # Notifications are centered vertically
     user.notifications_y = 0.95
 
-subtitles (show | hide):    user.toggle_subtitles()
+subtitles (show | hide):
+    user.toggle_subtitles()

@@ -1,7 +1,6 @@
 app: Kitty
 mode: command
 os: linux
-
 -
 
 fill:
@@ -12,16 +11,16 @@ install:
 update:
     " sudo apt update"
 
-remove: 
+remove:
     " sudo apt remove"
 shortcut:
     " sudo apt update; sudo apt upgrade"
 
 search for:
-    insert('grep -ri "" *') 
+    insert('grep -ri "" *')
     key(left:3)
 
-copy that:  
+copy that:
     key(ctrl-shift-c)
 
 paste that:
@@ -41,4 +40,3 @@ copy to clipboard:
 
 directory:
     user.paste(" mkdir ")
-

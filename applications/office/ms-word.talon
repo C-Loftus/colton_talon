@@ -1,6 +1,5 @@
 title: /Word/
 title: /.docx/
-
 -
 
 level <number_small>:
@@ -17,13 +16,16 @@ read aloud:
     sleep(.2)
     key(ctrl-alt-space)
 
-bullet:  key(ctrl-.)
+bullet:
+    key(ctrl-.)
 
 paste that:
     key(ctrl-shift-v)
 
-new comment:                key(ctrl-alt-m)
-new footnote:               key(alt-ctrl-f)
+new comment:
+    key(ctrl-alt-m)
+new footnote:
+    key(alt-ctrl-f)
 
 formatted footnote:
     key(alt-ctrl-f)
@@ -36,13 +38,16 @@ formatted footnote:
     key(ctrl-shift-+)
     key(right)
 
-new end note:               key(alt-ctrl-d)
+new end note:
+    key(alt-ctrl-d)
 remove highlighting:
     key(alt-h)
     sleep(.1)
     key(i)
     sleep(.1)
     key(n)
-clear formatting:           key(ctrl-space)
+clear formatting:
+    key(ctrl-space)
 
-format strike through:      key(ctrl-shift-x)
+format strike through:
+    key(ctrl-shift-x)

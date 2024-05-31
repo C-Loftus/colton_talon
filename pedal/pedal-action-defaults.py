@@ -1,4 +1,5 @@
-from talon import Module, actions, scope, Context, settings
+from talon import Context, Module, actions, scope, settings
+
 from .pedal_types import AppToActivate
 
 mod = Module()
@@ -6,12 +7,12 @@ ctx = Context()
 ctx.tags = []
 mod.tag("controlTabsWithPedal", desc="tag for controlling tabs with pedal")
 
-#  By default  this is false which signifies a continuously called function 
+#  By default  this is false which signifies a continuously called function
 # (Holding down scroll etc)
 mod.setting(
     "oneActionPerPedalPress",
     type=bool,
-    default=False, 
+    default=False,
     desc="If a pedal is held down, only fire the action once.   In other words only trigger the pedal up action once.",
 )
 
@@ -33,10 +34,10 @@ mod.setting(
 )
 
 mod.setting(
-    'secondsToTriggerPedalHold',
+    "secondsToTriggerPedalHold",
     type=int,
     default=2,
-    desc='secondsToTriggerPedalHold',
+    desc="secondsToTriggerPedalHold",
 )
 
 holdTriggerApp = AppToActivate.MICROSOFT_TEAMS
@@ -46,24 +47,23 @@ holdTriggerApp = AppToActivate.MICROSOFT_TEAMS
 @mod.action_class
 class Actions:
 
-
     def east_north_west_down():
         """Left, Center and Right pedal"""
 
     def center_east_down():
         """Center and Right pedal"""
-        ctx.settings['user.pedal_scroll_amount'] = 0.2
+        ctx.settings["user.pedal_scroll_amount"] = 0.2
         print("Speed reset to 0.2")
-
 
     def east_west_down():
         """Left and Right pedal"""
 
-
     def east_north_down():
         """Center and Right pedal"""
-        ctx.settings['user.pedal_scroll_amount'] = settings.get("user.pedal_scroll_amount")
-        ctx.settings['user.pedal_scroll_amount']+=0.2
+        ctx.settings["user.pedal_scroll_amount"] = settings.get(
+            "user.pedal_scroll_amount"
+        )
+        ctx.settings["user.pedal_scroll_amount"] += 0.2
         print(f'Speed set to: {ctx.settings["user.pedal_scroll_amount"]}')
 
     def north_west_down():
@@ -72,7 +72,6 @@ class Actions:
     def left_center_down():
         """Left and Center pedal"""
 
-
     def west_down():
         """Left pedal"""
         actions.user.mouse_scroll_down(settings.get("user.pedal_scroll_amount"))
@@ -80,48 +79,52 @@ class Actions:
     def east_down():
         """Right pedal"""
         actions.user.mouse_scroll_up(settings.get("user.pedal_scroll_amount"))
+
     def north_down():
         """Center pedal"""
         # modes = scope.get("mode")
         # if "sleep" in modes:
         #     # mode = "sleep"
         #     actions.speech.enable()
-        # else:    
+        # else:
         #     actions.speech.disable()
         # time.sleep(2)
-    
+
     def south_down():
         """south down"""
 
     def west_up():
         """Left pedal up"""
+
     def east_up():
         """Right pedal up"""
+
     def north_up():
         """Center pedal up"""
         actions.user.toggle_sleep_mode()
 
     def south_up():
         """test"""
-    
+
     def held_west():
-        """ called when the left pedal is held down"""
+        """called when the left pedal is held down"""
         if "user.controlTabsWithPedal" in list(ctx.tags):
             ctx.tags = []
         else:
             ctx.tags = ["user.controlTabsWithPedal"]
-        actions.user.notify('controlling tabs')
+        actions.user.notify("controlling tabs")
 
     def held_east():
-        """ called when the right pedal is held down"""
+        """called when the right pedal is held down"""
+
     def held_north():
-        """ called when the right pedal is held down"""
+        """called when the right pedal is held down"""
         print("Held center")
         chrome = actions.user.get_running_app("Chrome")
         actions.user.switcher_focus_app(chrome)
 
         global holdTriggerApp
-        match holdTriggerApp: 
+        match holdTriggerApp:
             case AppToActivate.MICROSOFT_TEAMS:
                 actions.key("ctrl-shift-6")
                 holdTriggerApp = AppToActivate.MICROSOFT_OUTLOOK
@@ -129,8 +132,10 @@ class Actions:
                 actions.key("ctrl-shift-7")
                 holdTriggerApp = AppToActivate.MICROSOFT_TEAMS
             case _:
-                raise ValueError(f"AppToActivate is of type {type(holdTriggerApp)} but must be within {AppToActivate}")
-        
+                raise ValueError(
+                    f"AppToActivate is of type {type(holdTriggerApp)} but must be within {AppToActivate}"
+                )
+
     def toggle_tab_mode():
         """called when the center pedal is held down"""
         if "user.tabsWithPedal" in list(ctx.tags):
@@ -141,4 +146,4 @@ class Actions:
     def reset_pedal_state():
         """"""
         ctx.tags = []
-        ctx.settings['user.pedal_scroll_amount'] = 0.1
+        ctx.settings["user.pedal_scroll_amount"] = 0.1

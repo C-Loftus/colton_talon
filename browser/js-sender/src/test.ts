@@ -4,7 +4,7 @@
 
   console.log("test");
 
-  let testNum = 0
-  testNum += 200
-  console.log(typeof(testNum))
+  let testNum = 0;
+  testNum += 200;
+  console.log(typeof testNum);
 })();

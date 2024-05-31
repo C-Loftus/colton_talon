@@ -1,5 +1,6 @@
-from talon import Context, Module, actions
 import time
+
+from talon import Context, Module, actions
 
 mod = Module()
 
@@ -24,6 +25,7 @@ app: web_dev
 
 ctx.settings["user.oneActionPerPedalPress"] = False
 
+
 @ctx.action_class("user")
 class Actions:
 
@@ -34,7 +36,7 @@ class Actions:
     #     """left pedal"""
 
     # def west_down():
-    #     """left pedal down"""   
+    #     """left pedal down"""
 
     # defnorth_down():
 
@@ -43,19 +45,16 @@ class Actions:
         Switch between chrome and vscode with a
         pedal press if you are doing web dev
         """
-        
+
         if "Chrome" not in actions.win.title():
             chrome = actions.user.get_running_app("Chrome")
             actions.user.switcher_focus_app(chrome)
             actions.key("ctrl-shift-r")
         else:
             actions.user.switcher_focus("Visual Studio Code")
-    
 
     # def east_down():
     #     """right pedal down"""
 
     # def north_up():
     #     """center pedal"""
-
-        

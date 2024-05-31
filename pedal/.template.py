@@ -1,11 +1,12 @@
 from talon import Context, Module, actions
 
 ctx = Context()
-ctx.matches = """title:  
-title: 
+ctx.matches = """title:
+title:
 """
 
 ctx.settings["user.oneActionPerPedalPress"] = False
+
 
 #  functions to be overwritten based on the context
 @ctx.action_class("user")
@@ -31,6 +32,7 @@ class Actions:
 
     def east_up():
         """right pedal"""
+
     def east_down():
         """right pedal down"""
 
@@ -39,8 +41,9 @@ class Actions:
 
     def held_north():
         """called when the center pedal is held down"""
+
     def held_west():
-        """ called when the left pedal is held down"""
+        """called when the left pedal is held down"""
+
     def held_east():
-        """ called when the right pedal is held down"""
-        
+        """called when the right pedal is held down"""

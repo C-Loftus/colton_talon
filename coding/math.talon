@@ -1,5 +1,4 @@
 title: /\.tex/
-
 -
 pdf:
     key(alt-super-e)
@@ -22,6 +21,3 @@ divide:
 
 make document:
     key(ctrl-alt-b)
-
-
-

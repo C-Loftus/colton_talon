@@ -1,9 +1,10 @@
-from talon import Module, app, ui, cron, actions, speech_system, settings
+from typing import Callable, Optional, Type
+
+from talon import Module, actions, app, cron, settings, speech_system, ui
 from talon.canvas import Canvas
 from talon.skia.canvas import Canvas as SkiaCanvas
 from talon.skia.imagefilter import ImageFilter
 from talon.types import Rect
-from typing import Type, Callable, Optional
 
 mod = Module()
 subtitle_canvas = []
@@ -151,16 +152,12 @@ def clear_canvases(canvas_list: list[Canvas]):
     canvas_list.clear()
 
 
-
-
-
-
-
 def on_pre_phrase(phrase):
     words = phrase.get("phrase")
 
     if words and actions.speech.enabled():
         text = " ".join(words)
         show_subtitle(text)
+
 
 speech_system.register("pre:phrase", on_pre_phrase)

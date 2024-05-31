@@ -1,5 +1,9 @@
+import math
+import os
+import random
+import time
+
 from talon import Context, Module, actions
-import time, random, math, os
 
 ctx = Context()
 ctx.matches = """title: /watch/
@@ -12,6 +16,7 @@ title: /listen.overdrive.com/
 speed_mode = False
 
 ctx.settings["user.oneActionPerPedalPress"] = True
+
 
 @ctx.action_class("user")
 class Actions:
@@ -38,4 +43,3 @@ class Actions:
 
     def north_up():
         actions.key("space")
-        

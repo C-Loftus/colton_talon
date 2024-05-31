@@ -1,12 +1,10 @@
 #My additional  commands for firefox beyond those in knausj
-
 tag: browser
 # app: chrome
-
 -
 # for firefox it requires my extension to switch to last tab with ctrl-9
 
-last [<number_small>] :
+last [<number_small>]:
     key(ctrl-9)
     times = number_small or 1
     times = times - 1
@@ -14,7 +12,7 @@ last [<number_small>] :
     sleep(.05)
     key("ctrl-pageup:{times}")
 
-tab <number_small> :
+tab <number_small>:
     key("ctrl-{number_small}")
 
 web search [<user.text>]:
@@ -45,12 +43,11 @@ bookmark <user.word>:
 bookmarks:
     key(ctrl-b)
 
-pick <number_small>: 
-    key("down:{number_small}") 
+pick <number_small>:
+    key("down:{number_small}")
     key(enter)
 
-
-notion save [( as | to)] [{user.notionDatabases}]:
+notion save [(as | to)] [{user.notionDatabases}]:
     key(ctrl-shift-k)
     sleep(1.5)
     key(tab)
@@ -72,7 +69,5 @@ notion save [( as | to)] [{user.notionDatabases}]:
 ^help notion$:
     user.help_list("user.notionDatabases")
 
-
-hence (toggle | switch): user.rango_command_without_target("toggleHints")
-
-
+hence (toggle | switch):
+    user.rango_command_without_target("toggleHints")

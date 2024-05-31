@@ -8,4 +8,4 @@
 
 # # parrot(lll):
 # #     print("lll")
-# #     mouse_click(0)   
+# #     mouse_click(0)

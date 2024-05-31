@@ -17,7 +17,7 @@ code block:
 run line:
     key(ctrl-enter)
 
-run chunk: 
+run chunk:
     user.vscode("r.runCurrentChunks")
 
 run all:

@@ -1,10 +1,13 @@
-from talon import Context, Module, actions
 import time
+
+from talon import Context, Module, actions
+
 ctx = Context()
 
 ctx.matches = """tag: user.controlTabsWithPedal
 """
 ctx.settings["user.oneActionPerPedalPress"] = False
+
 
 #  functions to be overwritten based on the context
 @ctx.action_class("user")
@@ -39,14 +42,12 @@ class Actions:
     #     """right pedal down"""
 
     # def north_up():
-        # """center pedal"""
+    # """center pedal"""
 
     # defnorth_down():
 
-        
     # def held_west():
     #     """ called when the left pedal is held down"""
 
     def held_east():
-        """ called when the right pedal is held down"""
-        
+        """called when the right pedal is held down"""

@@ -213,7 +213,7 @@ class SensorState {
     if (cur_value < user_threshold - kPaddingWidth) {
       individual_states_[sensor_index] = SensorState::OFF;
     }
-    
+
     // If we evaluated all the sensors this state applies to, only then
     // should we determine if we want to send a press/release event.
     bool all_evaluated = (sensor_index == num_sensors_ - 1);
@@ -291,7 +291,7 @@ class SensorState {
   State combined_state_ = SensorState::OFF;
 
   // One-tailed width size to create a window around user_threshold to
-  // mitigate fluctuations by noise. 
+  // mitigate fluctuations by noise.
   // TODO(teejusb): Make this a user controllable variable.
   const int16_t kPaddingWidth = 1;
 
@@ -318,7 +318,7 @@ class Sensor {
         #endif
         offset_(0), sensor_state_(sensor_state),
         should_delete_state_(false) {}
-  
+
   ~Sensor() {
     if (should_delete_state_) {
       delete sensor_state_;
@@ -344,7 +344,7 @@ class Sensor {
 
     // Initialize the sensor state.
     // This sets the button number corresponding to the sensor state.
-    // Trying to re-initialize a sensor_state_ is a no-op, so no harm in 
+    // Trying to re-initialize a sensor_state_ is a no-op, so no harm in
     sensor_state_->Init();
 
     // If this sensor hasn't been added to the state, then try adding it.
@@ -408,7 +408,7 @@ class Sensor {
 
   // Delete default constructor. Pin number MUST be explicitly specified.
   Sensor() = delete;
- 
+
  private:
   // Ensures that Init() has been called at exactly once on this Sensor.
   bool initialized_;
@@ -417,9 +417,9 @@ class Sensor {
 
   // The user defined threshold value to activate/deactivate this sensor at.
   int16_t user_threshold_;
-  
+
   #if defined(CAN_AVERAGE)
-  // The smoothed moving average calculated to reduce some of the noise. 
+  // The smoothed moving average calculated to reduce some of the noise.
   HullMovingAverage moving_average_;
   #endif
 
@@ -481,7 +481,7 @@ class SerialProcessor {
       buffer_[bytes_read] = '\0';
 
       if (bytes_read == 0) { return; }
- 
+
       switch(buffer_[0]) {
         case 'o':
         case 'O':
@@ -500,7 +500,7 @@ class SerialProcessor {
         default:
           break;
       }
-    }  
+    }
   }
 
   void UpdateAndPrintThreshold(size_t bytes_read) {
@@ -508,7 +508,7 @@ class SerialProcessor {
     // Sensor number + Threshold value, separated by a space.
     // {0, 1, 2, 3,...} + "0"-"1023"
     // e.g. 3 180 (fourth FSR, change threshold to 180)
-    
+
     if (bytes_read < 3 || bytes_read > 7) { return; }
 
     char* next = nullptr;
@@ -568,9 +568,9 @@ void setup() {
     // Button numbers should start with 1.
     kSensors[i].Init(i + 1);
     kSensors[i].UpdateThreshold(kDefaultThreshold);
-    
+
   }
-  
+
   #if defined(CLEAR_BIT) && defined(SET_BIT)
 	  // Set the ADC prescaler to 16 for boards that support it,
 	  // which is a good balance between speed and accuracy.

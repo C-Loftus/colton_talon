@@ -1,7 +1,10 @@
+import os
 import subprocess
+import time
+import webbrowser
 from typing import ContextManager
-from talon import Module, actions, Context, scope, clip, ui, cron
-import time, os, webbrowser
+
+from talon import Context, Module, actions, clip, cron, scope, ui
 from talon_init import TALON_HOME
 
 mod = Module()

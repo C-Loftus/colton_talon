@@ -1,21 +1,18 @@
-
 mode: command
 title: /docs.google/
-
 -
 
-
 for all:
-    insert('\\forall')
+    insert("\\forall")
     key(space)
 Special in:
-    insert('\\in')
+    insert("\\in")
     key(space)
 infinite:
     user.paste("∞")
     key(right)
 
-Greater  equal:
+Greater equal:
     ">="
 Less equal:
     "<="

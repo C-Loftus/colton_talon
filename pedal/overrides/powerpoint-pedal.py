@@ -1,5 +1,6 @@
-from talon import Context, Module, actions, settings
 import time
+
+from talon import Context, Module, actions, settings
 
 ctx = Context()
 ctx.matches = r"""app: powerpointInBrowser
@@ -15,8 +16,6 @@ mod.apps.powerpointInBrowser = """
 
 ctx.settings["user.oneActionPerPedalPress"] = False
 ctx.settings["user.oneActionOnCenterPress"] = False
-
-
 
 
 @ctx.action_class("user")
@@ -39,7 +38,3 @@ class Actions:
         """center pedal"""
         actions.key("tab")
         time.sleep(0.5)
-
-
-
-        

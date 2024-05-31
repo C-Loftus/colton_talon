@@ -12,12 +12,12 @@ tag(): browser
 
 # define some voice commands
 
-switch tab: key(ctrl-tab)
+switch tab:
+    key(ctrl-tab)
 
 listen:
     key(ctrl-shift-s)
     speech.disable()
-  
-    
+
 close tab:
     key(ctrl-w)

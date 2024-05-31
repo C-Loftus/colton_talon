@@ -3,29 +3,26 @@ from talon import Module, actions
 mod = Module()
 
 
-# TODO:  allow columns and rowsprocesses   
+# TODO:  allow columns and rowsprocesses
 # + allows for multiple letters
 @mod.capture(rule="<user.letter>+ <number>")
 def excel_cell(m) -> str:
-    return f'{m.letter}{m.number}'
+    return f"{m.letter}{m.number}"
 
 
 @mod.action_class
 class Actions:
-    def paste_delimited(text: str, delimiter: str="_", orientation: str = "column"):
-        '''paste a column by default'''
+    def paste_delimited(text: str, delimiter: str = "_", orientation: str = "column"):
+        """paste a column by default"""
 
         assert type(text) == str
 
-        orientation=orientation.strip().lower()
+        orientation = orientation.strip().lower()
         if orientation != "row" and orientation != "column":
-            raise ValueError(f'Invalid orientation {orientation} specified')
-        for word in text.split(delimiter): 
+            raise ValueError(f"Invalid orientation {orientation} specified")
+        for word in text.split(delimiter):
             actions.user.paste(word)
-            if orientation == "row" :
-               actions.key('tab')
+            if orientation == "row":
+                actions.key("tab")
             else:
-               actions.key('down')
-
-    
-    
+                actions.key("down")

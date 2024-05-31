@@ -1,6 +1,6 @@
 // Get all elements with [width='100%'] tr [border='0'] tbody [type='text']
 const elements = document.querySelectorAll(
-  '[width="100%"] tr [border="0"] tbody [type="text"]'
+  '[width="100%"] tr [border="0"] tbody [type="text"]',
 );
 
 country = true;

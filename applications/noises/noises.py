@@ -10,7 +10,7 @@
 
 # @mod.action_class
 # class Locks:
-#     # lock scrolling in cases otherwise permitted if manually specificied    
+#     # lock scrolling in cases otherwise permitted if manually specificied
 #     def lock_scroll():
 #         """
 #         Lock the hiss
@@ -75,13 +75,11 @@
 #         actions.user.mouse_scroll_down(amount=.9)
 #     elif hiss_lock:
 #         print("hiss lock")
-                    
+
 # # noise.register("hiss", on_hiss)
-
-
 
 
 # # patterns.json
 # # 	"throttle": {
 # # 			"gluck": 0.9
-# # 		}	
+# # 		}

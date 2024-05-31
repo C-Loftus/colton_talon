@@ -12,7 +12,6 @@
 (function () {
   "use strict";
 
-
   // Append the button to the document
 
   // Helper function to click a random element with a given class
@@ -39,5 +38,5 @@
     }, 1000); // Adjust the interval (in milliseconds) as needed
   }
 
-    simulateRandomClicks();
+  simulateRandomClicks();
 })();

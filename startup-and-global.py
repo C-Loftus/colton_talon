@@ -1,13 +1,23 @@
-from talon import app, Context, actions, ui, cron
-import subprocess, os, time
+import os
+import subprocess
+import time
 
-if os.name == 'nt':
+from talon import Context, actions, app, cron, ui
+
+if os.name == "nt":
     import win32gui
 
+
 def get_windows_running_apps():
-    
-    #Remove these apps from the list since they aren't necessary and can't be called with keyboard shortcuts anyways
-    FILTER_THESE = ['Microsoft Text Input Application', 'Windows Shell Experience Host', 'Search', 'Cortana', "Start"]
+
+    # Remove these apps from the list since they aren't necessary and can't be called with keyboard shortcuts anyways
+    FILTER_THESE = [
+        "Microsoft Text Input Application",
+        "Windows Shell Experience Host",
+        "Search",
+        "Cortana",
+        "Start",
+    ]
     taskbar_apps = []
 
     def callback(hwnd, lParam):
@@ -29,7 +39,7 @@ def get_windows_running_apps():
 
 
 def check_git():
-    current_dir = os.path.dirname(os.path.abspath(__file__) )
+    current_dir = os.path.dirname(os.path.abspath(__file__))
 
     def create_path(path):
         return os.path.join(current_dir, "..", path)
@@ -46,11 +56,13 @@ def check_git():
             os.chdir(path)
 
             # Check if there are any new changes
-            output = subprocess.check_output(['git', 'status', '-uno'], stderr=subprocess.STDOUT)
-            output = output.decode('utf-8')
+            output = subprocess.check_output(
+                ["git", "status", "-uno"], stderr=subprocess.STDOUT
+            )
+            output = output.decode("utf-8")
 
             # If the output contains "Your branch is behind", there are new changes
-            if 'Your branch is behind' in output:
+            if "Your branch is behind" in output:
                 app.notify(body=f"New changes are available for {path}")
                 no_updates = False
 
@@ -66,20 +78,21 @@ def disconnect_eye_tracker():
     try:
         actions.user.mouse_sleep()
         actions.user.disconnect_ocr_eye_tracker()
-    except :
+    except:
         # if the eye tracker is already disconnected, just pass
         # we don't care about errors here
         pass
 
+
 def auto_actions_on_startup():
 
-    cron.after("4s", disconnect_eye_tracker )
+    cron.after("4s", disconnect_eye_tracker)
     # actions.key(BROWSER := "super-1")
 
     match os.name:
-        
+
         case "nt":
-            # for some reason this application doesn't auto start natively 
+            # for some reason this application doesn't auto start natively
             # through windows so we have to just press the key
             # actions.key(STRETCHLY := "super-9")
             # check uptime and only run this if it's been less than 5 minutes
@@ -90,18 +103,6 @@ def auto_actions_on_startup():
 
         case "posix":
             check_git()
-            
-            
+
+
 app.register("ready", auto_actions_on_startup)
-
-
-game_controller_config = (
-    "03000000c01600008704000011010000,"
-    "Serial/Keyboard/Mouse/Joystick,"
-    "platform:Linux,"
-    "a:b1,b:b0,x:b2,y:b3,dpup:b4,"
-)
-
-# 03000000c01600008704000000000000,Serial/Keyboard/Mouse/Joystick,platform:Windows,a:b4,b:b3,x:b2,y:b1,dpup:b0,
-
-# os.environ["SDL_GAMECONTROLLERCONFIG"] = game_controller_config

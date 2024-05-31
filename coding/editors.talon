@@ -11,7 +11,7 @@ go up <digits>:
     key("up:{digits_1}")
 
 copy <digits> lines:
-    edit.extend_line_end() 
-    edit.extend_line_down() 
-    repeat(digits-2)
+    edit.extend_line_end()
+    edit.extend_line_down()
+    repeat(digits - 2)
     edit.copy()

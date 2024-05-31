@@ -14,4 +14,3 @@ gamepad(north:down):
 
 gamepad(north:up):
     user.pedal_up("south")
-    

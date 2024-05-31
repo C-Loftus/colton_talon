@@ -1,6 +1,5 @@
 mode: command
 os: linux
-
 -
 system monitor:
     key(super-c)
@@ -14,7 +13,7 @@ launch code:
     user.system_command_nb("code")
 launch code thesis:
     user.system_command_nb("code ~/Projects/thesis")
-Launch code voice: 
+Launch code voice:
     user.system_command_nb("code ~/numen")
 
 launch chrome:

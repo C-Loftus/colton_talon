@@ -7,17 +7,17 @@ title: /Google Docs/
 -
 settings():
     key_wait = 10.0
-    
+
 caps:
     mouse_click()
-	mouse_click()
+    mouse_click()
     text = edit.selected_text()
     result = user.formatted_text(text, "title")
     user.paste(result)
 
 mini:
     mouse_click()
-	mouse_click()
+    mouse_click()
     text = edit.selected_text()
     result = user.formatted_text(text, "alldown")
     user.paste(result)

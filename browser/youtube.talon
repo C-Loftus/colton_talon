@@ -1,20 +1,20 @@
 title: /YouTube/
 title: /Invidious/
-
 -
 # settings():
 #     key_wait = 10.0
 
-jump left: 
+jump left:
     key(ctrl-left)
-jump right: 
+jump right:
     key(ctrl-right)
 speed up <digits>:
     key("d:{digits_1}")
-speed down <digits>:    
+speed down <digits>:
     key("s:{digits_1}")
 
-ten: ""
+ten:
+    ""
 
 search <user.text>:
     key("/")
@@ -22,12 +22,11 @@ search <user.text>:
     "{user.text}"
     key(enter)
 
-next chapter: 
+next chapter:
     key(ctrl-right)
 
-previous chapter: 
+previous chapter:
     key(ctrl-left)
 
-
-toggle mini: 
+toggle mini:
     key(i)

@@ -1,6 +1,6 @@
-from talon import Module, Context, actions, clip
-
 import webbrowser
+
+from talon import Context, Module, actions, clip
 
 mod = Module()
 mod.list("notionDatabases", "notion databases that are available to save to")
@@ -15,7 +15,9 @@ class Actions:
             chrome = actions.user.get_running_app("Chrome")
             actions.user.switcher_focus_app(chrome)
         except:
-            raise NotImplementedError("Firefox doesn't support a keyboard shortcut for tab search")
+            raise NotImplementedError(
+                "Firefox doesn't support a keyboard shortcut for tab search"
+            )
 
         actions.key("ctrl-l")
         actions.sleep(0.05)
@@ -30,7 +32,7 @@ class Actions:
 
         clipped_web = clip.text().strip()
 
-        #this checks if nothing happened and then opens a new tab if nothing happened
+        # this checks if nothing happened and then opens a new tab if nothing happened
         if TAB_SEARCH_RETURNED_NONE := (website.strip() == clipped_web):
             webbrowser.open(website)
 

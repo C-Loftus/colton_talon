@@ -1,9 +1,7 @@
 # activate this .talon file if the current app name is "Chrome"
 # you can find app names by running ui.apps() in the REPL
 app.name: Google-chrome
-
 mode: sleep
-
 -
 
 # # disable dictation
@@ -17,7 +15,7 @@ mute:
     key(ctrl-shift-s)
     sleep(1)
     key(ctrl-backspace)
-  
+
 enter:
     key(enter)
 
@@ -48,6 +46,3 @@ backspace:
 delete:
     sleep(.5)
     key(ctrl-backspace)
-
-
-  

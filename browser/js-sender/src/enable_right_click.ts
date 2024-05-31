@@ -1,4 +1,4 @@
 (function enableRightClick() {
-  document.oncontextmenu=null;
+  document.oncontextmenu = null;
   window.oncontextmenu = null;
 })();

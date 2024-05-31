@@ -6,7 +6,8 @@ mode: command
 #     user.launch_new_tab_if_not_opened("{website}")
 
 # used for cursorless chaining
-ergo:                       skip()
+ergo:
+    skip()
 
 (fly | why):
     key(end)
@@ -74,15 +75,15 @@ cycle results:
 # mimic()
 
 alpha:
-    user.paste('α')
+    user.paste("α")
 
 beta:
-    user.paste('β')
+    user.paste("β")
 
 extract info:
     "for the information on this page, extract the company or sponrsor of the drug, the indication, the mechanism of action, route of administration, whether it requires a specific ER/HR/HER status, the line of therapy, the phase if it is a clinical trial, the mutation or gene target if applicable, any other important info and output it all in a bullet point format."
 
 fat <user.word>:
-    insert('{word}')
+    insert("{word}")
     sleep(.2)
     key(enter)

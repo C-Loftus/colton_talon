@@ -8,5 +8,5 @@
     "incremental": true,
     "moduleResolution": "node"
   },
-  "skipLibCheck": true,
+  "skipLibCheck": true
 }

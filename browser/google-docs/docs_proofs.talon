@@ -1,35 +1,31 @@
 title: /Google Docs/
 mode: command
-
 -
 # settings():
 #     key_wait = 10.0
 
-
-
-
 sigma:
-    insert('\\sum \n')
+    insert("\\sum \n")
     key(right)
 alpha:
-    insert('\\alpha ')
+    insert("\\alpha ")
     key(space)
 beta:
-    insert('\\beta ')
+    insert("\\beta ")
     key(space)
 
 gamma:
-    insert('\\gamma ')
+    insert("\\gamma ")
     key(space)
 delta:
-    insert('\\delta ')
+    insert("\\delta ")
     key(space)
 epsilon:
-    insert('\\epsilon ')
+    insert("\\epsilon ")
     key(space)
 
 raise <user.alnum>:
-    print('test')
+    print("test")
     insert("^{alnum_1}\n")
 
 integral <user.alnum> <user.alnum>:
@@ -41,17 +37,15 @@ sigma <user.alnum> <user.alnum>:
 <user.alnum> choose <user.alnum>:
     insert("\\choose {alnum_1}\n{alnum_2}\n")
 
-sigma (<number>|<user.letter>) infinity:
+sigma (<number> | <user.letter>) infinity:
     insert("\\sum ")
     insert(number or letter)
     key(enter)
     insert("∞")
     key(enter)
 
-
-<user.alnum> divide  <user.alnum>:
+<user.alnum> divide <user.alnum>:
     insert("\\frac {alnum_1}\n{alnum_2}\n")
-    
 
 special <user.letters>:
     key(space)
@@ -110,7 +104,6 @@ special down <user.letters> sub <number>:
     key(right)
     key(right)
 
-
 special down <user.letters>:
     key(alt-shift-i)
     key(e)
@@ -125,4 +118,3 @@ special down <user.letters>:
     insert("{letter}_")
     insert("{letter_2}")
     key(right)
-

@@ -1,42 +1,36 @@
-
-from typing import Union
 import json
-import re, os
+import os
+import platform
+import re
 from os.path import expanduser
 from pathlib import Path
+from typing import Any, Union
 
 from talon import Context, Module, actions, app, clip
-from typing import Any
-import platform
 
 mod = Module()
 mod.list("markdownOutputType", desc="markdown output type")
 
 
-
-
 @mod.action_class
 class Actions:
 
-    def remove_spaces(string: str): 
-        """"Removes Spaces from String"""
+    def remove_spaces(string: str):
+        """ "Removes Spaces from String"""
         return string.replace(" ", "")
-    
- 
-
 
     def get_dirname() -> str:
         """get current base name"""
         actions.user.vscode("copyFilePath")
-        path= clip.text()
+        path = clip.text()
         return os.path.dirname(path)
-    
+
     def get_basename() -> str:
         """get current base name"""
         actions.user.vscode("copyFilePath")
-        path= clip.text()
+        path = clip.text()
         return os.path.basename(path)
-    
+
     def get_full_path() -> str:
         """get current full path"""
         actions.user.vscode("copyFilePath")
@@ -50,10 +44,12 @@ class Actions:
             setting_value (any): The new value.  Will be JSON encoded
         """
 
-        if type(setting_value) == str and (setting_value == 'true' or setting_value == 'false'):
+        if type(setting_value) == str and (
+            setting_value == "true" or setting_value == "false"
+        ):
             setting_value = bool(setting_value)
 
-        if platform.system() == 'Windows':
+        if platform.system() == "Windows":
             original_settings_path = Path(
                 expanduser("~\\AppData\\Roaming\\Code\\User\\settings.json")
             )

@@ -1,4 +1,4 @@
-app.name: Adobe Acrobat Reader 
+app.name: Adobe Acrobat Reader
 -
 
 resume:

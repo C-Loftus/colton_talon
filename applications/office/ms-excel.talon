@@ -17,7 +17,7 @@ change <user.excel_cell>:
     key(enter)
     key(backspace)
 
-take  <user.excel_cell> past <user.excel_cell>:
+take <user.excel_cell> past <user.excel_cell>:
     key(ctrl-g)
     insert("{user.excel_cell}:{user.excel_cell_2}")
     key(enter)
@@ -61,7 +61,7 @@ next sheet:
 previous sheet:
     key(ctrl-pageup)
 
-( fit column | sit colon | fit colon):
+(fit column | sit colon | fit colon):
     key(alt-h)
     key(o)
     key(i)
@@ -71,14 +71,22 @@ fit row:
     key(o)
     key(a)
 
-format currency:            key(ctrl-shift-$)
-format percent:             key(ctrl-shift-%)
-format date:                key(ctrl-shift-#)
-format time:                key(ctrl-shift-@)
-format scientific:          key(ctrl-shift-^)
-format number:              key(ctrl-shift-!)
-format strike:              key(ctrl-5)
-hints toggle:               key(alt)
+format currency:
+    key(ctrl-shift-$)
+format percent:
+    key(ctrl-shift-%)
+format date:
+    key(ctrl-shift-#)
+format time:
+    key(ctrl-shift-@)
+format scientific:
+    key(ctrl-shift-^)
+format number:
+    key(ctrl-shift-!)
+format strike:
+    key(ctrl-5)
+hints toggle:
+    key(alt)
 
 new column:
     key(right)

@@ -12,6 +12,7 @@ ctx.settings["user.oneActionPerPedalPress"] = True
 pedal_scroll_amount = settings.get("user.pedal_scroll_amount")
 scroll, jump = False, False
 
+
 @ctx.action_class("user")
 class Actions:
 
@@ -27,21 +28,21 @@ class Actions:
         global scroll
         scroll = not scroll
         print("Switching scroll mode to", scroll)
-        ctx.settings["user.oneActionPerPedalPress"] = not ctx.settings["user.oneActionPerPedalPress"]
+        ctx.settings["user.oneActionPerPedalPress"] = not ctx.settings[
+            "user.oneActionPerPedalPress"
+        ]
         if scroll:
             print("Scroll amount is", pedal_scroll_amount)
-        
 
     def west_up():
         """Left pedal"""
         actions.user.vscode("jupyter.gotoPrevCellInFile")
         actions.user.vscode("notebook.focusPreviousEditor")
-        
 
     def east_up():
         """Right pedal"""
         if not jump:
-            actions.user.vscode("jupyter.runcurrentcell"); 
+            actions.user.vscode("jupyter.runcurrentcell")
             actions.user.vscode("notebook.cell.execute")
         actions.user.vscode("jupyter.gotoNextCellInFile")
         actions.user.vscode("notebook.focusNextEditor")
@@ -49,6 +50,5 @@ class Actions:
     def north_up():
         """Center pedal"""
 
-        actions.user.vscode("jupyter.runcurrentcell"); 
+        actions.user.vscode("jupyter.runcurrentcell")
         actions.user.vscode("notebook.cell.execute")
-

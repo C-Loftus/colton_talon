@@ -8,11 +8,11 @@
 
 # ctx.settings["user.oneActionPerPedalPress"] = False
 # ctx.settings["user.oneActionOnCenterPress"] = True
-    
+
 # @ctx.action_class("user")
 # class Actions:
 
-   
+
 #     def west_down():
 #         # os.system("amixer -D pulse sset Master 5%- > /dev/null")
 #         actions.key("down")
@@ -28,4 +28,3 @@
 #     #     # actions.user.with_nvda_mod_press
 #     #     actions.key("tab")
 #     #     actions.sleep("2s")
-        

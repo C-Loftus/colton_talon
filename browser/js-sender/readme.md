@@ -2,7 +2,7 @@ The purpose of the code in this folder is storing my Typescript functions I use 
 
 ## Technical Details
 
-This repository takes a sequence of Typescript/Javascript files and outputs a series of minified Javascript files. This is done with webpack. This is useful for  reducing the amount of data that needs to get sent over the clipboard and more easily including external libraries or bundled files if necessary.
+This repository takes a sequence of Typescript/Javascript files and outputs a series of minified Javascript files. This is done with webpack. This is useful for reducing the amount of data that needs to get sent over the clipboard and more easily including external libraries or bundled files if necessary.
 
 You will need `npm` and then run `npm install; npm run build` to compile the Typescript.
 

@@ -1,7 +1,6 @@
 mode: command
 title: /outlook.office.com/
 tag: browser
-
 -
 
 departure:
@@ -14,4 +13,3 @@ entrance <user.rango_target>:
 
 entrance:
     "Hello,\nThank you very much for your email.\n"
-        

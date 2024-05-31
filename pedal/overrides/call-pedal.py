@@ -27,6 +27,7 @@ app: teamsCallInBrowser
 
 ctx.settings["user.oneActionPerPedalPress"] = True
 
+
 @ctx.action_class("user")
 class CallActions:
 
@@ -37,11 +38,13 @@ class CallActions:
     def east_up():
         actions.key("volup")
 
+
 @teams_context.action_class("user")
 class TeamsActions:
 
     def east_west_down():
         actions.key("ctrl-shift-m")
+
 
 @zoom_context.action_class("user")
 class ZoomActions:

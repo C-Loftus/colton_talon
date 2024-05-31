@@ -1,6 +1,7 @@
-from talon import actions, ui, scope, app, Context, Module
-import time
 import os
+import time
+
+from talon import Context, Module, actions, app, scope, ui
 
 mod = Module()
 mod.tag("auto_switch_mode", desc="auto switch mode based on application")
@@ -112,7 +113,6 @@ def switcher():
 
     ui.register("app_activate", on_app_switch)
     ui.register("win_title", on_title_switch)
-
 
 
 # we need to wait until it is loaded since otherwise it could fail when a mode is not defined during startup

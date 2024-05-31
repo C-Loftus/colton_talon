@@ -1,9 +1,9 @@
 list:  user.pandoc_output_format
 
-- 
+-
 
 powerpoint
 word
-pdf 
+pdf
 html
 latex

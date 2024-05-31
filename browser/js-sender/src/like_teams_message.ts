@@ -1,6 +1,6 @@
 function click_last_message() {
   const elements = document.querySelectorAll(
-    '[class*="fui-ChatMyMessage__body"]'
+    '[class*="fui-ChatMyMessage__body"]',
   );
 
   if (elements.length > 0) {
@@ -10,12 +10,12 @@ function click_last_message() {
         bubbles: true,
         cancelable: true,
         view: window,
-      })
+      }),
     );
   }
 
   let buttonElement = document.querySelector(
-    'div[role="toolbar"] button.fui-Button[type="button"]'
+    'div[role="toolbar"] button.fui-Button[type="button"]',
   );
 
   // Check if the button element exists
@@ -33,7 +33,7 @@ window.addEventListener("load", () => {
   console.log("test");
   // click the last message
   const elements = document.querySelectorAll(
-    '[class*="fui-ChatMyMessage__body"]'
+    '[class*="fui-ChatMyMessage__body"]',
   );
 
   if (elements.length > 0) {
@@ -43,7 +43,7 @@ window.addEventListener("load", () => {
         bubbles: true,
         cancelable: true,
         view: window,
-      })
+      }),
     );
   }
 });

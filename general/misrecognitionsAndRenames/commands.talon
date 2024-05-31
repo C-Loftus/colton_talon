@@ -1,4 +1,5 @@
-(queer | were) line:        edit.delete_line()
+(queer | were) line:
+    edit.delete_line()
 
 inter:
     key(enter)

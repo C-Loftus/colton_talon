@@ -1,4 +1,5 @@
-from talon import Module, Context
+from talon import Context, Module
+
 mod = Module()
 ctx = Context()
 
@@ -20,5 +21,5 @@ class Actions:
             ctx.tags = ["user.asArduino"]
         else:
             ctx.tags = ["user.asPedal"]
-        
+
         isPedal = not isPedal

@@ -2,7 +2,6 @@ title: /Slack/
 title: /Element/
 title: /Discord/
 title: /Microsoft Teams/
-
 -
 settings():
     # Note unstable API; might change

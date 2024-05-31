@@ -1,5 +1,4 @@
 mode: command
-
 -
 
 note scratch <user.text>:

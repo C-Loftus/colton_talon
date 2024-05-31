@@ -1,4 +1,4 @@
-from talon import Context, Module, actions, settings, scope
+from talon import Context, Module, actions, scope, settings
 
 ctx = Context()
 ctx.matches = """app: vscode
@@ -7,11 +7,15 @@ not tag: user.controlTabsWithPedal
 """
 
 ctx.settings["user.oneActionPerPedalPress"] = False
-ctx.settings["user.oneActionOnCenterPress"] = True 
+ctx.settings["user.oneActionOnCenterPress"] = True
 
 
 ctx.tags = []
-pedal_scroll_amount = settings.get("user.pedal_scroll_amount") if settings.get("user.pedal_scroll_amount") else 0.2
+pedal_scroll_amount = (
+    settings.get("user.pedal_scroll_amount")
+    if settings.get("user.pedal_scroll_amount")
+    else 0.2
+)
 
 jump = False
 
@@ -26,6 +30,7 @@ def update_tag(ctx, tag):
         new_tags.add(tag)
     ctx.tags = frozenset(new_tags)
 
+
 @ctx.action_class("user")
 class Actions:
 
@@ -35,7 +40,6 @@ class Actions:
         jump = not jump
         display = False
         print("Switching jump mode to", jump)
-
 
     def north_west_down():
         """Left and Center pedal"""
@@ -47,7 +51,6 @@ class Actions:
     def east_north_down():
         """Center and Right pedal"""
         # update_tag(ctx, "pedal.scroll")
-
 
     def west_up():
         """Left pedal"""
@@ -72,9 +75,8 @@ class Actions:
             if "sleep" in modes:
                 # mode = "sleep"
                 actions.speech.enable()
-            else:    
+            else:
                 actions.speech.disable()
-
 
     def west_down():
         if not settings.get("user.oneActionPerPedalPress"):
@@ -87,18 +89,17 @@ class Actions:
     def reset_pedal_state():
         """called when the center pedal is held down"""
         ctx.tags = []
-        ctx.settings['user.pedal_scroll_amount'] = 0.2
+        ctx.settings["user.pedal_scroll_amount"] = 0.2
 
     def south_down():
         """called when the south pedal is down"""
         actions.key("enter")
         actions.sleep("5000ms")
 
-                
     # def noise_trigger_hiss(active: bool):
     #     """
     #     Called when the user makes a 'hiss' noise. Listen to
     #     https://noise.talonvoice.com/static/previews/hiss.mp3 for an
     #     example.
-    #     """ 
+    #     """
     #     actions.user.notify('test')

@@ -1,7 +1,6 @@
 title: /Microsoft Teams/
 mode: command
 tag: browser
-
 -
 
 entrance <user.rango_target>:

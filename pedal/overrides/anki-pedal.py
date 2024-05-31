@@ -9,9 +9,12 @@ app.exe: anki.exe
 """
 
 ctx.settings["user.oneActionPerPedalPress"] = True
+
+
 @ctx.action_class("user")
 class UserActions:
     """anki spaced repetition system overrides for pedal"""
+
     def north_up():
         actions.key("space")
 
@@ -23,6 +26,6 @@ class UserActions:
 
     def east_north_down():
         actions.key("3")
-    
+
     def north_west_down():
         actions.key("2")

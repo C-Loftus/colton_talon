@@ -1,9 +1,11 @@
-from talon import Module, cron, actions, ctrl, ui, Context
 import time
+
+from talon import Context, Module, actions, cron, ctrl, ui
 
 mod = Module()
 
 job = None
+
 
 def mouse_move_random():
     """move the mouse cursor to the center of the currently active window"""
@@ -17,9 +19,8 @@ def mouse_move_random():
     ctrl.mouse_move(rect.left + (rect.width), rect.top + (rect.height))
 
 
-
 @mod.action_class
-class act: 
+class act:
     def toggle_auto_move_mouse():
         """Toggle auto move mouse"""
         actions.user.notify("moving mouse automatically")
@@ -27,8 +28,8 @@ class act:
         if job:
             job.cancel()
         else:
-            job =  cron.interval("50s", mouse_move_random)
-            
+            job = cron.interval("50s", mouse_move_random)
+
     def mouse_move_center_active_window():
         """move the mouse cursor to the center of the active window"""
 
@@ -43,5 +44,7 @@ class act:
             application_name = win.app.name
             if window_name in application_name:
                 rect = win.rect
-                ctrl.mouse_move(rect.left + (rect.width / 2), rect.top + (rect.height / 2))
-                return 
+                ctrl.mouse_move(
+                    rect.left + (rect.width / 2), rect.top + (rect.height / 2)
+                )
+                return

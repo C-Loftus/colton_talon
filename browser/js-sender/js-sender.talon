@@ -1,7 +1,5 @@
 # sends JS files to the browser
-
 tag: browser
-
 -
 
 user script <user.talon_JS_Functions>:
