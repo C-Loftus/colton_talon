@@ -1,8 +1,6 @@
 # My Talon Scripts
 
-All of these are supplementary to the standard knausj (now called the talon `community`) repo on the most recent release.
-
-I don't use a fork of community. This contains all talon configuration.
+My scripts are supplementary to the standard community repo on the most recent release and work without any forking.
 
 # Functionality
 
@@ -15,13 +13,9 @@ I don't use a fork of community. This contains all talon configuration.
 
 ## Git Helpers for Extracting Specific Code from this Repo
 
-### Install Just One Directory
+- Install Just One Directory: [https://download-directory.github.io/](https://download-directory.github.io/)
 
-[https://download-directory.github.io/](https://download-directory.github.io/)
-
-### View History of a Given File
-
-[https://github.githistory.xyz](https://github.githistory.xyz)
+- View History of a Given File: [https://github.githistory.xyz](https://github.githistory.xyz)
 
 # Notes
 
