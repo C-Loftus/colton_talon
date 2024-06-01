@@ -2,7 +2,7 @@
 
 All of these are supplementary to the standard knausj (now called the talon `community`) repo on the most recent release.
 
-- I have my own fork of `community` and use this for any personal code
+I don't use a fork of community. This contains all talon configuration.
 
 # Functionality
 
@@ -13,9 +13,7 @@ All of these are supplementary to the standard knausj (now called the talon `com
 - Voice commands for updating the entire Talon user directory
 - and more!
 
-GPT and AI functionality has been moved into a separate repo [https://github.com/C-Loftus/colton_talon](https://github.com/C-Loftus/colton_talon) to share easier in the community.
-
-## Git Helpers for Getting Specific Code from this Repo
+## Git Helpers for Extracting Specific Code from this Repo
 
 ### Install Just One Directory
 
@@ -24,20 +22,6 @@ GPT and AI functionality has been moved into a separate repo [https://github.com
 ### View History of a Given File
 
 [https://github.githistory.xyz](https://github.githistory.xyz)
-
-## Install Talon and All My Scripts
-
-(Script below assumes fish, change the set command for bash)
-
-```sh
-set URL "https://talonvoice.com/dl/latest/talon-linux.tar.xz"
-curl $URL --output talon.tar.xz
-tar -vxf talon.tar.xz
-rm -f talon.tar.xz
-mv talon/ ~/talon
-mkdir -p ~/.talon/user
-git clone https://github.com/C-Loftus/my_talon_scripts ~/.talon/user/myscripts
-```
 
 # Notes
 
