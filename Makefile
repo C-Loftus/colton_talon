@@ -26,9 +26,9 @@ clone:
 fetch: pull
 	cd $(TALON_USER_DIR)/knausj_talon; git fetch upstream main
 
-# git -C ../private-talon pull origin master;
-pull:
-	cd ..; ls | xargs -I{} git -C {} pull
+.PHONY: update
+update: 
+	cd update; ./update.sh
 
 windows:
 	# mimic xbox controller to get rid of direct input and get xinput for talon. Talon uses gilrs and needs xinput
