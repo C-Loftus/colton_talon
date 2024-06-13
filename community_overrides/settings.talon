@@ -1,6 +1,6 @@
 # Match on any os to always override the less specific community settings file
 os: mac
-os: linx
+os: linux
 os: windows
 -
 settings():
