@@ -1,6 +1,7 @@
 settings():
-    user.cursorless_settings_directory = "my_talon_scripts/cursorless-settings"
+    user.cursorless_settings_directory = "colton_talon/cursorless-settings"
     imgui.dark_mode = true
+    user.echo_dictation = false
 
 
 tag(): user.cursorless_experimental_snippets

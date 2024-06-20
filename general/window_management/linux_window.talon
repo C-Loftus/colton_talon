@@ -2,8 +2,6 @@ mode: command
 os: linux
 -
 
-focus <user.running_applications>:
-    user.jump_workspace_and_switch_focus(running_applications)
 Toggle stacking:
     key(super-s)
 # stack left:
