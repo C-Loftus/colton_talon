@@ -13,8 +13,6 @@ My scripts are supplementary to the standard community repo on the most recent r
 
 ## Git Helpers for Extracting Specific Code from this Repo
 
-- Install Just One Directory: [https://download-directory.github.io/](https://download-directory.github.io/)
-
 - View History of a Given File: [https://github.githistory.xyz](https://github.githistory.xyz)
 
 # Notes
