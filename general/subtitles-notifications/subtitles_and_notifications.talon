@@ -14,11 +14,11 @@ settings():
     # Slightly dark subtitle outline
     user.subtitles_color_outline = "aaaaaa"
     # For each character in the subtitle extend the timeout 50ms
-    user.subtitles_timeout_per_char = 50
+    user.subtitles_timeout_per_char = 20
     # 750ms is the minimum timeout for a subtitle
-    user.subtitles_timeout_min = 750
+    user.subtitles_timeout_min = 75
     # 3 seconds is the maximum timeout for a subtitle
-    user.subtitles_timeout_max = 3000
+    user.subtitles_timeout_max = 200
     # Subtitles are positioned at the bottom of the screen
     user.subtitles_y = 0.93
 
