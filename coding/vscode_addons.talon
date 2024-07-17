@@ -19,13 +19,16 @@ new window:
 focus lines:
     key(ctrl-1)
 
-run python:
-    user.vscode("python.execInTerminal-icon")
-
+run last:
+    user.vscode("workbench.action.terminal.focus")
+    key(up)
+    key(enter)
+    
 kill program:
     user.vscode("workbench.action.terminal.focus")
     sleep(.25)
     key(ctrl-c)
+
 hints toggle:
     user.vscode("cursorless.toggleDecorations")
 
@@ -73,21 +76,12 @@ run rust:
     "cargo run"
     sleep(.1)
     key(enter)
+    
 run typescript:
     user.vscode("workbench.action.terminal.focus")
     sleep(.3)
     user.paste("npx ts-node src/")
 
-Compile typescript:
-    user.vscode("workbench.action.terminal.focus")
-    sleep(.3)
-    user.paste("npx tsc; node dist/src/index.js")
-    key(enter)
-Compile typescript tests:
-    user.vscode("workbench.action.terminal.focus")
-    sleep(.3)
-    user.paste("npx tsc; node dist/src/tests.js")
-    key(enter)
 dance:
     "// "
 run that:
@@ -108,12 +102,6 @@ pull user directory:
     user.paste("bash -c 'find . -name .git -print -execdir git pull \\;")
     sleep(.1)
     key(enter)
-
-# hunt {user.decoded_language_mode} <user.text>:
-#     user.find_everywhere(text)
-#     key(tab:7)
-#     "*{user.decoded_language_mode}"
-#     key(enter)
 
 enable completions:
     user.change_setting("github.copilot.editor.enableAutoCompletions", true)

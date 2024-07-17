@@ -1,6 +1,8 @@
 mode: all
+not os: mac
 
 -
+
 
 
 deck(pedal_right):
