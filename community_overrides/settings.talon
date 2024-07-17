@@ -87,3 +87,8 @@ settings():
     user.mode_indicator_show = true
     user.mode_indicator_x = 1
     user.mode_indicator_y = 0
+
+    user.subtitles_show = true
+    user.subtitles_timeout_per_char = 50
+    user.subtitles_timeout_min = 180
+    user.subtitles_timeout_max = 1000
