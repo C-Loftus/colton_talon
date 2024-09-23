@@ -3,3 +3,4 @@ run are, r.runSelection
 join, editor.action.joinLines
 run, notebook.cell.executeAndFocusContainers
 run, calva.evaluateCurrentTopLevelForm
+test run, testing.runAtCursor

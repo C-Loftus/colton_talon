@@ -28,7 +28,7 @@ scope:
     user.paste("{\n\n}")
     key(up)
 
-colgap:
+(colgap | call gap):
     ": "
 
 pad {user.symbol_key}:          " {symbol_key} "  

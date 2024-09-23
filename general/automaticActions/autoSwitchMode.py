@@ -116,4 +116,5 @@ def switcher():
 
 
 # we need to wait until it is loaded since otherwise it could fail when a mode is not defined during startup
-app.register("ready", switcher)
+# commented this out since don't like it much anymore
+# app.register("ready", switcher)

@@ -1,6 +1,8 @@
 #My additional  commands for firefox beyond those in knausj
 tag: browser
 # app: chrome
+not os: mac 
+
 -
 # for firefox it requires my extension to switch to last tab with ctrl-9
 

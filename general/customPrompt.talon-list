@@ -1,0 +1,9 @@
+list:  user.customPrompt
+-
+
+# Example of a custom prompt that is unique to a user's personal workflow
+
+check language: I am learning a new foreign language. Check the grammar of what I have written and return feedback in English with references to what I wrote.
+
+
+generate schema: I am writing python code. I want you to take in the JSON data here and generate a python typeddict that represents it. If there are null values make it an optional type and try to assume what the type should be based on the name. 
